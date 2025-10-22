@@ -7,7 +7,7 @@
             <!-- 页面标题 -->
             <div class="mb-6">
                 <div class="bg-blue-500 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block">
-                    <span class="font-bold">封神图鉴</span>
+                    <span class="font-bold">美食图鉴</span>
                 </div>
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-4 md:p-6">
                     <div class="flex items-center justify-between">

@@ -1,7 +1,7 @@
 {
     "name": "yifan-fengshen",
     "version": "1.0.0",
-    "description": "一饭封神 - AI厨艺大师指导平台",
+    "description": "AI美食大师 - AI厨艺大师指导平台",
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",

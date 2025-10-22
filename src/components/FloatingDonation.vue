@@ -129,7 +129,7 @@ const closeModal = () => {
 const shareProject = () => {
     if (navigator.share) {
         navigator.share({
-            title: '一饭封神 - AI厨艺大师指导平台',
+            title: 'AI美食大师 - AI厨艺大师指导平台',
             text: '发现这个超棒的AI美食平台，让每一餐都能达到封神级别！',
             url: window.location.href
         })

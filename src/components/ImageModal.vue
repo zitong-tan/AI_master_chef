@@ -23,6 +23,9 @@ import type { GalleryImage } from '@/services/galleryService'
 
 interface Props {
     image: GalleryImage
+    
+
+    
 }
 
 defineProps<Props>()

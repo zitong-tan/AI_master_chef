@@ -101,7 +101,7 @@
                                 :class="$route.path === '/gallery' ? 'bg-yellow-100 text-gray-800' : 'text-gray-700'"
                             >
                                 <span>🖼️</span>
-                                <span>封神图鉴</span>
+                                <span>美食图鉴</span>
                             </router-link>
                             <router-link
                                 to="/about"
@@ -212,7 +212,7 @@
                                 :class="$route.path === '/gallery' ? 'bg-yellow-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
                             >
                                 <span>🖼️</span>
-                                <span>封神图鉴</span>
+                                <span>美食图鉴</span>
                             </router-link>
                             <router-link
                                 to="/about"
@@ -256,7 +256,7 @@ const route = useRoute()
 const pageTitle = computed(() => {
     switch (route.path) {
         case '/':
-            return '一饭封神'
+            return 'AI美食大师'
         case '/today-eat':
             return '今日吃啥'
         case '/table-design':
@@ -270,11 +270,11 @@ const pageTitle = computed(() => {
         case '/favorites':
             return '我的收藏'
         case '/gallery':
-            return '封神图鉴'
+            return '美食图鉴'
         case '/about':
-            return '关于一饭封神'
+            return '关于AI美食大师'
         default:
-            return '一饭封神'
+            return 'AI美食大师'
     }
 })
 

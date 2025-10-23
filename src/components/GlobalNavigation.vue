@@ -6,10 +6,10 @@
                 <!-- Logo区域 -->
                 <router-link to="/" class="flex items-center gap-3 transition-transform duration-200" @click="rotateLogo">
                     <div
-                        class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center border-2 border-[#0A0910]"
+                        class="w-24 h-12 bg-gradient-to-br from-pink-400 to-blue-500 rounded-lg flex items-center justify-center border-2 border-[#0A0910]"
                         :class="{ 'rotate-logo': isLogoRotating }"
                     >
-                        <span class="text-white text-xl font-bold">饭</span>
+                        <span class="text-white text-xl font-bold">开饭啦</span>
                     </div>
                     <div>
                         <div class="text-2xl font-black text-dark-800 tracking-wider">
@@ -22,19 +22,19 @@
                 <!-- 导航菜单 -->
                 <div class="flex items-center gap-2">
                     <!-- 设置按钮 -->
-                    <SettingsButton />
+                    <SettingsButton class="hidden" />
                     <!-- 主要功能 -->
                     <router-link
                         to="/"
                         class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
-                        :class="$route.path === '/' ? 'bg-yellow-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                        :class="$route.path === '/' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
                         <span>🏠</span>
                         <span>主页</span>
                     </router-link>
                     <router-link
                         to="/today-eat"
-                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        class="hidden flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/today-eat' ? 'bg-yellow-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
                         <span>🎲</span>
@@ -42,7 +42,7 @@
                     </router-link>
                     <router-link
                         to="/table-design"
-                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        class="hidden flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/table-design' ? 'bg-yellow-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
                         <span>🍽️</span>
@@ -50,7 +50,7 @@
                     </router-link>
                     <router-link
                         to="/fortune-cooking"
-                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        class="hidden flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/fortune-cooking' ? 'bg-yellow-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
                         <span>🔮</span>
@@ -58,7 +58,7 @@
                     </router-link>
                     <router-link
                         to="/sauce-design"
-                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        class="hidden flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/sauce-design' ? 'bg-yellow-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
                         <span>🥄</span>
@@ -72,7 +72,7 @@
                             @click="showMoreMenu = !showMoreMenu"
                             :class="[
                                 'flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm',
-                                isMoreMenuActive ? 'bg-yellow-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                isMoreMenuActive ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                             ]"
                         >
                             <span>⋯</span>
@@ -97,7 +97,7 @@
                             <router-link
                                 to="/gallery"
                                 @click="showMoreMenu = false"
-                                class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
+                                class="hidden flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/gallery' ? 'bg-yellow-100 text-gray-800' : 'text-gray-700'"
                             >
                                 <span>🖼️</span>

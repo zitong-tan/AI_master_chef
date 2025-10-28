@@ -299,9 +299,9 @@ const editNotes = (favorite: FavoriteRecipe) => {
 }
 
 // 保存备注
-const saveNotes = (notes: string) => {
+const saveNotes = async (notes: string) => {
     if (editingFavorite.value) {
-        const success = FavoriteService.updateFavoriteNotes(editingFavorite.value.recipe.id, notes)
+        const success = await FavoriteService.updateFavoriteNotes(editingFavorite.value.recipe.id, notes)
         if (success) {
             refreshFavorites()
             showToast('备注已更新', 'success')
@@ -319,10 +319,10 @@ const confirmRemoveFavorite = (recipeId: string) => {
     removingRecipeId.value = recipeId
 }
 
-const removeFavorite = () => {
+const removeFavorite = async () => {
     if (!removingRecipeId.value) return
 
-    const success = FavoriteService.removeFavorite(removingRecipeId.value)
+    const success = await FavoriteService.removeFavorite(removingRecipeId.value)
     if (success) {
         refreshFavorites()
         showToast('已取消收藏', 'info')
@@ -333,8 +333,8 @@ const removeFavorite = () => {
 }
 
 // 清空所有收藏
-const clearAllFavorites = () => {
-    const success = FavoriteService.clearAllFavorites()
+const clearAllFavorites = async () => {
+    const success = await FavoriteService.clearAllFavorites()
     if (success) {
         refreshFavorites()
         showToast('已清空所有收藏', 'info')

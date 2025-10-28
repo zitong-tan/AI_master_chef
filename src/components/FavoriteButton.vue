@@ -45,14 +45,14 @@ const toggleFavorite = async () => {
 
         if (isFavorited.value) {
             // 取消收藏
-            success = FavoriteService.removeFavorite(props.recipe.id)
+            success = await FavoriteService.removeFavorite(props.recipe.id)
             if (success) {
                 isFavorited.value = false
                 showToast('已取消收藏', 'info')
             }
         } else {
             // 添加收藏
-            success = FavoriteService.addFavorite(props.recipe)
+            success = await FavoriteService.addFavorite(props.recipe)
             if (success) {
                 isFavorited.value = true
                 showToast('已添加到收藏', 'success')

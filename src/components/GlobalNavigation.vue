@@ -6,10 +6,10 @@
                 <!-- Logo区域 -->
                 <router-link to="/" class="flex items-center gap-3 transition-transform duration-200" @click="rotateLogo">
                     <div
-                        class="w-24 h-12 bg-gradient-to-br from-pink-400 to-blue-500 rounded-lg flex items-center justify-center border-2 border-[#0A0910]"
+                        class="w-24 h-12 bg-gradient-to-br from-red-400 to-blue-500 rounded-lg flex items-center justify-center border-2 border-[#0A0910]"
                         :class="{ 'rotate-logo': isLogoRotating }"
                     >
-                        <span class="text-white text-xl font-bold">开饭啦</span>
+                        <span class="text-white text-xl font-bold">吃什么</span>
                     </div>
                     <div>
                         <div class="text-2xl font-black text-dark-800 tracking-wider">

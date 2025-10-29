@@ -50,11 +50,19 @@
                     </router-link>
                     <router-link
                         to="/fortune-cooking"
-                        class="hidden flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
-                        :class="$route.path === '/fortune-cooking' ? 'bg-yellow-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                        class=" flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        :class="$route.path === '/fortune-cooking' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
                         <span>🔮</span>
                         <span>玄学厨房</span>
+                    </router-link>
+                    <router-link
+                        to="/community"
+                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        :class="$route.path === '/community' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                    >
+                        <span>👥</span>
+                        <span>美食社区</span>
                     </router-link>
                     <router-link
                         to="/sauce-design"
@@ -197,6 +205,15 @@
                                 <span>玄学厨房</span>
                             </router-link>
                             <router-link
+                                to="/community"
+                                @click="showMobileMenu = false"
+                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
+                                :class="$route.path === '/community' ? 'bg-green-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
+                            >
+                                <span>👥</span>
+                                <span>美食社区</span>
+                            </router-link>
+                            <router-link
                                 to="/favorites"
                                 @click="showMobileMenu = false"
                                 class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
@@ -267,6 +284,8 @@ const pageTitle = computed(() => {
             return '酱料设计大师'
         case '/fortune-cooking':
             return '玄学厨房'
+        case '/community':
+            return '美食社区'
         case '/favorites':
             return '我的收藏'
         case '/gallery':
@@ -292,6 +311,8 @@ const pageSubtitle = computed(() => {
             return '专业酱料制作，调味灵魂升华！'
         case '/fortune-cooking':
             return '星辰指引美食，占卜预见美味！'
+        case '/community':
+            return '分享美味，发现更多精彩！'
         case '/favorites':
             return '珍藏美味，随时回味！'
         case '/gallery':

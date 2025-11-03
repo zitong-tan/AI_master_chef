@@ -1,4 +1,5 @@
 import { supabase } from './supabaseService'
+import { AuthService } from './authService'
 
 export interface UserDish {
     id: string
@@ -11,6 +12,7 @@ export interface UserDish {
     difficulty: string | null
     cooking_time: string | null
     user_notes: string | null
+    user_name: string | null
     created_at: string
     updated_at: string
 }
@@ -51,6 +53,9 @@ export const communityService = {
     // 添加用户菜品
     async addUserDish(dish: UserDishInput): Promise<UserDish> {
         try {
+            // 获取当前登录用户的用户名
+            const currentUserName = AuthService.getCurrentUserName() || '匿名用户'
+            
             const { data, error } = await supabase
                 .from('user_dishes')
                 .insert([{
@@ -62,7 +67,8 @@ export const communityService = {
                     cooking_tips: dish.cooking_tips,
                     difficulty: dish.difficulty,
                     cooking_time: dish.cooking_time,
-                    user_notes: dish.user_notes
+                    user_notes: dish.user_notes,
+                    user_name: currentUserName
                 }])
                 .select()
                 .single()

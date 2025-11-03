@@ -184,6 +184,12 @@
                                 </span>
                             </div>
 
+                            <!-- 上传用户信息 -->
+                            <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                                <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                                <span>上传者：{{ dish.user_name || '匿名用户' }}</span>
+                            </div>
+
                             <!-- 难度和时间 -->
                             <div class="flex items-center gap-4 text-sm text-gray-600 mb-4">
                                 <span v-if="dish.difficulty" class="flex items-center gap-1">
@@ -251,6 +257,7 @@
         <div v-if="selectedDish" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
                 <div class="p-6">
+                    
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-2xl font-bold text-gray-800">{{ selectedDish.recipe_name }}</h2>
                         <button @click="selectedDish = null" class="text-gray-400 hover:text-gray-600">
@@ -337,6 +344,7 @@ interface UserDish {
     difficulty: string | null
     cooking_time: string | null
     user_notes: string | null
+    user_name: string | null
     created_at: string
     updated_at: string
 }

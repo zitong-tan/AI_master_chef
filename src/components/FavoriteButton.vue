@@ -57,7 +57,14 @@ const toggleFavorite = async () => {
                 isFavorited.value = true
                 showToast('已添加到收藏', 'success')
             } else {
-                showToast('该菜谱已在收藏中', 'warning')
+                // 检查是否是因为菜谱已收藏，还是Supabase同步失败
+                const isAlreadyFavorited = FavoriteService.isFavorite(props.recipe.id)
+                if (isAlreadyFavorited) {
+                    // 如果本地已收藏但Supabase同步失败，显示不同的提示
+                    showToast('收藏已保存到本地，但云端同步失败', 'warning')
+                } else {
+                    showToast('收藏失败，请检查网络连接或数据库权限', 'error')
+                }
             }
         }
 

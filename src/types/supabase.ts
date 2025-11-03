@@ -14,6 +14,7 @@ export interface Database {
           cooking_time: string | null
           favorite_date: string
           user_notes: string | null
+          user_name: string | null
           created_at: string
           updated_at: string
         }
@@ -29,6 +30,7 @@ export interface Database {
           cooking_time?: string | null
           favorite_date?: string
           user_notes?: string | null
+          user_name?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -44,6 +46,7 @@ export interface Database {
           cooking_time?: string | null
           favorite_date?: string
           user_notes?: string | null
+          user_name?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -61,6 +64,7 @@ export interface Database {
           cooking_time: string | null
           favorite_date: string
           user_notes: string | null
+          user_name: string | null
           created_at: string
           updated_at: string
         }
@@ -76,6 +80,7 @@ export interface Database {
           cooking_time?: string | null
           favorite_date?: string
           user_notes?: string | null
+          user_name?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -91,6 +96,30 @@ export interface Database {
           cooking_time?: string | null
           favorite_date?: string
           user_notes?: string | null
+          user_name?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      users: {
+        Row: {
+          id: string
+          user_name: string
+          password: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_name: string
+          password: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_name?: string
+          password?: string
           created_at?: string
           updated_at?: string
         }

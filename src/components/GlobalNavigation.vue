@@ -32,10 +32,29 @@
                         <span>🏠</span>
                         <span>主页</span>
                     </router-link>
+                    
+                    <!-- 登录/用户状态按钮 -->
+                    <div v-if="!isLoggedIn" class="flex items-center gap-2">
+                        <button
+                            @click="showLoginModal = true"
+                            class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm bg-green-500 text-white hover:bg-green-600"
+                        >
+                            <span>🔑</span>
+                            <span>登录</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 用户已登录状态 -->
+                    <div v-else class="flex items-center gap-2">
+                        <div class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] bg-blue-100 text-blue-800 text-sm">
+                            <span>👤</span>
+                            <span>{{ currentUserName }}</span>
+                        </div>
+                    </div>
                     <router-link
                         to="/today-eat"
-                        class="hidden flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
-                        :class="$route.path === '/today-eat' ? 'bg-yellow-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        :class="$route.path === '/today-eat' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
                         <span>🎲</span>
                         <span>美食盲盒</span>
@@ -91,7 +110,7 @@
                         <div
                             v-if="showMoreMenu"
                             @mouseenter="handleMouseEnter"
-                            class="absolute right-0 top-full mt-0.5 w-40 bg-white border-2 border-[#0A0910] rounded-lg shadow-lg z-50 overflow-hidden"
+                            class="absolute right-0 top-full mt-0.5 w-48 bg-white border-2 border-[#0A0910] rounded-lg shadow-lg z-50 overflow-hidden"
                         >
                             <router-link
                                 to="/favorites"
@@ -105,7 +124,7 @@
                             <router-link
                                 to="/gallery"
                                 @click="showMoreMenu = false"
-                                class="hidden flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
+                                class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/gallery' ? 'bg-yellow-100 text-gray-800' : 'text-gray-700'"
                             >
                                 <span>🖼️</span>
@@ -120,6 +139,17 @@
                                 <span>📖</span>
                                 <span>关于我们</span>
                             </router-link>
+                            
+                            <!-- 退出登录按钮 -->
+                            <div v-if="isLoggedIn" class="border-t border-gray-200">
+                                <button
+                                    @click="handleLogout"
+                                    class="flex items-center gap-2 px-4 py-3 text-sm font-bold w-full text-left transition-colors duration-200 hover:bg-red-100 text-red-600"
+                                >
+                                    <span>🚪</span>
+                                    <span>退出登录</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,6 +174,19 @@
                         </div>
                     </router-link>
                     <div class="flex items-center gap-2">
+                        <!-- 移动端登录/用户状态 -->
+                        <div v-if="!isLoggedIn">
+                            <button
+                                @click="showLoginModal = true"
+                                class="p-2 bg-green-500 text-white rounded-lg border-2 border-[#0A0910] transition-colors hover:bg-green-600"
+                            >
+                                <span class="text-sm font-bold">登录</span>
+                            </button>
+                        </div>
+                        <div v-else class="flex items-center gap-1 px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border-2 border-[#0A0910] text-xs font-bold">
+                            <span>👤</span>
+                            <span>{{ currentUserName }}</span>
+                        </div>
                         <!-- 移动端设置按钮 -->
                         <SettingsButton />
                         <button @click="showMobileMenu = !showMobileMenu" class="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg border-2 border-[#0A0910] transition-colors">
@@ -249,17 +292,53 @@
             </div>
         </div>
     </nav>
+    
+    <!-- 登录弹窗 -->
+    <LoginModal 
+        v-model:show="showLoginModal"
+        @loginSuccess="handleLoginSuccess"
+    />
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import SettingsButton from './SettingsButton.vue'
+import LoginModal from './LoginModal.vue'
+import { AuthService } from '@/services/authService'
 
 const showMobileMenu = ref(false)
 const showMoreMenu = ref(false)
+const showLoginModal = ref(false)
 const isLogoRotating = ref(false)
 let hideMenuTimer: NodeJS.Timeout | null = null
+
+// 用户状态
+const isLoggedIn = ref(false)
+const currentUserName = ref('')
+
+// 初始化用户状态
+const initUserState = () => {
+  isLoggedIn.value = AuthService.isLoggedIn()
+  currentUserName.value = AuthService.getCurrentUserName() || ''
+}
+
+// 处理登录成功
+const handleLoginSuccess = () => {
+  initUserState()
+}
+
+// 处理退出登录
+const handleLogout = () => {
+  AuthService.logout()
+  initUserState()
+  showMoreMenu.value = false
+}
+
+// 组件挂载时初始化用户状态
+onMounted(() => {
+  initUserState()
+})
 
 const rotateLogo = () => {
     isLogoRotating.value = true

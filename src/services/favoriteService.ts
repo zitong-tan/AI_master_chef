@@ -1,5 +1,6 @@
 import type { Recipe, FavoriteRecipe } from '@/types'
 import { supabase } from './supabaseService'
+import { AuthService } from './authService'
 
 const FAVORITES_KEY = 'yifan-fengshen-favorites'
 
@@ -29,6 +30,7 @@ export class FavoriteService {
 
             // 检查是否已收藏
             if (favorites.some(fav => fav.recipe.id === recipe.id)) {
+                console.log('菜谱已收藏，跳过添加:', recipe.id)
                 return false // 已收藏
             }
 
@@ -45,6 +47,9 @@ export class FavoriteService {
 
             // 2. 同步到Supabase（使用更简单的方式）
             try {
+                // 获取当前登录用户的用户名
+                const currentUserName = AuthService.getCurrentUserName() || '匿名用户'
+                
                 const supabaseData = {
                     recipe_id: recipe.id,
                     recipe_name: recipe.name,
@@ -54,25 +59,27 @@ export class FavoriteService {
                     cooking_tips: recipe.tips?.join(', ') || null, // 使用tips字段
                     difficulty: recipe.difficulty || null,
                     cooking_time: recipe.cookingTime?.toString() || null,
-                    servings: null, // Recipe类型中没有servings字段
-                    tags: null, // Recipe类型中没有tags字段
                     user_notes: notes || null,
+                    user_name: currentUserName,
                     favorite_date: new Date().toISOString()
                 }
                 
-                const { error } = await supabase
+                const { data, error } = await supabase
                     .from('favorites')
                     .insert(supabaseData)
+                    .select()
 
                 if (error) {
                     console.error('Supabase添加收藏失败:', error)
-                    // 本地存储成功，Supabase失败，仍然返回成功
-                    return true
+                    // 返回false让前端知道Supabase同步失败
+                    return false
                 }
+                
+                console.log('Supabase添加收藏成功:', data)
             } catch (supabaseError) {
                 console.error('Supabase操作异常:', supabaseError)
-                // 本地存储成功，Supabase异常，仍然返回成功
-                return true
+                // 返回false让前端知道Supabase同步失败
+                return false
             }
 
             return true
@@ -111,8 +118,8 @@ export class FavoriteService {
                 }
             } catch (supabaseError) {
                 console.error('Supabase操作异常:', supabaseError)
-                // 本地存储成功，Supabase异常，仍然返回成功
-                return true
+                // 返回false让前端知道Supabase同步失败
+                return false
             }
 
             return true
@@ -165,8 +172,8 @@ export class FavoriteService {
                 }
             } catch (supabaseError) {
                 console.error('Supabase操作异常:', supabaseError)
-                // 本地存储成功，Supabase异常，仍然返回成功
-                return true
+                // 返回false让前端知道Supabase同步失败
+                return false
             }
 
             return true
@@ -198,8 +205,8 @@ export class FavoriteService {
                 }
             } catch (supabaseError) {
                 console.error('Supabase操作异常:', supabaseError)
-                // 本地存储成功，Supabase异常，仍然返回成功
-                return true
+                // 返回false让前端知道Supabase同步失败
+                return false
             }
 
             return true

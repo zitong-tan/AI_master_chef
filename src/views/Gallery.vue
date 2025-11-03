@@ -1,12 +1,12 @@
 <template>
-    <div class="min-h-screen bg-yellow-400 px-2 md:px-4 py-6">
+    <div class="min-h-screen bg-blue-400 px-2 md:px-4 py-6">
         <!-- 全局导航 -->
         <GlobalNavigation />
 
         <div class="max-w-7xl mx-auto">
             <!-- 页面标题 -->
             <div class="mb-6">
-                <div class="bg-blue-500 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block">
+                <div class="bg-pink-500 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block">
                     <span class="font-bold">美食图鉴</span>
                 </div>
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-4 md:p-6">

@@ -28,6 +28,50 @@ const createAiClient = () => {
     })
 }
 
+// 稳健的 JSON 解析辅助：提取首个对象或数组结构
+const safeJsonParse = (text: string): any => {
+    const cleaned = text
+        .replace(/^```json\s*/i, '')
+        .replace(/^```\s*/i, '')
+        .replace(/```\s*$/i, '')
+        .trim()
+
+    // 直接尝试解析
+    try {
+        return JSON.parse(cleaned)
+    } catch (_) {
+        // 退化：尝试从文本中提取第一个 {...} 或 [...] 的 JSON 片段
+        const objMatch = cleaned.match(/\{[\s\S]*\}/)
+        const arrMatch = cleaned.match(/\[[\s\S]*\]/)
+        const candidate = (objMatch?.[0] ?? arrMatch?.[0] ?? '').trim()
+        if (candidate) {
+            try {
+                return JSON.parse(candidate)
+            } catch (__) {
+                // 仍失败则抛出
+                throw new Error('AI返回内容非标准JSON，请稍后重试')
+            }
+        }
+        throw new Error('未能从AI返回中提取JSON内容')
+    }
+}
+
+// 菜品图片生成（占位策略）：优先使用与菜名/菜系相关的图片
+const generateRecipeImage = async (recipe: Recipe): Promise<string> => {
+    // 使用 Unsplash 的 source 接口按关键词检索（免鉴权），或回退到 picsum
+    const keywords = encodeURIComponent(`${recipe.name} ${recipe.cuisine} food dish`)
+    // 该接口会返回随机精选图片，适合占位预览。避免版权问题不做下载与二次分发，仅展示链接。
+    const url = `https://source.unsplash.com/featured/?${keywords}`
+    return url
+}
+
+// 图片占位回退
+const generateFallbackImage = (name: string, cuisine: string): string => {
+    const seed = encodeURIComponent(`${name}-${cuisine}`)
+    // picsum 提供免鉴权占位图服务
+    return `https://picsum.photos/seed/${seed}/800/600`
+}
+
 /**
  * 调用AI接口生成菜谱
  * @param ingredients 食材列表
@@ -101,7 +145,7 @@ export const generateRecipe = async (ingredients: string[], cuisine: CuisineType
 
         const recipeData = JSON.parse(cleanResponse)
 
-        // 构建完整的Recipe对象
+        // 构建基础Recipe对象
         const recipe: Recipe = {
             id: `recipe-${cuisine.id}-${Date.now()}`,
             name: recipeData.name || `${cuisine.name}推荐菜品`,
@@ -115,8 +159,20 @@ export const generateRecipe = async (ingredients: string[], cuisine: CuisineType
             difficulty: recipeData.difficulty || 'medium',
             tips: recipeData.tips || ['注意火候控制', '调味要适中'],
             nutritionAnalysis: undefined,
-            winePairing: undefined
+            winePairing: undefined,
+            image: undefined
         }
+
+        // 并行获取营养分析、饮品搭配和图片
+        const [nutrition, wine, imageUrl] = await Promise.all([
+            getNutritionAnalysis(recipe),
+            getWinePairing(recipe),
+            generateRecipeImage(recipe)
+        ])
+
+        recipe.nutritionAnalysis = nutrition
+        recipe.winePairing = wine
+        recipe.image = imageUrl
 
         return recipe
     } catch (error) {
@@ -425,8 +481,20 @@ export const generateCustomRecipe = async (ingredients: string[], customPrompt: 
             difficulty: recipeData.difficulty || 'medium',
             tips: recipeData.tips || ['根据个人口味调整', '注意火候控制'],
             nutritionAnalysis: undefined,
-            winePairing: undefined
+            winePairing: undefined,
+            image: undefined
         }
+
+        // 并行获取营养分析、饮品搭配和图片
+        const [nutrition, wine, imageUrl] = await Promise.all([
+            getNutritionAnalysis(recipe),
+            getWinePairing(recipe),
+            generateRecipeImage(recipe)
+        ])
+
+        recipe.nutritionAnalysis = nutrition
+        recipe.winePairing = wine
+        recipe.image = imageUrl
 
         return recipe
     } catch (error) {

@@ -27,6 +27,7 @@ export interface Recipe {
     tips: string[]
     nutritionAnalysis?: NutritionAnalysis // 营养分析
     winePairing?: WinePairing // 酒水搭配
+    image?: string // 菜品图片URL（自动生成）
 }
 
 // 制作步骤

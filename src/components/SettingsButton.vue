@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 设置按钮 -->
-        <button @click="openSettings" class="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" title="系统设置">
+        <button @click="openSettings" class="hidden p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" title="系统设置">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                     stroke-linecap="round"

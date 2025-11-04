@@ -29,6 +29,19 @@ export interface UserDishInput {
     user_notes?: string | null
 }
 
+export interface UserComment {
+    id: string
+    user_name: string
+    comment_text: string
+    created_at: string
+    updated_at: string
+}
+
+export interface UserCommentInput {
+    user_name: string
+    comment_text: string
+}
+
 export const communityService = {
     // 获取所有用户菜品
     async getUserDishes(): Promise<UserDish[]> {
@@ -207,6 +220,113 @@ export const communityService = {
             return true
         } catch (error) {
             console.error('删除用户菜品异常:', error)
+            return false
+        }
+    },
+
+    // 获取所有用户评论
+    async getUserComments(): Promise<UserComment[]> {
+        try {
+            const { data, error } = await supabase
+                .from('user_comments')
+                .select('*')
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                console.error('获取用户评论失败:', error)
+                throw error
+            }
+
+            return data || []
+        } catch (error) {
+            console.error('获取用户评论异常:', error)
+            return []
+        }
+    },
+
+    // 添加用户评论
+    async addUserComment(comment: UserCommentInput): Promise<UserComment> {
+        try {
+            const { data, error } = await supabase
+                .from('user_comments')
+                .insert([{
+                    user_name: comment.user_name,
+                    comment_text: comment.comment_text
+                }])
+                .select()
+                .single()
+
+            if (error) {
+                console.error('添加用户评论失败:', error)
+                throw error
+            }
+
+            return data
+        } catch (error) {
+            console.error('添加用户评论异常:', error)
+            throw error
+        }
+    },
+
+    // 根据ID获取单个评论
+    async getUserCommentById(id: string): Promise<UserComment | null> {
+        try {
+            const { data, error } = await supabase
+                .from('user_comments')
+                .select('*')
+                .eq('id', id)
+                .single()
+
+            if (error) {
+                console.error('获取用户评论失败:', error)
+                throw error
+            }
+
+            return data
+        } catch (error) {
+            console.error('获取用户评论异常:', error)
+            return null
+        }
+    },
+
+    // 更新用户评论
+    async updateUserComment(id: string, commentText: string): Promise<UserComment | null> {
+        try {
+            const { data, error } = await supabase
+                .from('user_comments')
+                .update({ comment_text: commentText })
+                .eq('id', id)
+                .select()
+                .single()
+
+            if (error) {
+                console.error('更新用户评论失败:', error)
+                throw error
+            }
+
+            return data
+        } catch (error) {
+            console.error('更新用户评论异常:', error)
+            return null
+        }
+    },
+
+    // 删除用户评论
+    async deleteUserComment(id: string): Promise<boolean> {
+        try {
+            const { error } = await supabase
+                .from('user_comments')
+                .delete()
+                .eq('id', id)
+
+            if (error) {
+                console.error('删除用户评论失败:', error)
+                throw error
+            }
+
+            return true
+        } catch (error) {
+            console.error('删除用户评论异常:', error)
             return false
         }
     }

@@ -251,6 +251,80 @@
                     <p class="text-gray-500">成为第一个分享菜品的人吧！</p>
                 </div>
             </div>
+
+            <!-- 美食讨论区域 -->
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">美食讨论</h2>
+                
+                <!-- 发表评论表单 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6 border-2 border-gray-800">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">发表你的想法</h3>
+                    <form @submit.prevent="submitComment" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">评论内容</label>
+                            <textarea
+                                v-model="newComment.comment_text"
+                                rows="3"
+                                required
+                                class="w-full px-4 py-2 border-2 border-gray-800 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                                placeholder="分享你对美食的想法、心得或建议..."
+                            ></textarea>
+                        </div>
+                        <div class="flex justify-end">
+                            <button
+                                type="submit"
+                                :disabled="isSubmittingComment"
+                                class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-400 transition-colors font-medium"
+                            >
+                                {{ isSubmittingComment ? '发表中...' : '发表评论' }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 评论列表 -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">社区讨论</h3>
+                    
+                    <!-- 加载状态 -->
+                    <div v-if="isLoadingComments" class="text-center py-8">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
+                        <p class="mt-2 text-gray-600">加载评论中...</p>
+                    </div>
+
+                    <!-- 评论列表 -->
+                    <div v-else class="space-y-4">
+                        <div
+                            v-for="comment in userComments"
+                            :key="comment.id"
+                            class="bg-white rounded-xl shadow-md p-4 border border-gray-200"
+                        >
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                                    <span class="font-medium text-gray-800">{{ comment.user_name }}</span>
+                                    <span class="text-xs text-gray-500">{{ formatDate(comment.created_at) }}</span>
+                                </div>
+                                <button
+                                    v-if="comment.user_name === currentUserName"
+                                    @click="deleteComment(comment.id)"
+                                    class="text-red-500 hover:text-red-700 text-sm"
+                                >
+                                    删除
+                                </button>
+                            </div>
+                            <p class="text-gray-700 whitespace-pre-wrap">{{ comment.comment_text }}</p>
+                        </div>
+                    </div>
+
+                    <!-- 空评论状态 -->
+                    <div v-if="!isLoadingComments && userComments.length === 0" class="text-center py-8">
+                        <div class="text-4xl mb-3">💬</div>
+                        <h3 class="text-lg font-medium text-gray-600 mb-1">还没有评论</h3>
+                        <p class="text-gray-500">成为第一个发表想法的人吧！</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 菜品详情模态框 -->
@@ -330,7 +404,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { communityService } from '../services/communityService'
+import { communityService, type UserComment } from '../services/communityService'
+import { AuthService } from '../services/authService'
 import GlobalNavigation from '../components/GlobalNavigation.vue'
 
 interface UserDish {
@@ -360,10 +435,18 @@ const newDish = ref({
     user_notes: ''
 })
 
+const newComment = ref({
+    comment_text: ''
+})
+
 const communityDishes = ref<UserDish[]>([])
+const userComments = ref<UserComment[]>([])
 const selectedDish = ref<UserDish | null>(null)
 const isSubmitting = ref(false)
+const isSubmittingComment = ref(false)
 const isLoading = ref(false)
+const isLoadingComments = ref(false)
+const currentUserName = ref(AuthService.getCurrentUserName() || '匿名用户')
 
 // 添加食材
 const addIngredient = () => {
@@ -451,6 +534,73 @@ const submitDish = async () => {
     }
 }
 
+// 提交评论
+const submitComment = async () => {
+    if (!newComment.value.comment_text.trim()) {
+        alert('请输入评论内容')
+        return
+    }
+
+    isSubmittingComment.value = true
+
+    try {
+        const commentData = {
+            user_name: currentUserName.value,
+            comment_text: newComment.value.comment_text.trim()
+        }
+
+        await communityService.addUserComment(commentData)
+        
+        // 重置表单
+        newComment.value = {
+            comment_text: ''
+        }
+
+        // 重新加载评论列表
+        await loadUserComments()
+        
+        alert('评论发表成功！')
+    } catch (error) {
+        console.error('发表评论失败:', error)
+        alert('发表评论失败，请重试')
+    } finally {
+        isSubmittingComment.value = false
+    }
+}
+
+// 删除评论
+const deleteComment = async (commentId: string) => {
+    // 找到要删除的评论
+    const commentToDelete = userComments.value.find(comment => comment.id === commentId)
+    
+    // 检查评论是否存在
+    if (!commentToDelete) {
+        alert('评论不存在')
+        return
+    }
+    
+    // 检查用户是否有权限删除（只能删除自己的评论）
+    if (commentToDelete.user_name !== currentUserName.value) {
+        alert('您只能删除自己的评论')
+        return
+    }
+    
+    if (!confirm('确定要删除这条评论吗？')) {
+        return
+    }
+
+    try {
+        const success = await communityService.deleteUserComment(commentId)
+        if (success) {
+            await loadUserComments()
+            alert('评论删除成功！')
+        }
+    } catch (error) {
+        console.error('删除评论失败:', error)
+        alert('删除评论失败，请重试')
+    }
+}
+
 // 生成唯一的recipe_id
 const generateRecipeId = (): string => {
     return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
@@ -486,8 +636,22 @@ const loadCommunityDishes = async () => {
     }
 }
 
+// 加载用户评论
+const loadUserComments = async () => {
+    isLoadingComments.value = true
+    try {
+        userComments.value = await communityService.getUserComments()
+    } catch (error) {
+        console.error('加载用户评论失败:', error)
+        alert('加载评论失败，请刷新页面重试')
+    } finally {
+        isLoadingComments.value = false
+    }
+}
+
 onMounted(() => {
     loadCommunityDishes()
+    loadUserComments()
 })
 </script>
 

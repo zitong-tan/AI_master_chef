@@ -129,5 +129,13 @@ export const cuisines: CuisineType[] = [
         avatar: '🤓',
         specialty: '厨神',
         prompt: `这是厨神，509做饭最好吃的人。`
+    },
+    {
+        id: 'jie',
+        name: 'jiejie',
+        description: '食神大人',
+        avatar: '😎',
+        specialty: '食神',
+        prompt: `这是食神，509最会吃的人。`
     }
 ]

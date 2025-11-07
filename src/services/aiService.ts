@@ -28,33 +28,33 @@ const createAiClient = () => {
     })
 }
 
-// 稳健的 JSON 解析辅助：提取首个对象或数组结构
-const safeJsonParse = (text: string): any => {
-    const cleaned = text
-        .replace(/^```json\s*/i, '')
-        .replace(/^```\s*/i, '')
-        .replace(/```\s*$/i, '')
-        .trim()
-
-    // 直接尝试解析
-    try {
-        return JSON.parse(cleaned)
-    } catch (_) {
-        // 退化：尝试从文本中提取第一个 {...} 或 [...] 的 JSON 片段
-        const objMatch = cleaned.match(/\{[\s\S]*\}/)
-        const arrMatch = cleaned.match(/\[[\s\S]*\]/)
-        const candidate = (objMatch?.[0] ?? arrMatch?.[0] ?? '').trim()
-        if (candidate) {
-            try {
-                return JSON.parse(candidate)
-            } catch (__) {
-                // 仍失败则抛出
-                throw new Error('AI返回内容非标准JSON，请稍后重试')
-            }
-        }
-        throw new Error('未能从AI返回中提取JSON内容')
-    }
-}
+// 稳健的 JSON 解析辅助：提取首个对象或数组结构（已注释未使用函数）
+// const safeJsonParse = (text: string): any => {
+//     const cleaned = text
+//         .replace(/^```json\s*/i, '')
+//         .replace(/^```\s*/i, '')
+//         .replace(/```\s*$/i, '')
+//         .trim()
+// 
+//     // 直接尝试解析
+//     try {
+//         return JSON.parse(cleaned)
+//     } catch (_) {
+//         // 退化：尝试从文本中提取第一个 {...} 或 [...] 的 JSON 片段
+//         const objMatch = cleaned.match(/\{[\s\S]*\}/)
+//         const arrMatch = cleaned.match(/\[[\s\S]*\]/)
+//         const candidate = (objMatch?.[0] ?? arrMatch?.[0] ?? '').trim()
+//         if (candidate) {
+//             try {
+//                 return JSON.parse(candidate)
+//             } catch (__) {
+//                 // 仍失败则抛出
+//                 throw new Error('AI返回内容非标准JSON，请稍后重试')
+//             }
+//         }
+//         throw new Error('未能从AI返回中提取JSON内容')
+//     }
+// }
 
 // 菜品图片生成（占位策略）：优先使用与菜名/菜系相关的图片
 const generateRecipeImage = async (recipe: Recipe): Promise<string> => {
@@ -65,12 +65,7 @@ const generateRecipeImage = async (recipe: Recipe): Promise<string> => {
     return url
 }
 
-// 图片占位回退
-const generateFallbackImage = (name: string, cuisine: string): string => {
-    const seed = encodeURIComponent(`${name}-${cuisine}`)
-    // picsum 提供免鉴权占位图服务
-    return `https://picsum.photos/seed/${seed}/800/600`
-}
+// 图片占位回退 - 已注释掉未使用的函数
 
 /**
  * 调用AI接口生成菜谱

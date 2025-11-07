@@ -41,7 +41,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">所需食材</label>
                         <div class="space-y-2">
-                            <div v-for="(ingredient, index) in newDish.ingredients" :key="index" class="flex gap-2">
+                            <div v-for="(_, index) in newDish.ingredients" :key="index" class="flex gap-2">
                                 <input
                                     v-model="newDish.ingredients[index]"
                                     type="text"
@@ -70,7 +70,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">制作步骤</label>
                         <div class="space-y-2">
-                            <div v-for="(step, index) in newDish.steps" :key="index" class="flex gap-2">
+                            <div v-for="(_, index) in newDish.steps" :key="index" class="flex gap-2">
                                 <span class="px-4 py-1 border-2 border-gray-800 bg-blue-500 text-white rounded-lg transition-colors flex items-center justify-cente">
                                     {{ index + 1 }}
                                 </span>

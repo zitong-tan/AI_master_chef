@@ -13,11 +13,12 @@ export default defineConfig({
         outDir: 'dist',
         assetsDir: 'assets',
         sourcemap: false,
-        minify: false, // 禁用压缩以避免terser问题
+        minify: 'esbuild', // 启用esbuild压缩
         rollupOptions: {
             output: {
                 manualChunks: undefined
             }
         }
-    }
+    },
+    base: '/' // 使用绝对路径，与 createWebHistory() 匹配
 })

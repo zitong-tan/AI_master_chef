@@ -232,7 +232,7 @@
                             <router-link
                                 to="/sauce-design"
                                 @click="showMobileMenu = false"
-                                class="hidden flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
+                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
                                 :class="$route.path === '/sauce-design' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
                             >
                                 <span>🥄</span>

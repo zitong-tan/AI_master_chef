@@ -12,6 +12,7 @@ import SauceDesign from './views/SauceDesign.vue'
 import FortuneCooking from './views/FortuneCooking.vue'
 import SettingsDemo from './views/SettingsDemo.vue'
 import Community from './views/Community.vue'
+import MyFoods from './views/MyFoods.vue'
 import { autoRefreshEnvSettings } from './utils/envWatcher'
 import './style.css'
 
@@ -26,7 +27,8 @@ const routes = [
     { path: '/sauce-design', component: SauceDesign },
     { path: '/fortune-cooking', component: FortuneCooking },
     { path: '/community', component: Community },
-    { path: '/settings-demo', component: SettingsDemo }
+    { path: '/settings-demo', component: SettingsDemo },
+    { path: '/my-foods', component: MyFoods }
 ]
 
 const router = createRouter({

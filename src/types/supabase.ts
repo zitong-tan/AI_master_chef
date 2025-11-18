@@ -123,7 +123,43 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
-      }
+      },
+      foods: {
+        Row: {
+          id: number
+          user_id: number
+          food_name: string
+          quantity: number
+          unit: string
+          expiration_date: string
+          storage_suggestion?: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          user_id: number
+          food_name: string
+          quantity?: number
+          unit?: string
+          expiration_date: string
+          storage_suggestion?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          user_id?: number
+          food_name?: string
+          quantity?: number
+          unit?: string
+          expiration_date?: string
+          storage_suggestion?: string
+          created_at?: string
+          updated_at?: string
+        }
+      },
+    
     }
   }
 }

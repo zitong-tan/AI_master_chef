@@ -20,5 +20,5 @@ export default defineConfig({
             }
         }
     },
-    base: '/' // 使用绝对路径，与 createWebHistory() 匹配
+    base: './' // 使用相对路径，适应手动部署
 })

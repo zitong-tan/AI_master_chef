@@ -166,7 +166,7 @@
 
             <!-- 移动端导航 -->
             <div class="md:hidden">
-                <!-- 顶部Logo和菜单按钮 -->
+                <!-- 顶部Logo和登录状态 -->
                 <div class="flex items-center justify-between">
                     <router-link to="/" class="flex items-center gap-2" @click="rotateLogo">
                         <div
@@ -192,120 +192,19 @@
                                 <span class="text-sm font-bold">登录</span>
                             </button>
                         </div>
-                        <div v-else class="flex items-center gap-1 px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border-2 border-[#0A0910] text-xs font-bold">
-                            <span>👤</span>
-                            <span>{{ currentUserName }}</span>
-                        </div>
-                        <!-- 移动端设置按钮 -->
-                        <SettingsButton />
-                        <button @click="showMobileMenu = !showMobileMenu" class="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg border-2 border-[#0A0910] transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 移动端菜单 - 横向滚动标签栏 -->
-                <div v-if="showMobileMenu" class="border-t-2 border-gray-200 pt-3 mt-3">
-                    <!-- 横向滚动导航 -->
-                    <div class="overflow-x-auto scrollbar-hide">
-                        <div class="flex gap-2 pb-2 min-w-max">
-                            <router-link
-                                to="/"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
+                        <div v-else class="flex items-center gap-1">
+                            <div class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border-2 border-[#0A0910] text-xs font-bold">
+                                <span>👤</span>
+                                <span>{{ currentUserName }}</span>
+                            </div>
+                            <button
+                                @click="handleLogout"
+                                class="p-2 bg-red-500 text-white rounded-lg border-2 border-[#0A0910] transition-colors hover:bg-red-600"
                             >
-                                <span>🏠</span>
-                                <span>主页</span>
-                            </router-link>
-                            <router-link
-                                to="/today-eat"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/today-eat' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>🎲</span>
-                                <span>美食盲盒</span>
-                            </router-link>
-                            <router-link
-                                to="/table-design"
-                                @click="showMobileMenu = false"
-                                class="hidden flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/table-design' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>🍽️</span>
-                                <span>满汉全席</span>
-                            </router-link>
-                            <router-link
-                                to="/sauce-design"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/sauce-design' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>🥄</span>
-                                <span>酱料大师</span>
-                            </router-link>
-                            <router-link
-                                to="/fortune-cooking"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/fortune-cooking' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>🔮</span>
-                                <span>玄学厨房</span>
-                            </router-link>
-                            <router-link
-                                to="/community"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/community' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>👥</span>
-                                <span>美食社区</span>
-                            </router-link>
-                            <router-link
-                                to="/favorites"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/favorites' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>❤️</span>
-                                <span>我的收藏</span>
-                            </router-link>
-                            <router-link
-                                to="/my-foods"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/my-foods' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>🥬</span>
-                                <span>我的食材</span>
-                            </router-link>
-                            <router-link
-                                to="/gallery"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/gallery' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>🖼️</span>
-                                <span>美食图鉴</span>
-                            </router-link>
-                            <router-link
-                                to="/about"
-                                @click="showMobileMenu = false"
-                                class="flex items-center gap-1.5 px-3 py-2 rounded-full font-bold border-2 border-[#0A0910] transition-all duration-200 whitespace-nowrap text-sm"
-                                :class="$route.path === '/about' ? 'bg-blue-400 text-gray-800 shadow-md' : 'bg-white text-gray-700 hover:bg-gray-50 active:scale-95'"
-                            >
-                                <span>📖</span>
-                                <span>关于我们</span>
-                            </router-link>
+                                <span class="text-sm font-bold">退出</span>
+                            </button>
                         </div>
                     </div>
-
-                    <!-- 滚动提示 -->
-                    <div class="text-center text-xs text-gray-500 mt-1">← 左右滑动查看更多功能 →</div>
                 </div>
             </div>
         </div>

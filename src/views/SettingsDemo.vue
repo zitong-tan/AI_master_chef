@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gray-50 px-4 py-6">
+    <div class="min-h-screen bg-gray-50 px-4 py-6 pb-20 md:pb-6">
         <!-- 全局导航 -->
         <GlobalNavigation />
 

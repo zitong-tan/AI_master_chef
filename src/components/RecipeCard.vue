@@ -270,6 +270,19 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
     favoriteChanged: [isFavorited: boolean]
 }>()
+
+// 在菜谱卡片挂载时触发事件，通知AI助手进行点评
+import { onMounted } from 'vue'
+onMounted(() => {
+    // 延迟一下，确保DOM已经渲染
+    setTimeout(() => {
+        const event = new CustomEvent('recipeGenerated', {
+            detail: props.recipe
+        })
+        window.dispatchEvent(event)
+    }, 500)
+})
+
 const isExpanded = ref(false)
 const isGeneratingImage = ref(false)
 const generatedImage = ref<GeneratedImage | null>(null)

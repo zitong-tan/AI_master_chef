@@ -3,6 +3,7 @@
         <router-view />
         <MobileBottomNav />
         <!-- <FloatingDonation /> -->
+        <ChatBot />
     </div>
 </template>
 
@@ -10,4 +11,5 @@
 import MobileBottomNav from './components/MobileBottomNav.vue'
 // App组件
 // import FloatingDonation from './components/FloatingDonation.vue'
+import ChatBot from './components/ChatBot.vue'
 </script>

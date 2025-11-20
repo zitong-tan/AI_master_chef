@@ -40,8 +40,8 @@
                             placeholder="请输入食材名称"
                             @input="handleFoodNameInput"
                         />
-                        <div v-if="suggestions.length > 0" class="mt-1 text-xs text-blue-600">
-                          哇！居然是{{ suggestions.join('、') }}，系统将自动推荐保质期
+                        <div v-if="suggestions.length > 0" class="mt-1 text-xs text-red-600">
+                          哇！居然是{{ suggestions.join('、') }}，下面为你推荐了保质期，如果是今天过期就不要添加了哦！
                         </div>
                     </div>
 
@@ -357,7 +357,7 @@ const initFormData = () => {
 }
 
 // 监听props变化
-watch(() => props.food, (newFood) => {
+watch(() => props.food, () => {
   initFormData()
 }, { immediate: true })
 

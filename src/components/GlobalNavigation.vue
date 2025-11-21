@@ -224,7 +224,6 @@ import SettingsButton from './SettingsButton.vue'
 import LoginModal from './LoginModal.vue'
 import { AuthService } from '@/services/authService'
 
-const showMobileMenu = ref(false)
 const showMoreMenu = ref(false)
 const showLoginModal = ref(false)
 const isLogoRotating = ref(false)

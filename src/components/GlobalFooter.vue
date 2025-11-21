@@ -5,12 +5,11 @@
             <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
                 <p class="text-sm text-gray-600">
                     © 戴夫的后花园 |
-                    <a href="https://github.com/zitong-tan/AI_master_chef.git" target="_blank" class="text-blue-600 hover:text-blue-700 hover:underline transition-colors">
+                    <a href="https://github.com/zitong-tan/AI_master_chef.git" target="_blank" class="text-blue-600 hover:text-blue-700 hover:underline transition-colors text-decoration: none">
                         Powered by 火炬树桩 and 豌豆射手
                     </a>
                 </p>
                 <div class="hidden md:block w-px h-4 bg-gray-300"></div>
-                <p class="text-xs text-gray-500">🚀 Vibe Coding with codebuddy</p>
             </div>
         </div>
     </footer>

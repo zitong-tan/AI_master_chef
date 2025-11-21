@@ -1,10 +1,18 @@
 [build]
-  command = "npm install && npm run build"
+  command = "npm install && npm run build:simple"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
   CI = "true"
+  VITE_TEXT_GENERATION_BASE_URL = "https://api.deepseek.com"
+  VITE_TEXT_GENERATION_API_KEY = "sk-ec3807d150764ce4a85f2c0c7989bf2f"
+  VITE_TEXT_GENERATION_MODEL = "deepseek-chat"
+  VITE_TEXT_GENERATION_TEMPERATURE = "0.7"
+  VITE_TEXT_GENERATION_TIMEOUT = "300000"
+  VITE_IMAGE_GENERATION_BASE_URL = "https://open.bigmodel.cn/api/paas/v4/images/generations"
+  VITE_IMAGE_GENERATION_API_KEY = "a835b9f6866d48ec956d341418df8a50.NuhlKYn58EkCb5iP"
+  VITE_IMAGE_GENERATION_MODEL = "cogview-3-flash"
 
 [[redirects]]
   from = "/*"

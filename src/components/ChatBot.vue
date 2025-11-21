@@ -1,9 +1,10 @@
 <template>
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <!-- 桌面端机器人 -->
+    <div class="hidden md:block fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
         <!-- 轮播文字提示 -->
-        <div v-if="!isOpen" class="bg-white border-2 border-[#0A0910] rounded-lg px-4 py-2 shadow-lg max-w-xs">
-            <p class="text-sm font-medium text-gray-800">{{ currentCarousel }}</p>
-            <p class="text-xs text-gray-500 mt-1">💡 点击我来使用AI助手</p>
+        <div v-if="!isOpen" class="bg-white border-2 border-[#0A0910] rounded-lg px-4 py-2 shadow-lg w-64">
+            <p class="text-sm font-medium text-gray-800 text-center">{{ currentCarousel }}</p>
+            <p class="text-xs text-gray-500 mt-1 text-center">💡 点击我来使用AI助手</p>
         </div>
 
         <!-- 机器人按钮 -->
@@ -90,6 +91,79 @@
             </div>
         </div>
     </div>
+
+    <!-- 移动端聊天窗口 -->
+    <div
+        v-if="isOpen && isMobile"
+        class="md:hidden fixed inset-x-8 bottom-20 top-32 bg-white rounded-2xl shadow-2xl border-2 border-[#0A0910] flex flex-col overflow-hidden animate-fade-in-up z-50"
+    >
+        <!-- 头部 -->
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-2 flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+                <img src="/miku111.png" alt="AI助手" class="w-6 h-6 rounded-full object-cover border border-white" />
+                <div>
+                    <h3 class="font-bold text-base">AI美食助手</h3>
+                    <p class="text-xs text-blue-100 hidden">{{ currentCarousel }}</p>
+                </div>
+            </div>
+            <button @click="toggleChat" class="text-white hover:bg-white/20 p-1.5 rounded-lg transition-colors text-base">
+                ✕
+            </button>
+        </div>
+
+        <!-- 消息区域 -->
+        <div ref="messagesContainer" class="flex-1 overflow-y-auto p-2 space-y-2 bg-gray-50">
+            <div v-if="messages.length === 0" class="flex flex-col items-center justify-center h-full text-center">
+                <div class="text-2xl mb-1">👋</div>
+                <p class="text-gray-600 font-medium text-sm">你好！我是AI美食助手</p>
+                <p class="text-xs text-gray-400 mt-1">有什么我可以帮助你的吗？</p>
+            </div>
+
+            <div v-for="(msg, index) in messages" :key="index" :class="['flex', msg.role === 'user' ? 'justify-end' : 'justify-start']">
+                <div
+                    :class="[
+                        'max-w-[75%] px-2 py-1.5 rounded-lg',
+                        msg.role === 'user'
+                            ? 'bg-blue-500 text-white rounded-br-none'
+                            : 'bg-gray-200 text-gray-800 rounded-bl-none'
+                    ]"
+                >
+                    <p class="text-sm whitespace-pre-wrap break-words leading-normal">{{ msg.content }}</p>
+                </div>
+            </div>
+
+            <!-- 加载状态 -->
+            <div v-if="isLoading" class="flex justify-start">
+                <div class="bg-gray-200 text-gray-800 px-2 py-1.5 rounded-lg rounded-bl-none">
+                    <div class="flex gap-0.5">
+                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce"></div>
+                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 输入区域 -->
+        <div class="border-t border-gray-200 p-2 bg-white">
+            <div class="flex gap-1.5">
+                <input
+                    v-model="userInput"
+                    @keyup.enter="sendMessage"
+                    :disabled="isLoading"
+                    placeholder="输入..."
+                    class="flex-1 px-2 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 disabled:bg-gray-100"
+                />
+                <button
+                    @click="sendMessage"
+                    :disabled="isLoading || !userInput.trim()"
+                    class="px-2 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 transition-colors font-medium text-sm"
+                >
+                    发送
+                </button>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -115,6 +189,7 @@ const messages = ref<Message[]>([])
 const messagesContainer = ref<HTMLElement>()
 const carouselIndex = ref(0)
 const pendingReview = ref<RecipeReview | null>(null)
+const isMobile = ref(false)
 
 const carouselTexts = [
     '我喜欢西红柿炒鸡蛋，你也喜欢吗？',
@@ -135,7 +210,22 @@ onMounted(() => {
 
     // 监听菜谱生成事件
     window.addEventListener('recipeGenerated', handleRecipeGenerated as EventListener)
+    
+    // 监听移动端导航栏的机器人按钮点击事件
+    window.addEventListener('toggleChatBot', handleToggleChatBot as EventListener)
+    
+    // 监听移动端导航栏的机器人关闭事件
+    window.addEventListener('closeChatBot', handleCloseChatBot as EventListener)
+    
+    // 检测移动端
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
 })
+
+// 检测移动端
+const checkMobile = () => {
+    isMobile.value = window.innerWidth < 768
+}
 
 // 处理菜谱生成事件
 const handleRecipeGenerated = async (event: any) => {
@@ -154,6 +244,20 @@ const handleRecipeGenerated = async (event: any) => {
 
         // 生成菜谱点评
         await generateRecipeReview()
+    }
+}
+
+// 处理移动端导航栏机器人按钮点击事件
+const handleToggleChatBot = () => {
+    if (isMobile.value) {
+        toggleChat()
+    }
+}
+
+// 处理移动端导航栏机器人关闭事件
+const handleCloseChatBot = () => {
+    if (isMobile.value && isOpen.value) {
+        isOpen.value = false
     }
 }
 

@@ -15,11 +15,11 @@
             <!-- 操作台 -->
             <div class="relative">
                 <button
-                    @click="showControlPanel = !showControlPanel; showMyPanel = false"
+                    @click="showControlPanel = !showControlPanel; showMyPanel = false; closeChatBot()"
                     class="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs"
                     :class="showControlPanel ? 'text-blue-600' : 'text-gray-600'"
                 >
-                    <span class="text-xl">🎛️</span>
+                    <span class="text-xl">🍚</span>
                     <span class="font-medium">操作台</span>
                 </button>
                 
@@ -72,10 +72,19 @@
                 </div>
             </div>
             
+            <!-- AI机器人 -->
+            <button
+                @click="toggleChatBot"
+                class="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs text-gray-600 hover:text-blue-600"
+            >
+                <div class="w-6 h-6 rounded-full overflow-hidden bg-cover bg-center border border-gray-300" style="background-image: url('/miku.png')"></div>
+                <span class="font-medium">AI助手</span>
+            </button>
+            
             <!-- 我的 -->
             <div class="relative">
                 <button
-                    @click="showMyPanel = !showMyPanel; showControlPanel = false"
+                    @click="showMyPanel = !showMyPanel; showControlPanel = false; closeChatBot()"
                     class="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs"
                     :class="showMyPanel ? 'text-blue-600' : 'text-gray-600'"
                 >
@@ -191,6 +200,22 @@ onMounted(() => {
         document.removeEventListener('click', handleClickOutside)
     }
 })
+
+// 切换AI聊天机器人
+const toggleChatBot = () => {
+    // 关闭展开的菜单
+    showControlPanel.value = false
+    showMyPanel.value = false
+    
+    // 触发全局事件，由ChatBot组件监听
+    window.dispatchEvent(new CustomEvent('toggleChatBot'))
+}
+
+// 关闭AI聊天机器人
+const closeChatBot = () => {
+    // 触发关闭事件
+    window.dispatchEvent(new CustomEvent('closeChatBot'))
+}
 </script>
 
 <style scoped>

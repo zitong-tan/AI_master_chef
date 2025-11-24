@@ -365,6 +365,14 @@ const generateRecipeFromSelection = async () => {
 
         recipe.value = await generateRecipe(selectedDishes.value, cuisineInfo)
 
+        // 为新生成的菜谱自动触发AI助手分析
+        setTimeout(() => {
+            const event = new CustomEvent('recipeGenerated', {
+                detail: recipe.value
+            })
+            window.dispatchEvent(event)
+        }, 500)
+
         // 显示成功提示
         showToast('菜谱生成成功', 'success')
     } catch (error) {

@@ -934,6 +934,14 @@ const generateRecipes = async () => {
                     // 每生成一个菜谱就立即添加到列表中
                     recipes.value.push(recipe)
 
+                    // 为新生成的菜谱自动触发AI助手分析
+                    setTimeout(() => {
+                        const event = new CustomEvent('recipeGenerated', {
+                            detail: recipe
+                        })
+                        window.dispatchEvent(event)
+                    }, 500)
+
                     // 更新全局加载文字，显示进度
                     const completedCount = recipes.value.length + cuisineSlots.value.filter(slot => slot.error).length
                     loadingText.value = `已完成 ${completedCount}/${total} 道菜谱...`

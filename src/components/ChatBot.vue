@@ -60,12 +60,15 @@
 
                 <!-- 加载状态 -->
                 <div v-if="isLoading" class="flex justify-start">
-                    <div class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg rounded-bl-none">
-                        <div class="flex gap-1">
-                            <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-                            <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                            <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    <div class="bg-gray-200 text-gray-800 px-4 py-3 rounded-lg rounded-bl-none max-w-[75%]">
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="flex gap-1">
+                                <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                            </div>
                         </div>
+                        <p class="text-sm text-gray-700">{{ loadingText }}</p>
                     </div>
                 </div>
             </div>
@@ -134,12 +137,15 @@
 
             <!-- 加载状态 -->
             <div v-if="isLoading" class="flex justify-start">
-                <div class="bg-gray-200 text-gray-800 px-2 py-1.5 rounded-lg rounded-bl-none">
-                    <div class="flex gap-0.5">
-                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce"></div>
-                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                <div class="bg-gray-200 text-gray-800 px-2 py-2 rounded-lg rounded-bl-none max-w-[75%]">
+                    <div class="flex items-center gap-1 mb-1">
+                        <div class="flex gap-0.5">
+                            <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce"></div>
+                            <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                            <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                        </div>
                     </div>
+                    <p class="text-xs text-gray-700">{{ loadingText }}</p>
                 </div>
             </div>
         </div>
@@ -190,6 +196,7 @@ const messagesContainer = ref<HTMLElement>()
 const carouselIndex = ref(0)
 const pendingReview = ref<RecipeReview | null>(null)
 const isMobile = ref(false)
+const loadingText = ref('正在思考中...')
 
 const carouselTexts = [
     '我喜欢西红柿炒鸡蛋，你也喜欢吗？',
@@ -208,8 +215,11 @@ onMounted(() => {
         carouselIndex.value = (carouselIndex.value + 1) % carouselTexts.length
     }, 3000)
 
-    // 监听菜谱生成事件
+    // 监听菜谱生成事件（新生成菜谱自动分析）
     window.addEventListener('recipeGenerated', handleRecipeGenerated as EventListener)
+    
+    // 监听询问大师事件（按钮触发）
+    window.addEventListener('askMasterAboutRecipe', handleRecipeGenerated as EventListener)
     
     // 监听移动端导航栏的机器人按钮点击事件
     window.addEventListener('toggleChatBot', handleToggleChatBot as EventListener)
@@ -266,6 +276,7 @@ const generateRecipeReview = async () => {
     if (!pendingReview.value) return
 
     isLoading.value = true
+    loadingText.value = '大师正在认真分析哦！请耐心等待一下~'
     try {
         const review = await reviewRecipe(
             pendingReview.value.recipeName,
@@ -321,6 +332,7 @@ const sendMessage = async () => {
 
     // 调用AI服务
     isLoading.value = true
+    loadingText.value = '正在思考中...'
     try {
         const response = await chatWithBot(userMessage)
         messages.value.push({

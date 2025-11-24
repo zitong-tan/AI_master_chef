@@ -30,6 +30,17 @@
         </div>
 
         <div class="p-2 md:p-6">
+            <!-- AI分析按钮 -->
+            <div class="mb-4">
+                <button 
+                    @click="askMaster"
+                    class="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-4 py-3 rounded-lg font-bold border-2 border-black transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2"
+                >
+                    <span>👨‍🍳</span>
+                    <span>来问问大师</span>
+                </button>
+            </div>
+
             <!-- 食材列表 -->
             <div class="mb-4">
                 <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">🥬 所需食材</h4>
@@ -271,18 +282,6 @@ const emit = defineEmits<{
     favoriteChanged: [isFavorited: boolean]
 }>()
 
-// 在菜谱卡片挂载时触发事件，通知AI助手进行点评
-import { onMounted } from 'vue'
-onMounted(() => {
-    // 延迟一下，确保DOM已经渲染
-    setTimeout(() => {
-        const event = new CustomEvent('recipeGenerated', {
-            detail: props.recipe
-        })
-        window.dispatchEvent(event)
-    }, 500)
-})
-
 const isExpanded = ref(false)
 const isGeneratingImage = ref(false)
 const generatedImage = ref<GeneratedImage | null>(null)
@@ -412,6 +411,15 @@ const generateImage = async () => {
 const handleImageError = () => {
     imageError.value = '图片加载失败'
     generatedImage.value = null
+}
+
+// 询问AI大师
+const askMaster = () => {
+    // 触发自定义事件，通知AI助手进行点评
+    const event = new CustomEvent('askMasterAboutRecipe', {
+        detail: props.recipe
+    })
+    window.dispatchEvent(event)
 }
 
 const fetchNutritionAnalysis = async () => {

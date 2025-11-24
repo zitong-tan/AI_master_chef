@@ -45,6 +45,11 @@
                 class="w-full px-3 py-2 border-2 border-[#0A0910] rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
                 placeholder="请输入密码"
               />
+              <!-- 登录提示 -->
+              <p class="mt-2 text-sm text-blue-700 flex items-center">
+                <span class="mr-2">💡</span>
+                只需要登录一次哦，之后便不需要重复登录了哦！
+              </p>
             </div>
             <button
               @click="handleLogin"
@@ -86,6 +91,7 @@
                 class="w-full px-3 py-2 border-2 border-[#0A0910] rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
                 placeholder="请输入密码"
               />
+              <p class="mt-1 text-xs text-gray-500">💡 建议使用大小写字母＋数字组合哦！</p>
             </div>
             <div>
               <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">确认密码</label>

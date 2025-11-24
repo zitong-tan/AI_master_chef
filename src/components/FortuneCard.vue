@@ -7,11 +7,11 @@
                     <h2 class="text-2xl font-bold mb-2">{{ fortune.dishName }}</h2>
                     <div class="flex items-center gap-4 text-sm">
                         <span class="flex items-center gap-1">
-                            <span>🔮</span>
+                            <span>◉</span>
                             <span>{{ getFortuneTypeName(fortune.type) }}</span>
                         </span>
                         <span class="flex items-center gap-1">
-                            <span>⏱️</span>
+                            <span>◌</span>
                             <span>{{ fortune.cookingTime }}分钟</span>
                         </span>
                         <span :class="['px-2 py-1 rounded-full text-xs font-medium', getDifficultyStyle(fortune.difficulty)]">
@@ -26,7 +26,7 @@
                 <div class="text-center">
                     <div class="text-xs opacity-80 mb-1">幸运指数</div>
                     <div class="flex items-center gap-1">
-                        <span v-for="i in 10" :key="i" :class="['text-lg hidden sm:inline', i <= fortune.luckyIndex ? 'text-yellow-300' : 'text-white/30']">⭐</span>
+                        <span v-for="i in 10" :key="i" :class="['text-lg hidden sm:inline', i <= fortune.luckyIndex ? 'text-yellow-300' : 'text-white/30']">★</span>
                         <span class="text-xl font-bold text-yellow-300">{{ fortune.luckyIndex }}/10</span>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
             <!-- 详细描述 -->
             <div class="mb-6 p-4 bg-pink-50 rounded-lg border border-pink-200">
                 <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
-                    <span>✨</span>
+                    <span>✦</span>
                     <span>神秘解析</span>
                 </h3>
                 <p class="text-gray-700">{{ fortune.description }}</p>
@@ -69,7 +69,7 @@
             <!-- 制作步骤 -->
             <div v-if="fortune.steps && fortune.steps.length > 0" class="mb-6">
                 <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                    <span>👨‍🍳</span>
+                    <span>◉</span>
                     <span>神秘步骤</span>
                 </h3>
                 <div class="space-y-4">
@@ -89,7 +89,7 @@
             <!-- 占卜建议 -->
             <div v-if="fortune.tips.length > 0" class="mb-6">
                 <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                    <span>💡</span>
+                    <span>◉</span>
                     <span>神秘建议</span>
                 </h3>
                 <div class="space-y-2">
@@ -103,7 +103,7 @@
             <!-- 神秘话语 -->
             <div class="mb-6 p-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg border border-purple-200">
                 <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
-                    <span>🔮</span>
+                    <span>◉</span>
                     <span>占卜师的话</span>
                 </h3>
                 <p class="text-gray-700 italic text-center">{{ fortune.mysticalMessage }}</p>
@@ -154,7 +154,7 @@ const getDifficultyName = (difficulty: 'easy' | 'medium' | 'hard'): string => {
 
 // 分享结果 - 暂时未使用
 // const shareResult = () => {
-//     const shareText = `🔮 料理占卜师为我推荐了：${props.fortune.dishName}\n\n✨ ${props.fortune.reason}\n\n🌟 幸运指数：${props.fortune.luckyIndex}/10\n\n来"AI美食大师"体验神秘的料理占卜吧！`
+//     const shareText = `◉ 料理占卜师为我推荐了：${props.fortune.dishName}\n\n✦ ${props.fortune.reason}\n\n🌟 幸运指数：${props.fortune.luckyIndex}/10\n\n来"AI美食大师"体验神秘的料理占卜吧！`
 
 //     if (navigator.share) {
 //         navigator.share({

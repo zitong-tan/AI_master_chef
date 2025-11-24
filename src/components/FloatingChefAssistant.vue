@@ -7,9 +7,9 @@
             :aria-label="isOpen ? '关闭厨神助理' : '打开厨神助理'"
         >
             <div class="text-2xl md:text-3xl relative">
-                <span :class="{ 'opacity-0': isLoading }">👨‍🍳</span>
+                <span :class="{ 'opacity-0': isLoading }">◉</span>
                 <span v-if="isLoading" class="absolute inset-0 flex items-center justify-center">
-                    <span class="animate-pulse">🤔</span>
+                    <span class="animate-pulse">◔</span>
                 </span>
             </div>
         </button>
@@ -29,7 +29,7 @@
             <!-- 头部 -->
             <div class="px-4 py-3 bg-yellow-100 border-b-2 border-[#0A0910] flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-2">
-                    <span class="text-xl">👨‍🍳</span>
+                    <span class="text-xl">◉</span>
                     <div>
                         <div class="text-sm font-black text-gray-800">厨神小助手</div>
                         <div class="text-xs text-gray-600">会做饭的AI，问我任何烹饪问题～</div>
@@ -47,7 +47,7 @@
                 <div v-for="(m, idx) in messages" :key="idx" class="flex" :class="m.role === 'user' ? 'justify-end' : 'justify-start'">
                     <div v-if="m.role === 'assistant'" class="max-w-[80%] rounded-lg px-3 py-2 text-sm leading-6 bg-white border-2 border-[#0A0910] text-gray-800 markdown-body">
                         <div v-if="isLoading && idx === messages.length - 1">
-                            <span class="animate-pulse">👨‍🍳</span>
+                            <span class="animate-pulse">◉</span>
                             <span class="text-sm font-medium">小助手正在思考中···</span>
                         </div>
                         <div v-else v-html="renderMarkdown(m.content)" />

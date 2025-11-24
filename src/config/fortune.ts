@@ -229,7 +229,7 @@ export const moodConfigs: MoodConfig[] = [
     {
         id: 'happy',
         name: '开心',
-        emoji: '😊',
+        emoji: '◡',
         color: 'text-yellow-500',
         cookingStyle: ['甜品', '色彩丰富', '庆祝菜品', '轻松制作'],
         description: '心情愉悦，适合制作色彩缤纷的美食'
@@ -295,7 +295,7 @@ export const moodConfigs: MoodConfig[] = [
 // 占卜师角色配置
 export const fortuneTeller: FortuneTeller = {
     name: '星月占卜师',
-    avatar: '🔮',
+    avatar: '◉',
     greetings: [
         '欢迎来到神秘的料理占卜殿堂...',
         '星辰指引着美食的方向，让我为你占卜...',

@@ -1,90 +1,105 @@
 <template>
-    <div class="min-h-screen bg-blue-400 px-2 md:px-4 py-6 pb-20 md:pb-6">
+    <div class="min-h-screen px-2 md:px-4 py-6 pb-20 md:pb-6">
         <!-- 全局导航 -->
         <GlobalNavigation />
 
         <div class="max-w-7xl mx-auto">
+            <!-- 欢迎标题区域 -->
+            <div class="text-center mb-8 animate-fade-in">
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-3 drop-shadow-lg">
+                    <span class="bg-gradient-to-r from-white to-purple-100 bg-clip-text text-transparent">
+                        智能美食创作平台
+                    </span>
+                </h1>
+                <p class="text-white/90 text-lg md:text-xl font-medium">
+                    ✦ 三步生成专属菜谱，让AI成为你的私人大厨 ✦
+                </p>
+            </div>
+
             <!-- 步骤1: 输入食材 -->
-            <div class="mb-6">
-                <div class="bg-pink-400 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block">
-                    <span class="font-bold">1. 输入食材</span>
-                </div>
-                <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-4 md:p-6 md:pb-10">
-                    <div class="text-center mb-6">
-                        <div class="w-16 h-16 bg-black rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <span class="text-white text-2xl">🥬</span>
+            <div class="mb-6 animate-slide-up" style="animation-delay: 0.1s">
+                <div class="glass-strong rounded-2xl p-6 md:p-8 shadow-glass-lg hover:shadow-glass transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <span class="text-white text-2xl font-bold">①</span>
                         </div>
-                        <h2 class="text-2xl font-bold text-dark-800 mb-2">添加食材</h2>
-                        <p class="text-gray-600">输入你现有的食材，按回车添加</p>
-                        <p class="text-xs text-gray-500 mt-1">支持蔬菜、肉类、调料等 (最多10种)</p>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">选择食材</h2>
+                            <p class="text-white/80 text-sm">从冰箱里挑选你想用的食材</p>
+                        </div>
                     </div>
 
                     <!-- 食材输入区域 -->
                     <div class="space-y-4">
                         <!-- 已添加的食材 -->
-                        <div v-if="ingredients.length > 0" class="flex flex-wrap gap-2">
+                        <div v-if="ingredients.length > 0" class="flex flex-wrap gap-2 mb-4">
                             <div
                                 v-for="ingredient in ingredients"
                                 :key="ingredient"
-                                class="inline-flex items-center gap-2 bg-yellow-400 text-dark-800 px-3 py-2 rounded-full text-sm font-medium border-2 border-[#0A0910]"
+                                class="ingredient-tag inline-flex items-center gap-2 bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
                             >
+                                <span>◆</span>
                                 {{ ingredient }}
-                                <button @click="removeIngredient(ingredient)" class="hover:bg-yellow-500 rounded-full p-1 transition-colors">
+                                <button @click="removeIngredient(ingredient)" class="hover:bg-white/20 rounded-full p-1 transition-colors">
                                     <span class="text-xs">✕</span>
                                 </button>
                             </div>
                         </div>
 
                         <!-- 输入框 -->
-                        <div class="relative">
+                        <div class="relative mb-4">
+                            <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400 text-xl">
+                                ◆
+                            </div>
                             <input
                                 v-model="currentIngredient"
                                 @keyup.enter="addIngredient"
                                 placeholder="输入食材名称，按回车添加..."
-                                class="w-full p-3 md:p-4 border-2 border-[#0A0910] rounded-lg text-sm md:text-lg font-medium focus:outline-none focus:ring-2 focus:ring-pink-400"
+                                class="w-full pl-12 pr-4 py-4 bg-white/90 backdrop-blur-sm rounded-xl text-lg font-medium focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white shadow-lg transition-all duration-200"
                             />
                         </div>
 
                         <!-- 快速选择食材 -->
-                        <div class="mt-4">
+                        <div>
                             <button
                                 @click="toggleIngredientPicker"
-                                class="flex items-center justify-between w-full p-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 transition-all duration-200"
+                                class="quick-select-btn flex items-center justify-between w-full p-3 text-sm font-semibold text-purple-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                                 <span class="flex items-center gap-2">
-                                    <span class="text-base">🥬</span>
-                                    <span class="font-medium">快速选择食材</span>
+                                    <span class="text-lg">◆</span>
+                                    <span>快速选择食材</span>
                                 </span>
-                                <span class="transform transition-transform duration-200 text-gray-400" :class="{ 'rotate-180': showIngredientPicker }">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span class="transform transition-transform duration-300 text-purple-400" :class="{ 'rotate-180': showIngredientPicker }">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </span>
                             </button>
 
-                            <div v-if="showIngredientPicker" class="mt-2 border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm">
+                            <div v-if="showIngredientPicker" class="mt-3 rounded-xl overflow-hidden bg-white/95 backdrop-blur-sm shadow-xl animate-slide-up">
                                 <!-- 食材展示区域 -->
-                                <div class="p-3 max-h-80 overflow-y-auto">
+                                <div class="p-4 max-h-80 overflow-y-auto custom-scrollbar">
                                     <div class="space-y-4">
                                         <div v-for="category in ingredientCategories" :key="category.id">
                                             <!-- 分类标题 -->
-                                            <div class="flex items-center gap-2 mb-2">
-                                                <span class="text-sm">{{ category.icon }}</span>
-                                                <span class="text-sm font-bold text-gray-700">{{ category.name }}</span>
-                                                <div class="flex-1 h-px bg-gray-200"></div>
+                                            <div class="flex items-center gap-2 mb-3">
+                                                <span class="text-lg">{{ category.icon }}</span>
+                                                <span class="text-sm font-bold text-gray-800">{{ category.name }}</span>
+                                                <div class="flex-1 h-px bg-gradient-to-r from-purple-200 to-transparent"></div>
                                             </div>
 
                                             <!-- 食材按钮 -->
-                                            <div class="flex flex-wrap gap-1.5">
+                                            <div class="flex flex-wrap gap-2">
                                                 <button
                                                     v-for="item in category.items"
                                                     :key="item"
                                                     @click="quickAddIngredient(item)"
                                                     :disabled="ingredients.includes(item) || ingredients.length >= 10"
-                                                    class="px-3 py-1.5 text-xs font-medium rounded-full border border-gray-300 hover:border-pink-400 hover:bg-pink-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed disabled:border-gray-200 transition-all duration-200 hover:shadow-sm"
+                                                    class="px-3 py-2 text-xs font-semibold rounded-lg transition-all duration-200 shadow-sm hover:shadow-md transform hover:scale-105 disabled:transform-none"
                                                     :class="{
-                                                        'bg-yellow-100 border-yellow-400 text-yellow-800 shadow-sm': ingredients.includes(item),
-                                                        'hover:scale-105': !ingredients.includes(item) && ingredients.length < 10
+                                                        'bg-gradient-to-r from-purple-400 to-pink-400 text-white shadow-lg': ingredients.includes(item),
+                                                        'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 border border-gray-200': !ingredients.includes(item) && ingredients.length < 10,
+                                                        'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200': ingredients.length >= 10 && !ingredients.includes(item)
                                                     }"
                                                 >
                                                     {{ item }}
@@ -95,9 +110,9 @@
                                 </div>
 
                                 <!-- 底部状态栏 -->
-                                <div class="px-3 py-2 bg-gray-50 border-t border-gray-200 text-xs text-gray-500 flex justify-between items-center">
-                                    <span>点击食材快速添加到列表</span>
-                                    <span class="font-medium">已选择 {{ ingredients.length }}/10</span>
+                                <div class="px-4 py-3 bg-gradient-to-r from-purple-50 to-pink-50 border-t border-purple-100 text-xs font-medium flex justify-between items-center">
+                                    <span class="text-gray-600">✦ 点击食材快速添加</span>
+                                    <span class="text-purple-600 font-bold">{{ ingredients.length }}/10</span>
                                 </div>
                             </div>
                         </div>
@@ -108,11 +123,17 @@
             <!-- 步骤2和3: 左右布局 -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <!-- 步骤2: 选择菜系 -->
-                <div>
-                    <div class="bg-green-400 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block">
-                        <span class="font-bold">2. 选择菜系</span>
-                    </div>
-                    <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-4 md:p-6 h-full">
+                <div class="animate-slide-up" style="animation-delay: 0.2s">
+                    <div class="glass-strong rounded-2xl p-6 md:p-8 shadow-glass-lg hover:shadow-glass transition-all duration-300 h-full">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-teal-500 rounded-xl flex items-center justify-center shadow-lg">
+                                <span class="text-white text-2xl font-bold">②</span>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">选择风格</h2>
+                                <p class="text-white/80 text-sm">挑选你喜欢的菜系或自定义</p>
+                            </div>
+                        </div>
                         <div>
                             <!-- 自定义要求提示 -->
                             <div v-if="customPrompt.trim()" class="mb-4 p-3 bg-blue-50 border-2 border-blue-200 rounded-lg text-center">
@@ -141,7 +162,7 @@
 
                             <!-- 国际菜系 -->
                             <div class="mb-6" :class="{ 'opacity-50': customPrompt.trim() }">
-                                <h5 class="text-xs font-bold text-gray-700 mb-2 flex items-center gap-1">🌍 国际菜系</h5>
+                                <h5 class="text-xs font-bold text-gray-700 mb-2 flex items-center gap-1">◎ 国际菜系</h5>
                                 <div class="grid grid-cols-3 gap-2">
                                     <button
                                         v-for="cuisine in cuisines.slice(8)"
@@ -167,7 +188,7 @@
                                     :class="{ 'bg-blue-50 border-blue-300': showCustomPrompt || customPrompt.trim() }"
                                 >
                                     <span class="flex items-center gap-2">
-                                        <span class="text-base">💭</span>
+                                        <span class="text-base">◔</span>
                                         <span class="font-medium">或自定义要求</span>
                                         <span v-if="customPrompt.trim()" class="text-xs bg-blue-500 text-white px-2 py-1 rounded-full">已设置</span>
                                     </span>
@@ -187,7 +208,7 @@
                                             class="flex items-center justify-between w-full p-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-white/50 rounded-lg border border-blue-200 hover:border-blue-300 transition-all duration-200 mb-2"
                                         >
                                             <span class="flex items-center gap-2">
-                                                <span class="text-base">⚡</span>
+                                                <span class="text-base">✦</span>
                                                 <span class="font-medium">快速预设</span>
                                             </span>
                                             <span class="transform transition-transform duration-200 text-gray-400" :class="{ 'rotate-180': showPresetPicker }">
@@ -200,7 +221,7 @@
                                         <div v-if="showPresetPicker" class="space-y-2 mb-3 p-2 bg-white/70 rounded-lg border border-blue-200 shadow-sm max-h-40 overflow-y-auto">
                                             <!-- 场景预设 -->
                                             <div>
-                                                <h6 class="text-xs font-medium text-gray-700 mb-1 flex items-center gap-1">🎯 场景需求</h6>
+                                                <h6 class="text-xs font-medium text-gray-700 mb-1 flex items-center gap-1">◎ 场景需求</h6>
                                                 <div class="flex flex-wrap gap-1">
                                                     <button
                                                         v-for="preset in scenePresets"
@@ -252,14 +273,14 @@
                                             @click="getRandomInspiration"
                                             class="w-full py-1.5 px-2 bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white text-sm font-medium rounded-lg border-2 border-[#0A0910] transition-all duration-200 transform"
                                         >
-                                            ✨ 随机灵感
+                                            ✦ 随机灵感
                                         </button>
                                     </div>
 
                                     <!-- 底部提示 -->
                                     <div class="mt-2 pt-2 border-t border-blue-200">
                                         <div class="flex items-center justify-between text-xs text-blue-600">
-                                            <span>💡 提示：越具体越好！</span>
+                                            <span>◉ 提示：越具体越好！</span>
                                             <span :class="{ 'text-red-500': customPrompt.length > 180 }">{{ customPrompt.length }}/200</span>
                                         </div>
                                     </div>
@@ -270,14 +291,20 @@
                 </div>
 
                 <!-- 步骤3: 交给大师 -->
-                <div class="max-sm:mt-10">
-                    <div class="bg-orange-400 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block">
-                        <span class="font-bold">3. 交给大师</span>
-                    </div>
-                    <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-4 md:p-6 h-full">
+                <div class="animate-slide-up" style="animation-delay: 0.3s">
+                    <div class="glass-strong rounded-2xl p-6 md:p-8 shadow-glass-lg hover:shadow-glass transition-all duration-300 h-full">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center shadow-lg">
+                                <span class="text-white text-2xl font-bold">③</span>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">开始创作</h2>
+                                <p class="text-white/80 text-sm">AI大师为你量身定制菜谱</p>
+                            </div>
+                        </div>
                         <div class="text-center h-full flex flex-col">
                             <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-                                <span class="text-white text-2xl">👨‍🍳</span>
+                                <span class="text-white text-2xl">◉</span>
                             </div>
                             <h2 class="text-xl font-bold text-dark-800 mb-2">准备开始烹饪</h2>
                             <p class="text-gray-600 mb-4 text-sm">大师已准备就绪，点击按钮开始创作美味佳肴</p>
@@ -285,7 +312,7 @@
                             <!-- 当前配置预览 -->
                             <div class="bg-gray-50 rounded-lg p-3 mb-4 text-left flex-1">
                                 <h3 class="font-bold text-sm text-gray-700 mb-2 flex items-center gap-2">
-                                    <span>📋</span>
+                                    <span>◐</span>
                                     <span>当前配置</span>
                                 </h3>
 
@@ -309,7 +336,7 @@
                                             :key="cuisineId"
                                             class="inline-flex items-center gap-1 bg-green-200 text-green-800 px-2 py-1 rounded text-xs mr-1 mb-1"
                                         >
-                                            <span>{{ cuisines.find(c => c.id === cuisineId)?.avatar || '👨‍🍳' }}</span>
+                                            <span>{{ cuisines.find(c => c.id === cuisineId)?.avatar || '◉' }}</span>
                                             <span>{{ cuisines.find(c => c.id === cuisineId)?.name }}</span>
                                         </div>
                                     </div>
@@ -330,7 +357,7 @@
                             <button
                                 @click="generateRecipes"
                                 :disabled="ingredients.length === 0 || isLoading"
-                                class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 disabled:from-gray-400 disabled:to-gray-400 text-white px-6 py-3 rounded-lg font-bold text-base md:text-lg border-2 border-[#0A0910] transition-all duration-300 transform disabled:scale-100 disabled:cursor-not-allowed shadow-lg mb-3"
+                                class="generate-btn w-full bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 disabled:from-gray-400 disabled:to-gray-500 text-white px-8 py-4 rounded-2xl font-bold text-lg md:text-xl transition-all duration-300 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl mb-4 relative overflow-hidden"
                             >
                                 <span class="flex items-center gap-2 justify-center">
                                     <template v-if="isLoading">
@@ -339,7 +366,7 @@
                                         <span v-else>{{ loadingText }}</span>
                                     </template>
                                     <template v-else>
-                                        <span class="text-xl">✨</span>
+                                        <span class="text-xl">✦</span>
                                         <span>{{ customPrompt.trim() ? '按要求生成' : '交给大师' }}</span>
                                     </template>
                                 </span>
@@ -347,8 +374,8 @@
 
                             <!-- 提示信息 -->
                             <div class="text-sm">
-                                <p v-if="customPrompt.trim()" class="text-blue-600">🎯 将根据您的自定义要求生成菜谱</p>
-                                <p v-else-if="selectedCuisines.length > 0" class="text-green-600">🍽️ 将生成 {{ selectedCuisines.length }} 个菜系的菜谱</p>
+                                <p v-if="customPrompt.trim()" class="text-blue-600">◎ 将根据您的自定义要求生成菜谱</p>
+                                <p v-else-if="selectedCuisines.length > 0" class="text-green-600">◈ 将生成 {{ selectedCuisines.length }} 个菜系的菜谱</p>
                                 <p class="text-xs text-gray-500 mt-1">大师将为您精心设计菜谱流程</p>
                             </div>
                         </div>
@@ -357,11 +384,17 @@
             </div>
 
             <!-- 步骤4: 菜谱结果 -->
-            <div ref="resultsSection" class="mt-16">
-                <div class="bg-dark-800 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block">
-                    <span class="font-bold">4. 菜谱结果</span>
-                </div>
-                <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-2 md:p-6">
+            <div ref="resultsSection" class="mt-12 animate-slide-up" style="animation-delay: 0.4s">
+                <div class="glass-strong rounded-2xl p-6 md:p-8 shadow-glass-lg">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                            <span class="text-white text-2xl font-bold">④</span>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">生成结果</h2>
+                            <p class="text-white/80 text-sm">你的专属美食菜谱已就绪</p>
+                        </div>
+                    </div>
                     <!-- 移除这个整体加载状态，因为我们现在使用菜系模块加载 -->
 
                     <!-- 流式加载状态 - 显示菜系模块和加载状态 -->
@@ -385,19 +418,19 @@
                                         <div class="flex items-center justify-between">
                                             <div class="flex-1">
                                                 <h3 class="text-lg font-bold mb-1 flex items-center gap-2">
-                                                    <span class="animate-bounce">😅</span>
+                                                    <span class="animate-bounce">◔</span>
                                                     {{ cuisineInfo.name }}不会这道菜，哈哈
                                                 </h3>
                                                 <div class="flex items-center gap-3 text-sm">
                                                     <span class="bg-white/20 px-2 py-1 rounded text-xs">{{ cuisineInfo.name }}</span>
                                                     <span class="flex items-center gap-1">
-                                                        <span>😓</span>
+                                                        <span>◑</span>
                                                         技能点不够
                                                     </span>
-                                                    <span>🎯 开小差了</span>
+                                                    <span>◎ 开小差了</span>
                                                 </div>
                                             </div>
-                                            <div class="text-2xl ml-2">🤷‍♂️</div>
+                                            <div class="text-2xl ml-2">◔</div>
                                         </div>
                                     </div>
 
@@ -405,7 +438,7 @@
                                     <div class="p-4 md:p-6 text-center">
                                         <div class="mb-4">
                                             <div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                                                <span class="text-orange-500 text-2xl">🤔</span>
+                                                <span class="text-orange-500 text-2xl">◔</span>
                                             </div>
                                             <h4 class="text-lg font-bold text-gray-800 mb-2">大师表示很为难</h4>
                                             <p class="text-gray-600 text-sm mb-4">{{ cuisineInfo.name }}看了看你的食材，挠了挠头说："这个组合我还没学会呢！"</p>
@@ -413,7 +446,7 @@
 
                                         <!-- 建议区域 -->
                                         <div class="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 mb-4">
-                                            <h5 class="text-sm font-bold text-yellow-800 mb-2 flex items-center gap-1 justify-center">💡 大师的建议</h5>
+                                            <h5 class="text-sm font-bold text-yellow-800 mb-2 flex items-center gap-1 justify-center">◉ 大师的建议</h5>
                                             <div class="text-xs text-yellow-700 space-y-1">
                                                 <p>• 试试其他菜系大师，他们可能有不同的想法</p>
                                                 <p>• 调整一下食材搭配，或许会有惊喜</p>
@@ -438,17 +471,17 @@
                                         <div class="flex items-center justify-between">
                                             <div class="flex-1">
                                                 <h3 class="text-lg font-bold mb-1 flex items-center gap-2">
-                                                    <span class="animate-pulse">👨‍🍳</span>
+                                                    <span class="animate-pulse">◉</span>
                                                     {{ cuisineInfo.name }}创作中...
                                                 </h3>
                                                 <!-- 移动端：垂直布局 -->
                                                 <div class="flex flex-col gap-1 md:hidden">
                                                     <div class="flex items-center gap-2">
                                                         <span class="bg-white/20 px-2 py-1 rounded text-xs animate-pulse">{{ cuisineInfo.name }}</span>
-                                                        <span class="text-xs">📊 精心制作</span>
+                                                        <span class="text-xs">◫ 精心制作</span>
                                                     </div>
                                                     <div class="flex items-center gap-1 text-xs">
-                                                        <span class="animate-spin">⏱️</span>
+                                                        <span class="animate-spin">◌</span>
                                                         <span>预计10-20秒</span>
                                                     </div>
                                                 </div>
@@ -456,10 +489,10 @@
                                                 <div class="hidden md:flex items-center gap-3 text-sm">
                                                     <span class="bg-white/20 px-2 py-1 rounded text-xs animate-pulse">{{ cuisineInfo.name }}</span>
                                                     <span class="flex items-center gap-1">
-                                                        <span class="animate-spin">⏱️</span>
+                                                        <span class="animate-spin">◌</span>
                                                         预计10-20秒
                                                     </span>
-                                                    <span>📊 精心制作</span>
+                                                    <span>◫ 精心制作</span>
                                                 </div>
                                             </div>
                                             <div class="text-2xl ml-2 animate-bounce">⏳</div>
@@ -470,7 +503,7 @@
                                     <div class="p-4 md:p-6">
                                         <!-- 食材预览 -->
                                         <div class="mb-4">
-                                            <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">🥬 使用食材</h4>
+                                            <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">◆ 使用食材</h4>
                                             <div class="flex flex-wrap gap-1">
                                                 <span
                                                     v-for="ingredient in ingredients"
@@ -484,7 +517,7 @@
 
                                         <!-- 步骤预览骨架 -->
                                         <div class="mb-4">
-                                            <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">📝 制作步骤</h4>
+                                            <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">◐ 制作步骤</h4>
                                             <div class="space-y-2">
                                                 <div v-for="i in 3" :key="i" class="flex gap-2 p-2 bg-gray-50 rounded border border-gray-200">
                                                     <div class="flex-shrink-0 w-5 h-5 bg-gray-300 rounded shimmer-effect"></div>
@@ -546,7 +579,7 @@
                     <!-- 空状态 -->
                     <div v-else-if="recipes.length === 0" class="text-center py-12">
                         <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <span class="text-gray-400 text-2xl">⭐</span>
+                            <span class="text-gray-400 text-2xl">★</span>
                         </div>
                         <h3 class="text-xl font-bold text-gray-400 mb-2">等待魔法发生...</h3>
                         <p class="text-gray-500">添加食材并选择菜系开始创作</p>

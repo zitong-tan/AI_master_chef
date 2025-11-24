@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-white border-2 border-[#0A0910] max-w-7xl mx-auto rounded-lg mb-4 shadow-lg">
+    <nav class="bg-white border-2 border-[#0A0910] max-w-7xl mx-auto rounded-lg mb-4 shadow-lg relative z-50">
         <div class="px-4 py-6 md:px-6">
             <!-- 桌面端导航 -->
             <div class="hidden md:flex items-center justify-between">
@@ -29,7 +29,7 @@
                         class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>🏠</span>
+                        <span>⌂</span>
                         <span>主页</span>
                     </router-link>
                     
@@ -39,7 +39,7 @@
                             @click="showLoginModal = true"
                             class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm bg-green-500 text-white hover:bg-green-600"
                         >
-                            <span>🔑</span>
+                            <span>◉</span>
                             <span>登录</span>
                         </button>
                     </div>
@@ -47,7 +47,7 @@
                     <!-- 用户已登录状态 -->
                     <div v-else class="flex items-center gap-2">
                         <div class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] bg-blue-100 text-blue-800 text-sm">
-                            <span>👤</span>
+                            <span>◉</span>
                             <span>{{ currentUserName }}</span>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                         class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/today-eat' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>🎲</span>
+                        <span>⚄</span>
                         <span>美食盲盒</span>
                     </router-link>
                     <router-link
@@ -64,7 +64,7 @@
                         class="hidden flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/table-design' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>🍽️</span>
+                        <span>◈</span>
                         <span>满汉全席</span>
                     </router-link>
                     <router-link
@@ -72,7 +72,7 @@
                         class=" flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/fortune-cooking' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>🔮</span>
+                        <span>◉</span>
                         <span>玄学厨房</span>
                     </router-link>
                     <router-link
@@ -80,7 +80,7 @@
                         class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/community' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>👥</span>
+                        <span>◎</span>
                         <span>美食社区</span>
                     </router-link>
                     <router-link
@@ -88,12 +88,12 @@
                         class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/sauce-design' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>🥄</span>
+                        <span>◈</span>
                         <span>酱料大师</span>
                     </router-link>
 
                     <!-- 更多菜单下拉 -->
-                    <div class="relative" @mouseleave="handleMouseLeave">
+                    <div class="relative z-[100]" @mouseleave="handleMouseLeave">
                         <button
                             @mouseenter="handleMouseEnter"
                             @click="showMoreMenu = !showMoreMenu"
@@ -110,7 +110,7 @@
                         <div
                             v-if="showMoreMenu"
                             @mouseenter="handleMouseEnter"
-                            class="absolute right-0 top-full mt-0.5 w-48 bg-white border-2 border-[#0A0910] rounded-lg shadow-lg z-50 overflow-hidden"
+                            class="absolute right-0 top-full mt-0.5 w-48 bg-white border-2 border-[#0A0910] rounded-lg shadow-lg z-[9999] overflow-hidden"
                         >
                             <router-link
                                 to="/favorites"
@@ -118,7 +118,7 @@
                                 class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/favorites' ? 'bg-blue-100 text-gray-800' : 'text-gray-700'"
                             >
-                                <span>❤️</span>
+                                <span>♥</span>
                                 <span>我的收藏</span>
                             </router-link>
                             <router-link
@@ -127,7 +127,7 @@
                                 class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/my-foods' ? 'bg-blue-100 text-gray-800' : 'text-gray-700'"
                             >
-                                <span>🥬</span>
+                                <span>◆</span>
                                 <span>我的食材</span>
                             </router-link>
                             <router-link
@@ -136,7 +136,7 @@
                                 class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/gallery' ? 'bg-blue-100 text-gray-800' : 'text-gray-700'"
                             >
-                                <span>🖼️</span>
+                                <span>◫</span>
                                 <span>美食图鉴</span>
                             </router-link>
                             <router-link
@@ -145,7 +145,7 @@
                                 class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/about' ? 'bg-blue-100 text-gray-800' : 'text-gray-700'"
                             >
-                                <span>📖</span>
+                                <span>◐</span>
                                 <span>关于我们</span>
                             </router-link>
                             
@@ -155,7 +155,7 @@
                                     @click="handleLogout"
                                     class="flex items-center gap-2 px-4 py-3 text-sm font-bold w-full text-left transition-colors duration-200 hover:bg-red-100 text-red-600"
                                 >
-                                    <span>🚪</span>
+                                    <span>⊗</span>
                                     <span>退出登录</span>
                                 </button>
                             </div>
@@ -194,7 +194,7 @@
                         </div>
                         <div v-else class="flex items-center gap-1">
                             <div class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border-2 border-[#0A0910] text-xs font-bold">
-                                <span>👤</span>
+                                <span>◉</span>
                                 <span>{{ currentUserName }}</span>
                             </div>
                             <button

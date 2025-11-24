@@ -32,7 +32,7 @@
                 </div>
 
                 <!-- 爱心装饰 -->
-                <div class="absolute -top-1 -right-1 text-xs animate-pulse">❤️</div>
+                <div class="absolute -top-1 -right-1 text-xs animate-pulse">♥</div>
             </div>
 
             <!-- 涟漪效果 -->
@@ -48,7 +48,7 @@
             v-if="!showModal"
             class="absolute bottom-full right-0 mb-2 bg-gray-800 text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none"
         >
-            点击支持开发者 ✨
+            点击支持开发者 ✦
             <div class="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
         </div>
 
@@ -69,7 +69,7 @@
                         <h3 class="text-2xl md:text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-2 md:mb-4">支持开发者</h3>
                         <p class="text-gray-600 text-sm md:text-lg leading-relaxed md:max-w-md">
                             🤖 AI需要成本，您的每一份支持<br />
-                            都让项目走得更远 ❤️
+                            都让项目走得更远 ♥
                         </p>
                         <div class="hidden md:block mt-6 space-y-3 text-sm text-gray-500">
                             <div class="flex items-center gap-2">
@@ -99,7 +99,7 @@
                         />
                         <p class="text-xs md:text-sm text-gray-500 mt-3 md:mt-4 flex items-center justify-center gap-1">
                             <span>扫码支持开发者</span>
-                            <span class="animate-pulse">✨</span>
+                            <span class="animate-pulse">✦</span>
                         </p>
                     </div>
                 </div>

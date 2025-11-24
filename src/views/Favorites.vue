@@ -13,7 +13,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
-                                <span class="text-white text-2xl">❤️</span>
+                                <span class="text-white text-2xl">♥</span>
                             </div>
                             <div>
                                 <h1 class="text-md font-bold text-gray-800">收藏菜谱</h1>
@@ -43,7 +43,7 @@
                     <div v-if="false" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                         <div class="bg-gradient-to-r from-pink-100 to-red-100 p-4 rounded-lg border-2 border-[#0A0910]">
                             <div class="flex items-center gap-2">
-                                <span class="text-2xl">📊</span>
+                                <span class="text-2xl">◫</span>
                                 <div>
                                     <div class="text-lg font-bold text-gray-800">{{ stats.total }}</div>
                                     <div class="text-sm text-gray-600">总收藏数</div>
@@ -53,7 +53,7 @@
 
                         <div class="bg-gradient-to-r from-green-100 to-emerald-100 p-4 rounded-lg border-2 border-[#0A0910]">
                             <div class="flex items-center gap-2">
-                                <span class="text-2xl">👨‍🍳</span>
+                                <span class="text-2xl">◉</span>
                                 <div>
                                     <div class="text-lg font-bold text-gray-800">{{ Object.keys(stats.cuisineStats).length }}</div>
                                     <div class="text-sm text-gray-600">菜系种类</div>
@@ -121,11 +121,11 @@
                     <div class="bg-red-100 border-b-2 border-black p-3">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
-                                <span class="text-red-500">❤️</span>
+                                <span class="text-red-500">♥</span>
                                 <span class="text-sm text-gray-600">收藏于 {{ formatDate(favorite.favoriteDate) }}</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <button @click="editNotes(favorite)" class="text-blue-500 hover:text-blue-600 text-sm" title="编辑备注">📝</button>
+                                <button @click="editNotes(favorite)" class="text-blue-500 hover:text-blue-600 text-sm" title="编辑备注">◐</button>
                                 <button @click="confirmRemoveFavorite(favorite.recipe.id)" class="text-red-500 hover:text-red-600 text-sm" title="取消收藏">🗑️</button>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                         to="/"
                         class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 hover:scale-105"
                     >
-                        <span>✨</span>
+                        <span>✦</span>
                         <span>开始生成菜谱</span>
                     </router-link>
                 </div>
@@ -163,7 +163,7 @@
             <!-- 搜索无结果 -->
             <div v-else class="text-center py-16">
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg p-8">
-                    <div class="text-4xl mb-4">🔍</div>
+                    <div class="text-4xl mb-4">◎</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">没有找到匹配的菜谱</h3>
                     <p class="text-gray-600 mb-4">试试调整搜索条件或筛选选项</p>
                     <button

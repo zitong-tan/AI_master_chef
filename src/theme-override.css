@@ -1,0 +1,243 @@
+/* 现代化主题覆盖样式 */
+
+/* 全局背景渐变 */
+.min-h-screen {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* 玻璃态卡片效果 */
+.bg-white {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15) !important;
+}
+
+/* 移除旧的黑色边框，使用柔和阴影 */
+.border-2.border-\[\#0A0910\],
+.border-\[\#0A0910\] {
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 更新步骤标签样式 - 使用渐变 */
+.bg-pink-400 {
+    background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%) !important;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3) !important;
+}
+
+.bg-green-400 {
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%) !important;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
+}
+
+.bg-orange-400 {
+    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%) !important;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3) !important;
+}
+
+.bg-dark-800 {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    box-shadow: 0 4px 15px rgba(30, 41, 59, 0.3) !important;
+}
+
+.bg-blue-400 {
+    background: transparent !important;
+}
+
+/* 食材标签 - 现代化设计 */
+.bg-yellow-400 {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    box-shadow: 0 2px 10px rgba(251, 191, 36, 0.3) !important;
+    border: none !important;
+}
+
+/* 按钮悬停效果增强 */
+button:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 输入框现代化 */
+input, textarea {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 2px solid rgba(99, 102, 241, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+input:focus, textarea:focus {
+    background: rgba(255, 255, 255, 1) !important;
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* 圆角统一 */
+.rounded-lg {
+    border-radius: 1rem !important;
+}
+
+.rounded-t-lg {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+}
+
+.rounded-tl-none {
+    border-top-left-radius: 0 !important;
+}
+
+/* 菜系按钮现代化 */
+.bg-gray-100 {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease !important;
+}
+
+.bg-gray-100:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    transform: translateY(-2px);
+}
+
+/* 渐变按钮增强 */
+.bg-gradient-to-r {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease !important;
+}
+
+.bg-gradient-to-r::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.bg-gradient-to-r:hover::before {
+    left: 100%;
+}
+
+/* 导航栏玻璃态效果 */
+nav.bg-white {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Logo渐变增强 */
+.bg-gradient-to-br {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 底部导航现代化 */
+[data-mobile-nav] {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(99, 102, 241, 0.1) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 卡片阴影增强 */
+.shadow-lg {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 悬浮动画 */
+@keyframes float-gentle {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.float-animation {
+    animation: float-gentle 3s ease-in-out infinite;
+}
+
+/* 加载动画增强 */
+.animate-spin {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* 标签和徽章 */
+.bg-blue-100 {
+    background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%) !important;
+}
+
+.bg-green-100 {
+    background: linear-gradient(135deg, #d1fae5 0%, #dbeafe 100%) !important;
+}
+
+.bg-yellow-100 {
+    background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%) !important;
+}
+
+/* 下拉菜单玻璃态 */
+.absolute.bg-white {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 9999 !important;
+}
+
+/* 确保导航栏有足够高的层级 */
+nav {
+    position: relative;
+    z-index: 100 !important;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* 文字渐变效果 */
+.text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 成功/错误状态增强 */
+.bg-green-50 {
+    background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%) !important;
+}
+
+.bg-red-50 {
+    background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%) !important;
+}
+
+.bg-yellow-50 {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%) !important;
+}
+
+/* 图标容器增强 */
+.w-16.h-16 {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+.w-16.h-16:hover {
+    transform: scale(1.05) rotate(5deg);
+}

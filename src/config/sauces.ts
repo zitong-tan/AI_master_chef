@@ -6,7 +6,7 @@ export const sauceCategories: SauceCategoryConfig[] = [
         id: 'spicy',
         name: '辣味酱料',
         description: '各种辣椒酱、辣油、麻辣酱料',
-        icon: '🌶️',
+        icon: '◊',
         color: 'bg-red-500',
         examples: ['辣椒酱', '蒜蓉辣椒酱', '麻辣油', '韩式辣椒酱', '泰式甜辣酱']
     },
@@ -30,7 +30,7 @@ export const sauceCategories: SauceCategoryConfig[] = [
         id: 'complex',
         name: '复合调味酱',
         description: '多种调料混合的复合酱料',
-        icon: '🥄',
+        icon: '◈',
         color: 'bg-purple-500',
         examples: ['XO酱', '沙茶酱', '黑椒酱', '蘑菇酱', '咖喱酱']
     },
@@ -46,7 +46,7 @@ export const sauceCategories: SauceCategoryConfig[] = [
         id: 'fusion',
         name: '创新融合酱',
         description: '现代创新和中西融合酱料',
-        icon: '✨',
+        icon: '✦',
         color: 'bg-pink-500',
         examples: ['芝士酱', '牛油果酱', '芝麻酱', '花生酱', '创意调味酱']
     }
@@ -54,11 +54,11 @@ export const sauceCategories: SauceCategoryConfig[] = [
 
 // 使用场景配置
 export const useCaseOptions = [
-    { id: 'noodles', name: '拌面', icon: '🍜' },
-    { id: 'dipping', name: '蘸菜', icon: '🥢' },
-    { id: 'cooking', name: '炒菜', icon: '🍳' },
-    { id: 'bbq', name: '烧烤', icon: '🔥' },
-    { id: 'hotpot', name: '火锅', icon: '🍲' }
+    { id: 'noodles', name: '拌面', icon: '◈' },
+    { id: 'dipping', name: '蘸菜', icon: '◈' },
+    { id: 'cooking', name: '炒菜', icon: '◈' },
+    { id: 'bbq', name: '烧烤', icon: '◈' },
+    { id: 'hotpot', name: '火锅', icon: '◈' }
 ]
 
 // 预设酱料模板
@@ -148,5 +148,5 @@ export const getCategoryColor = (category: SauceCategory): string => {
 // 获取分类图标
 export const getCategoryIcon = (category: SauceCategory): string => {
     const config = getSauceCategoryById(category)
-    return config?.icon || '🥄'
+    return config?.icon || '◈'
 }

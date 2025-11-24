@@ -16,7 +16,7 @@
                             <div class="space-y-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-                                        <span>🌶️ 辣度</span>
+                                        <span>◊ 辣度</span>
                                         <span class="text-red-600 font-bold">{{ preferences.spiceLevel }}</span>
                                     </label>
                                     <input
@@ -42,7 +42,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-                                        <span>🧂 咸度</span>
+                                        <span>◑ 咸度</span>
                                         <span class="text-blue-600 font-bold">{{ preferences.saltLevel }}</span>
                                     </label>
                                     <input
@@ -131,7 +131,7 @@
             <!-- 推荐结果区域 -->
             <div v-if="recommendations.length > 0 || isLoadingRecommendations" class="mb-8" data-recommendations>
                 <div class="bg-purple-500 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block">
-                    <span class="font-bold">✨ 为您推荐</span>
+                    <span class="font-bold">✦ 为您推荐</span>
                 </div>
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-4 md:p-6">
                     <!-- 推荐加载状态 -->
@@ -146,7 +146,7 @@
                     <!-- 推荐列表 -->
                     <div v-else-if="recommendations.length > 0" class="space-y-4">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-bold text-gray-800">🎯 根据您的偏好，推荐以下酱料：</h3>
+                            <h3 class="text-lg font-bold text-gray-800">◎ 根据您的偏好，推荐以下酱料：</h3>
                             <span class="text-sm text-gray-500">共{{ recommendations.length }}种</span>
                         </div>
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -162,13 +162,13 @@
                                 <div class="font-bold text-gray-800 mb-2 pr-8">{{ sauceName }}</div>
                                 <div class="text-sm text-gray-600 mb-2">点击查看详细制作方法</div>
                                 <div class="flex items-center text-xs text-purple-600 group-hover:text-purple-700">
-                                    <span class="mr-1">👨‍🍳</span>
+                                    <span class="mr-1">◉</span>
                                     <span>AI推荐</span>
                                 </div>
                             </button>
                         </div>
                         <div class="text-center pt-4 border-t border-gray-200">
-                            <p class="text-sm text-gray-500">💡 不满意推荐结果？试试调整上方的口味偏好或使用场景</p>
+                            <p class="text-sm text-gray-500">◉ 不满意推荐结果？试试调整上方的口味偏好或使用场景</p>
                         </div>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
                                 class="w-full p-4 border-2 border-[#0A0910] rounded-lg text-md font-medium focus:outline-none focus:ring-2 focus:ring-green-400"
                             />
                             <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                                <span class="text-2xl">🔍</span>
+                                <span class="text-2xl">◎</span>
                             </div>
                         </div>
                         <button
@@ -219,7 +219,7 @@
                     <!-- 空状态 -->
                     <div v-if="!currentSauce && !isLoadingSearch" class="text-center py-12">
                         <div class="w-16 h-16 bg-gradient-to-br from-teal-400 to-green-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <span class="text-white text-2xl">🥄</span>
+                            <span class="text-white text-2xl">◈</span>
                         </div>
                         <h3 class="text-lg font-bold text-gray-600 mb-3">开始您的酱料制作之旅</h3>
                         <div class="space-y-2 text-sm text-gray-500 max-w-md mx-auto">
@@ -228,7 +228,7 @@
                                 <span>配置口味偏好，获取个性化推荐</span>
                             </p>
                             <p class="flex items-center justify-center gap-2">
-                                <span>🔍</span>
+                                <span>◎</span>
                                 <span>直接搜索想要制作的酱料</span>
                             </p>
                         </div>
@@ -237,7 +237,7 @@
                     <!-- 搜索加载状态 -->
                     <div v-if="isLoadingSearch" class="text-center py-12">
                         <div class="w-16 h-16 bg-gradient-to-br from-teal-400 to-green-500 rounded-lg flex items-center justify-center mx-auto mb-4 animate-pulse">
-                            <span class="text-white text-2xl">👨‍🍳</span>
+                            <span class="text-white text-2xl">◉</span>
                         </div>
                         <h3 class="text-xl font-bold text-gray-700 mb-2">AI大师正在准备酱料配方...</h3>
                         <p class="text-gray-500">请稍等片刻，美味秘方即将呈现</p>

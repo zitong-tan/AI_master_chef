@@ -11,7 +11,7 @@ const difficultyDescriptions = {
 // 获取分类图标
 export const getCategoryIcon = (category: SauceCategory): string => {
     const config = sauceCategories.find(c => c.id === category)
-    return config?.icon || '🥄'
+    return config?.icon || '◈'
 }
 
 // 获取分类名称

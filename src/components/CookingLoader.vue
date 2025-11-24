@@ -2,11 +2,11 @@
     <div class="cooking-loader flex flex-col items-center justify-center p-8">
         <!-- 厨师动画 -->
         <div class="relative mb-6">
-            <div class="cooking-animation text-6xl mb-4">👨‍🍳</div>
+            <div class="cooking-animation text-6xl mb-4">◉</div>
 
             <!-- 火焰效果 -->
             <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                <div class="fire-animation text-2xl">🔥</div>
+                <div class="fire-animation text-2xl">◈</div>
             </div>
 
             <!-- 蒸汽效果 -->

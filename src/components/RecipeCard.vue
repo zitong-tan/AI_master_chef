@@ -8,18 +8,18 @@
                     <!-- 移动端：垂直布局 -->
                     <div class="flex flex-col gap-1 md:hidden">
                         <div class="flex items-center gap-2">
-                            <span class="bg-white/20 px-2 py-1 rounded text-xs whitespace-nowrap"> 👨‍🍳 {{ recipe.cuisine }} </span>
-                            <span class="text-xs whitespace-nowrap">📊 {{ difficultyText }}</span>
+                            <span class="bg-white/20 px-2 py-1 rounded text-xs whitespace-nowrap"> ◉ {{ recipe.cuisine }} </span>
+                            <span class="text-xs whitespace-nowrap">◫ {{ difficultyText }}</span>
                         </div>
                         <div class="text-xs">
-                            <span>⏱️ {{ formatTime(recipe.cookingTime) }}</span>
+                            <span>◌ {{ formatTime(recipe.cookingTime) }}</span>
                         </div>
                     </div>
                     <!-- 桌面端：水平布局 -->
                     <div class="hidden md:flex items-center gap-3 text-sm">
-                        <span class="bg-white/20 px-2 py-1 rounded text-xs whitespace-nowrap"> 👨‍🍳 {{ recipe.cuisine }} </span>
-                        <span class="whitespace-nowrap">⏱️ {{ formatTime(recipe.cookingTime) }}</span>
-                        <span class="whitespace-nowrap">📊 {{ difficultyText }}</span>
+                        <span class="bg-white/20 px-2 py-1 rounded text-xs whitespace-nowrap"> ◉ {{ recipe.cuisine }} </span>
+                        <span class="whitespace-nowrap">◌ {{ formatTime(recipe.cookingTime) }}</span>
+                        <span class="whitespace-nowrap">◫ {{ difficultyText }}</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-2 flex-shrink-0">
@@ -32,7 +32,7 @@
         <div class="p-2 md:p-6">
             <!-- 食材列表 -->
             <div class="mb-4">
-                <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">🥬 所需食材</h4>
+                <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">◆ 所需食材</h4>
                 <div class="flex flex-wrap gap-1">
                     <span v-for="ingredient in recipe.ingredients" :key="ingredient" class="bg-yellow-400 text-dark-800 px-2 py-1 rounded text-xs font-medium border border-black">
                         {{ ingredient }}
@@ -43,7 +43,7 @@
             <!-- 制作步骤预览 -->
             <div class="mb-4">
                 <div class="flex items-center justify-between mb-2">
-                    <h4 class="text-sm font-bold text-dark-800 flex items-center gap-1">📝 制作步骤</h4>
+                    <h4 class="text-sm font-bold text-dark-800 flex items-center gap-1">◐ 制作步骤</h4>
                     <button @click="toggleExpanded" class="bg-gray-100 hover:bg-gray-200 text-dark-800 text-xs px-2 py-1 rounded border border-black transition-colors">
                         {{ isExpanded ? '收起' : '展开' }}
                     </button>
@@ -71,8 +71,8 @@
                         <div class="flex-1">
                             <p class="text-dark-800 mb-1 text-sm">{{ step.description }}</p>
                             <div v-if="step.time || step.temperature" class="flex gap-2 text-xs text-gray-600">
-                                <span v-if="step.time" class="bg-white px-2 py-1 rounded border"> ⏱️ {{ formatTime(step.time) }} </span>
-                                <span v-if="step.temperature" class="bg-white px-2 py-1 rounded border"> 🌡️ {{ step.temperature }} </span>
+                                <span v-if="step.time" class="bg-white px-2 py-1 rounded border"> ◌ {{ formatTime(step.time) }} </span>
+                                <span v-if="step.temperature" class="bg-white px-2 py-1 rounded border"> ◑ {{ step.temperature }} </span>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
 
             <!-- 烹饪技巧 -->
             <div v-if="recipe.tips && recipe.tips.length > 0 && isExpanded" class="mb-4">
-                <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">💡 烹饪技巧</h4>
+                <h4 class="text-sm font-bold text-dark-800 mb-2 flex items-center gap-1">◉ 烹饪技巧</h4>
                 <div class="bg-yellow-100 border-l-4 border-yellow-400 p-3 rounded-r">
                     <ul class="space-y-1">
                         <li v-for="tip in recipe.tips" :key="tip" class="flex items-start gap-2 text-dark-700">
@@ -94,7 +94,7 @@
 
             <!-- 营养分析 -->
             <div v-if="isExpanded" class="mb-4">
-                <h4 class="text-sm font-bold text-dark-800 mb-3 flex items-center gap-1">📊 营养分析</h4>
+                <h4 class="text-sm font-bold text-dark-800 mb-3 flex items-center gap-1">◫ 营养分析</h4>
 
                 <div v-if="isFetchingNutrition" class="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center">
                     <div class="w-12 h-12 border-4 border-gray-300 border-t-green-500 rounded-full animate-spin mx-auto mb-3"></div>
@@ -110,7 +110,7 @@
 
                 <!-- 营养分析空状态 - 包含获取按钮 -->
                 <div v-else-if="!isFetchingNutrition" class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:bg-gray-50 transition-colors">
-                    <div class="text-gray-400 text-2xl mb-3">🥗</div>
+                    <div class="text-gray-400 text-2xl mb-3">◆</div>
                     <p class="text-gray-500 text-xs mb-4">暂无营养分析数据</p>
                     <button
                         @click="fetchNutritionAnalysis"
@@ -122,7 +122,7 @@
                                 <div class="animate-spin w-3 h-3 border border-white border-t-transparent rounded-full"></div>
                                 获取中...
                             </template>
-                            <template v-else> ✨ 获取营养分析 </template>
+                            <template v-else> ✦ 获取营养分析 </template>
                         </span>
                     </button>
                 </div>
@@ -168,7 +168,7 @@
                                 <div class="animate-spin w-3 h-3 border border-white border-t-transparent rounded-full"></div>
                                 获取中...
                             </template>
-                            <template v-else> ✨ 获取饮品搭配 </template>
+                            <template v-else> ✦ 获取饮品搭配 </template>
                         </span>
                     </button>
                 </div>
@@ -186,7 +186,7 @@
 
             <!-- 效果图区域 -->
             <div class="mt-4 pt-4 border-t border-gray-200">
-                <h4 class="text-sm font-bold text-dark-800 mb-3 flex items-center gap-1">🖼️ 菜品效果图</h4>
+                <h4 class="text-sm font-bold text-dark-800 mb-3 flex items-center gap-1">◫ 菜品效果图</h4>
 
                 <!-- 加载状态 -->
                 <div v-if="isGeneratingImage" class="bg-gray-50 border-2 border-gray-300 rounded-lg p-6 text-center">
@@ -225,7 +225,7 @@
                                 <div class="animate-spin w-3 h-3 border border-white border-t-transparent rounded-full"></div>
                                 生成中...
                             </template>
-                            <template v-else> ✨ 生成效果图 </template>
+                            <template v-else> ✦ 生成效果图 </template>
                         </span>
                     </button>
                 </div>

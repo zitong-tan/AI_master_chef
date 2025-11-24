@@ -6,7 +6,7 @@
         <div class="max-w-4xl mx-auto space-y-6">
             <!-- 页面标题 -->
             <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-[#0A0910]">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">⚙️ 配置系统演示</h1>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">⚙ 配置系统演示</h1>
                 <p class="text-gray-600">这里展示了新的配置系统功能，包括设置管理、配置测试等。</p>
             </div>
 
@@ -15,7 +15,7 @@
 
             <!-- 使用说明 -->
             <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-[#0A0910]">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">📖 使用说明</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">◐ 使用说明</h2>
 
                 <div class="space-y-4">
                     <div class="bg-blue-50 rounded-lg p-4">
@@ -42,7 +42,7 @@
 
             <!-- 功能特性 -->
             <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-[#0A0910]">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">✨ 功能特性</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">✦ 功能特性</h2>
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="space-y-3">

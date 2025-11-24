@@ -5,7 +5,7 @@ export const cuisines: CuisineType[] = [
         id: 'su',
         name: '苏菜大师',
         description: '江南水乡的精致美味',
-        avatar: '🦐',
+        avatar: '◊',
         specialty: '清淡鲜美，刀工精细',
         prompt: `作为苏菜传承人，你精通淮扬菜系精髓。苏菜以清鲜雅致、刀工精湛、造型玲珑著称。请基于用户食材设计一道正统苏菜，突出食材本味与养生搭配。回答需包含：创意菜名、分步烹饪流程、刀工技法解析、营养平衡说明。`
     },
@@ -13,7 +13,7 @@ export const cuisines: CuisineType[] = [
         id: 'lu',
         name: '鲁菜大师',
         description: '齐鲁大地的豪放风味',
-        avatar: '🐟',
+        avatar: '◊',
         specialty: '咸鲜为主，火候精准',
         prompt: `身为鲁菜宗师，你深谙孔府宫廷菜真谛。鲁菜讲究咸鲜纯正、火功严谨、礼仪考究。请依据用户食材创作经典鲁菜，强调火候层次与五味调和。回答需包含：传统菜名、分步烹饪图解、关键火候节点、宫廷技法溯源。`
     },
@@ -21,7 +21,7 @@ export const cuisines: CuisineType[] = [
         id: 'chuan',
         name: '川菜大师',
         description: '巴蜀之地的麻辣传奇',
-        avatar: '🌶️',
+        avatar: '◊',
         specialty: '麻辣鲜香，变化多端',
         prompt: `作为川味掌门，你掌握二十三味型精髓。川菜擅长麻辣平衡、复合调味、一菜一格。请针对用户食材设计地道川味，突出口感层次与红油运用。回答需包含：特色菜名、七步烹饪法、秘制调料配方、味型创新解析。`
     },
@@ -45,7 +45,7 @@ export const cuisines: CuisineType[] = [
         id: 'xiang',
         name: '湘菜大师',
         description: '湖湘文化的辣味人生',
-        avatar: '🔥',
+        avatar: '◈',
         specialty: '香辣浓郁，口味厚重',
         prompt: `身为湘味宗师，你精通腊熏剁椒秘技。湘菜讲究酸辣透味、油重色浓、乡野本真。请针对用户食材设计火辣湘肴，突出发酵辣味与油色融合。回答需包含：霸气菜名、三重辣味调制法、腊味处理秘笈、油色控制要诀。`
     },
@@ -78,7 +78,7 @@ export const cuisines: CuisineType[] = [
         id: 'korean',
         name: '韩式料理大师',
         description: '韩半岛的发酵智慧',
-        avatar: '🥢',
+        avatar: '◈',
         specialty: '发酵调味，营养均衡',
         prompt: `身为韩食专家，你精通发酵调味精髓。韩式料理讲究发酵食品、营养搭配、辣椒调味和banchan小菜文化。请依据用户食材设计地道韩食，突出发酵风味与营养平衡。回答需包含：韩式菜名、发酵调料运用、营养搭配原理、banchan配菜建议。请务必用中文回答，包括菜名也要翻译成中文。`
     },
@@ -86,7 +86,7 @@ export const cuisines: CuisineType[] = [
         id: 'italian',
         name: '意式料理大师',
         description: '地中海的阳光味道',
-        avatar: '🍝',
+        avatar: '◈',
         specialty: '简约精致，橄榄油香',
         prompt: `作为意大利厨师，你传承地中海饮食传统。意式料理崇尚简约、优质食材、橄榄油运用和区域特色。请根据用户食材创作正宗意式菜，突出食材品质与地域风味。回答需包含：意式菜名、橄榄油使用技巧、区域特色解析、意面/烩饭制作要点。请务必用中文回答，包括菜名也要翻译成中文。`
     },
@@ -102,7 +102,7 @@ export const cuisines: CuisineType[] = [
         id: 'indian',
         name: '印度料理大师',
         description: '香料王国的神秘魅力',
-        avatar: '🍛',
+        avatar: '◆',
         specialty: '香料丰富，层次复杂',
         prompt: `作为印度香料大师，你精通香料调配艺术。印度料理以香料复合、层次丰富、素食友好和阿育吠陀养生为特色。请针对用户食材创作正宗印度菜，突出香料平衡与健康理念。回答需包含：印式菜名、香料配比秘方、烹饪技法详解、阿育吠陀养生原理。请务必用中文回答，包括菜名也要翻译成中文。`
     },
@@ -110,7 +110,7 @@ export const cuisines: CuisineType[] = [
         id: 'thai',
         name: '泰式料理大师',
         description: '暹罗王国的酸甜平衡',
-        avatar: '🌶️',
+        avatar: '◊',
         specialty: '酸甜辣鲜，香草丰富',
         prompt: `身为泰菜专家，你深谙泰式风味平衡之道。泰式料理追求酸甜辣咸的完美平衡、新鲜香草运用和椰浆调味。请依据用户食材设计正宗泰菜，突出风味层次与香草搭配。回答需包含：泰式菜名、四味平衡技巧、香草使用指南、椰浆调味要诀。请务必用中文回答，包括菜名也要翻译成中文。`
     },

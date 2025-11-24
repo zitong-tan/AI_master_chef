@@ -11,7 +11,7 @@ export const ingredientCategories: IngredientCategory[] = [
     {
         id: 'meat',
         name: '荤菜',
-        icon: '🥩',
+        icon: '◉',
         color: 'bg-red-100 border-red-300 text-red-800',
         items: [
             '猪肉',
@@ -119,7 +119,7 @@ export const ingredientCategories: IngredientCategory[] = [
     {
         id: 'vegetables',
         name: '蔬菜',
-        icon: '🥬',
+        icon: '◆',
         color: 'bg-green-100 border-green-300 text-green-800',
         items: [
             '白菜',
@@ -210,7 +210,7 @@ export const ingredientCategories: IngredientCategory[] = [
     {
         id: 'mushrooms',
         name: '菌菇',
-        icon: '🍄',
+        icon: '◆',
         color: 'bg-yellow-100 border-yellow-300 text-yellow-800',
         items: [
             '香菇',
@@ -245,7 +245,7 @@ export const ingredientCategories: IngredientCategory[] = [
     {
         id: 'beans',
         name: '豆类',
-        icon: '🫘',
+        icon: '◆',
         color: 'bg-orange-100 border-orange-300 text-orange-800',
         items: [
             '豆腐',
@@ -287,7 +287,7 @@ export const ingredientCategories: IngredientCategory[] = [
     {
         id: 'eggs',
         name: '蛋类',
-        icon: '🥚',
+        icon: '◇',
         color: 'bg-amber-100 border-amber-300 text-amber-800',
         items: ['鸡蛋', '土鸡蛋', '鸭蛋', '鹅蛋', '鹌鹑蛋', '鸽子蛋', '咸鸭蛋', '松花蛋', '皮蛋', '茶叶蛋', '卤蛋', '溏心蛋']
     },
@@ -295,7 +295,7 @@ export const ingredientCategories: IngredientCategory[] = [
     {
         id: 'fruits',
         name: '水果',
-        icon: '🍎',
+        icon: '◐',
         color: 'bg-pink-100 border-pink-300 text-pink-800',
         items: [
             '苹果',
@@ -343,7 +343,7 @@ export const ingredientCategories: IngredientCategory[] = [
     {
         id: 'dairy',
         name: '奶制品',
-        icon: '🥛',
+        icon: '◇',
         color: 'bg-blue-50 border-blue-200 text-blue-700',
         items: ['牛奶', '酸奶', '奶酪', '芝士', '奶油', '黄油', '炼乳', '奶粉', '马苏里拉奶酪', '车达奶酪', '帕玛森奶酪', '奶昔']
     }

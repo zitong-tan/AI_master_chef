@@ -10,7 +10,7 @@
             <!-- 项目简介 -->
             <div class="relative">
                 <div class="bg-blue-500 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block mb-0">
-                    <span class="font-bold text-lg">🎯 项目简介</span>
+                    <span class="font-bold text-lg">◎ 项目简介</span>
                 </div>
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-6">
                     <div class="mt-4">
@@ -42,7 +42,7 @@
                             </div>
                             <div class="text-center">
                                 <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg p-8 border-2 border-[#0A0910]">
-                                    <div class="text-6xl mb-4">👨‍🍳</div>
+                                    <div class="text-6xl mb-4">◉</div>
                                     <h3 class="text-xl font-bold text-white mb-2">LEGENDARY STATUS</h3>
                                     <p class="text-white text-sm">FROM A SINGLE MEAL!</p>
                                 </div>
@@ -52,7 +52,7 @@
                         <!-- 平台特色 -->
                         <div>
                             <div class="flex items-center gap-2 mb-4">
-                                <span class="text-2xl">✨</span>
+                                <span class="text-2xl">✦</span>
                                 <h3 class="text-xl font-bold text-dark-800">平台特色</h3>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -62,12 +62,12 @@
                                     <p class="text-xs text-gray-600">基于食材智能匹配最适合的菜谱和烹饪方法</p>
                                 </div>
                                 <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-lg">
-                                    <div class="text-3xl mb-2">👨‍🍳</div>
+                                    <div class="text-3xl mb-2">◉</div>
                                     <h4 class="font-bold text-dark-800 mb-2 text-sm">大师级指导</h4>
                                     <p class="text-xs text-gray-600">汇聚各菜系大师的烹饪精髓和独门秘籍</p>
                                 </div>
                                 <div class="text-center p-4 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg">
-                                    <div class="text-3xl mb-2">🎯</div>
+                                    <div class="text-3xl mb-2">◎</div>
                                     <h4 class="font-bold text-dark-800 mb-2 text-sm">个性化定制</h4>
                                     <p class="text-xs text-gray-600">根据个人口味偏好和饮食需求定制专属菜谱</p>
                                 </div>
@@ -80,7 +80,7 @@
             <!-- 菜系大全 -->
             <div class="relative">
                 <div class="bg-gradient-to-r from-red-500 to-green-500 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block mb-0">
-                    <span class="font-bold text-lg">👨‍🍳 大师介绍</span>
+                    <span class="font-bold text-lg">◉ 大师介绍</span>
                 </div>
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-6">
                     <div class="mt-4">
@@ -113,7 +113,7 @@
                         <!-- 国际菜系 -->
                         <div>
                             <div class="flex items-center gap-2 mb-4">
-                                <span class="text-2xl">🌍</span>
+                                <span class="text-2xl">◎</span>
                                 <h3 class="text-xl font-bold text-dark-800">国际菜系</h3>
                             </div>
                             <p class="text-gray-700 mb-4 text-sm">融汇世界各地的经典料理，为您带来国际化的美食体验。</p>
@@ -159,7 +159,7 @@ const chineseCuisines = ref([
     {
         id: 'sichuan',
         name: '川菜大师',
-        avatar: '🌶️',
+        avatar: '◊',
         specialty: '麻辣鲜香，口味浓重',
         dishes: '麻婆豆腐、宫保鸡丁、水煮鱼',
         flavor: '麻辣、鲜香、回甜'
@@ -167,7 +167,7 @@ const chineseCuisines = ref([
     {
         id: 'cantonese',
         name: '粤菜大师',
-        avatar: '🦐',
+        avatar: '◊',
         specialty: '清淡鲜美，注重原味',
         dishes: '白切鸡、蒸蛋羹、广式点心',
         flavor: '清淡、鲜美、嫩滑'
@@ -175,7 +175,7 @@ const chineseCuisines = ref([
     {
         id: 'shandong',
         name: '鲁菜大师',
-        avatar: '🐟',
+        avatar: '◊',
         specialty: '咸鲜为主，突出本味',
         dishes: '糖醋鲤鱼、九转大肠、葱爆海参',
         flavor: '咸鲜、醇厚、清香'
@@ -207,7 +207,7 @@ const chineseCuisines = ref([
     {
         id: 'hunan',
         name: '湘菜大师',
-        avatar: '🌶️',
+        avatar: '◊',
         specialty: '香辣鲜浓，口味厚重',
         dishes: '剁椒鱼头、麻辣子鸡、口味虾',
         flavor: '香辣、鲜浓、酸辣'
@@ -237,7 +237,7 @@ const internationalCuisines = ref([
     {
         id: 'korean',
         name: '韩式料理大师',
-        avatar: '🥢',
+        avatar: '◈',
         specialty: '发酵调味，营养均衡',
         dishes: '泡菜、烤肉、石锅拌饭',
         style: '酸辣、发酵、健康'
@@ -245,7 +245,7 @@ const internationalCuisines = ref([
     {
         id: 'thai',
         name: '泰式料理大师',
-        avatar: '🌶️',
+        avatar: '◊',
         specialty: '酸甜辣香，层次丰富',
         dishes: '冬阴功汤、绿咖喱、芒果糯米饭',
         style: '酸甜、香辣、清爽'
@@ -253,7 +253,7 @@ const internationalCuisines = ref([
     {
         id: 'italian',
         name: '意式料理大师',
-        avatar: '🍝',
+        avatar: '◈',
         specialty: '简单食材，经典搭配',
         dishes: '意大利面、披萨、提拉米苏',
         style: '简约、经典、浓郁'

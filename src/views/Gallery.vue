@@ -13,7 +13,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-                                <span class="text-white text-2xl">🖼️</span>
+                                <span class="text-white text-2xl">◫</span>
                             </div>
                             <div>
                                 <h1 class="text-md font-bold text-gray-800">AI厨艺的视觉宝典</h1>
@@ -141,14 +141,14 @@
             <!-- 空状态 -->
             <div v-else-if="images.length === 0" class="text-center py-6">
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg p-8">
-                    <div class="text-6xl mb-4">🖼️</div>
+                    <div class="text-6xl mb-4">◫</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">图库还是空的</h3>
                     <p class="text-gray-600 mb-6">去生成一些菜品效果图，让图库丰富起来吧！</p>
                     <router-link
                         to="/"
                         class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 hover:scale-105"
                     >
-                        <span>✨</span>
+                        <span>✦</span>
                         <span>开始生成菜谱</span>
                     </router-link>
                 </div>
@@ -157,7 +157,7 @@
             <!-- 搜索无结果 -->
             <div v-else class="text-center py-16">
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg p-8">
-                    <div class="text-4xl mb-4">🔍</div>
+                    <div class="text-4xl mb-4">◎</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">没有找到匹配的图片</h3>
                     <p class="text-gray-600 mb-4">试试调整搜索条件或筛选选项</p>
                     <button

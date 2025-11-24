@@ -11,7 +11,7 @@
                             <span>{{ getCategoryName(sauce.category) }}</span>
                         </span>
                         <span class="flex items-center gap-1">
-                            <span>⏱️</span>
+                            <span>◌</span>
                             <span>{{ sauce.makingTime }}分钟</span>
                         </span>
                         <span :class="['px-2 py-1 rounded-full text-xs font-medium', getDifficultyStyle(sauce.difficulty)]">
@@ -24,7 +24,7 @@
             <!-- 口味特征 -->
             <div class="mt-4 grid grid-cols-4 gap-2 md:gap-4">
                 <div class="text-center">
-                    <div class="text-xs opacity-80 mb-1">🌶️ 辣度</div>
+                    <div class="text-xs opacity-80 mb-1">◊ 辣度</div>
                     <div class="text-xl font-bold text-red-200">
                         {{ sauce.spiceLevel || 0 }}
                     </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <div class="text-xs opacity-80 mb-1">🧂 咸度</div>
+                    <div class="text-xs opacity-80 mb-1">◑ 咸度</div>
                     <div class="text-xl font-bold text-blue-200">
                         {{ sauce.saltLevel || 0 }}
                     </div>
@@ -54,7 +54,7 @@
             <!-- 酱料描述 -->
             <div v-if="sauce.description" class="mb-6 p-4 bg-orange-50 rounded-lg border border-orange-200">
                 <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2">
-                    <span>📝</span>
+                    <span>◐</span>
                     <span>酱料特色</span>
                 </h3>
                 <p class="text-gray-700">{{ sauce.description }}</p>
@@ -77,7 +77,7 @@
             <!-- 制作步骤 -->
             <div class="mb-6">
                 <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                    <span>👨‍🍳</span>
+                    <span>◉</span>
                     <span>制作步骤</span>
                 </h3>
                 <div class="space-y-4">
@@ -91,15 +91,15 @@
                             <p class="text-gray-800 mb-2">{{ step.description }}</p>
                             <div class="flex gap-4 text-sm text-gray-600">
                                 <span v-if="step.time" class="flex items-center gap-1">
-                                    <span>⏱️</span>
+                                    <span>◌</span>
                                     <span>{{ step.time }}分钟</span>
                                 </span>
                                 <span v-if="step.temperature" class="flex items-center gap-1">
-                                    <span>🔥</span>
+                                    <span>◈</span>
                                     <span>{{ step.temperature }}</span>
                                 </span>
                                 <span v-if="step.technique" class="flex items-center gap-1">
-                                    <span>🥄</span>
+                                    <span>◈</span>
                                     <span>{{ step.technique }}</span>
                                 </span>
                             </div>
@@ -111,12 +111,12 @@
             <!-- 制作技巧 -->
             <div v-if="sauce.tips.length > 0" class="mb-6">
                 <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                    <span>💡</span>
+                    <span>◉</span>
                     <span>制作技巧</span>
                 </h3>
                 <div class="space-y-2">
                     <div v-for="(tip, index) in sauce.tips" :key="index" class="flex items-start gap-2 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                        <span class="text-yellow-600 mt-0.5">💡</span>
+                        <span class="text-yellow-600 mt-0.5">◉</span>
                         <span class="text-gray-700">{{ tip }}</span>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                             <span class="text-gray-700">{{ sauce.storage.duration }}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-blue-600">🌡️</span>
+                            <span class="text-blue-600">◑</span>
                             <span class="text-gray-700">{{ sauce.storage.temperature }}</span>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
             <!-- 搭配建议 -->
             <div v-if="sauce.pairings.length > 0" class="mb-6">
                 <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">
-                    <span>🍽️</span>
+                    <span>◈</span>
                     <span>搭配建议</span>
                 </h3>
                 <div class="flex flex-wrap gap-2">

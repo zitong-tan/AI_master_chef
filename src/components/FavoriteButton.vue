@@ -6,7 +6,7 @@
         :title="isFavorited ? '取消收藏' : '收藏菜谱'"
     >
         <span class="text-xl transition-transform duration-200" :class="{ 'animate-pulse': isLoading }">
-            {{ isFavorited ? '❤️' : '🤍' }}
+            {{ isFavorited ? '♥' : '🤍' }}
         </span>
     </button>
 </template>

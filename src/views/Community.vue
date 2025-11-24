@@ -246,7 +246,7 @@
 
                 <!-- 空状态 -->
                 <div v-if="!isLoading && communityDishes.length === 0" class="text-center py-12">
-                    <div class="text-6xl mb-4">🍳</div>
+                    <div class="text-6xl mb-4">◈</div>
                     <h3 class="text-xl font-medium text-gray-600 mb-2">还没有菜品分享</h3>
                     <p class="text-gray-500">成为第一个分享菜品的人吧！</p>
                 </div>

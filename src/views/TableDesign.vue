@@ -15,7 +15,7 @@
                         <!-- 生成模式选择 - 紧凑布局 -->
                         <div class="mb-4">
                             <h3 class="text-lg font-bold text-dark-800 mb-3 flex items-center gap-2">
-                                <span class="text-xl">🍽️</span>
+                                <span class="text-xl">◈</span>
                                 <span>选择生成模式</span>
                             </h3>
                             <div class="grid grid-cols-1 gap-3">
@@ -26,7 +26,7 @@
                                         !config.flexibleCount ? 'bg-yellow-400 text-dark-800 shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     ]"
                                 >
-                                    <span class="text-xl">🎯</span>
+                                    <span class="text-xl">◎</span>
                                     <div>
                                         <div class="font-bold text-sm">固定数量模式</div>
                                         <div class="text-xs opacity-75">指定确切菜品数量</div>
@@ -39,7 +39,7 @@
                                         config.flexibleCount ? 'bg-yellow-400 text-dark-800 shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     ]"
                                 >
-                                    <span class="text-xl">✨</span>
+                                    <span class="text-xl">✦</span>
                                     <div>
                                         <div class="font-bold text-sm">智能搭配模式</div>
                                         <div class="text-xs opacity-75">AI智能决定数量和搭配</div>
@@ -54,7 +54,7 @@
                             <div v-if="!config.flexibleCount">
                                 <!-- 数量选择 -->
                                 <div class="bg-gray-50 rounded-lg p-3 border-2 border-gray-200">
-                                    <h5 class="text-sm font-bold text-gray-700 mb-2 flex items-center gap-1">🍽️ 菜品数量</h5>
+                                    <h5 class="text-sm font-bold text-gray-700 mb-2 flex items-center gap-1">◈ 菜品数量</h5>
                                     <div class="flex items-center gap-3 flex-wrap">
                                         <div class="flex gap-2">
                                             <button
@@ -118,7 +118,7 @@
                                         </button>
                                     </div>
                                     <div class="flex justify-between items-center mt-1 text-xs text-gray-500">
-                                        <span>💡 例如：红烧肉、清蒸鱼</span>
+                                        <span>◉ 例如：红烧肉、清蒸鱼</span>
                                         <span>{{ config.customDishes.length }}/10</span>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@
                                         </button>
                                     </div>
                                     <div class="flex justify-between items-center mt-1 text-xs text-gray-500">
-                                        <span>💡 例如：包菜、娃娃菜、土豆</span>
+                                        <span>◉ 例如：包菜、娃娃菜、土豆</span>
                                         <span>{{ config.customDishes.length }}/10</span>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                         <!-- 提示信息 -->
                         <div class="mb-4 p-3 bg-blue-50 border-2 border-blue-200 rounded-lg">
                             <p class="text-sm text-blue-700">
-                                <span class="font-medium">💡 可选配置：</span>
+                                <span class="font-medium">◉ 可选配置：</span>
                                 以下设置为可选项，不设置也能生成精彩菜单。
                             </p>
                         </div>
@@ -195,7 +195,7 @@
                                     class="w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg font-medium text-left flex items-center justify-between transition-colors"
                                 >
                                     <div class="flex items-center gap-2">
-                                        <span class="text-lg">🍽️</span>
+                                        <span class="text-lg">◈</span>
                                         <span class="font-bold text-gray-800 text-sm">口味和风格设置</span>
                                     </div>
                                     <span class="text-gray-500 transform transition-transform" :class="{ 'rotate-180': showTasteSettings }">▼</span>
@@ -224,7 +224,7 @@
 
                                         <!-- 菜系风格 -->
                                         <div>
-                                            <h5 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">🌍 菜系风格</h5>
+                                            <h5 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">◎ 菜系风格</h5>
                                             <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                                                 <button
                                                     v-for="style in cuisineStyles"
@@ -243,7 +243,7 @@
 
                                         <!-- 用餐场景 -->
                                         <div>
-                                            <h5 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">🎭 用餐场景</h5>
+                                            <h5 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">◇ 用餐场景</h5>
                                             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                                                 <button
                                                     v-for="scene in diningScenes"
@@ -270,7 +270,7 @@
                                     class="w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg font-medium text-left flex items-center justify-between transition-colors"
                                 >
                                     <div class="flex items-center gap-2">
-                                        <span class="text-lg">⚖️</span>
+                                        <span class="text-lg">◈</span>
                                         <span class="font-bold text-gray-800 text-sm">营养和特殊要求</span>
                                     </div>
                                     <span class="text-gray-500 transform transition-transform" :class="{ 'rotate-180': showNutritionSettings }">▼</span>
@@ -280,7 +280,7 @@
                                     <div v-show="showNutritionSettings" class="p-4 border-t-2 border-gray-200 space-y-6">
                                         <!-- 营养搭配 -->
                                         <div>
-                                            <h5 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">⚖️ 营养搭配</h5>
+                                            <h5 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">◈ 营养搭配</h5>
                                             <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
                                                 <button
                                                     v-for="nutrition in nutritionOptions"
@@ -299,7 +299,7 @@
 
                                         <!-- 特殊要求 -->
                                         <div>
-                                            <h5 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">💭 特殊要求</h5>
+                                            <h5 class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-1">◔ 特殊要求</h5>
                                             <textarea
                                                 v-model="config.customRequirement"
                                                 placeholder="例如：不要太油腻，适合老人小孩，有一道汤..."
@@ -317,11 +317,11 @@
                         <!-- 当前配置预览（简化版） -->
                         <div class="bg-gray-50 rounded-lg p-3 mt-6">
                             <h6 class="font-bold text-sm text-gray-700 mb-2 flex items-center gap-2">
-                                <span>📋</span>
+                                <span>◐</span>
                                 <span>当前配置</span>
                             </h6>
                             <div class="text-xs text-gray-600 space-y-1">
-                                <div>生成模式：{{ config.flexibleCount ? '✨ 智能搭配' : '🎯 固定数量' }}</div>
+                                <div>生成模式：{{ config.flexibleCount ? '✦ 智能搭配' : '◎ 固定数量' }}</div>
                                 <div v-if="!config.flexibleCount">菜品数量：{{ config.dishCount }}道菜</div>
                                 <div v-if="config.customDishes.length > 0">{{ config.flexibleCount ? '输入菜品' : '指定菜品' }}：{{ config.customDishes.join('、') }}</div>
                                 <div v-if="config.tastes.length > 0">口味：{{ config.tastes.map(t => tasteOptions.find(opt => opt.id === t)?.name).join('、') }}</div>
@@ -344,7 +344,7 @@
                     <!-- 生成按钮区域 -->
                     <div v-if="!isGenerating && generatedDishes.length === 0" class="text-center">
                         <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <span class="text-white text-2xl">👨‍🍳</span>
+                            <span class="text-white text-2xl">◉</span>
                         </div>
                         <h2 class="text-xl font-bold text-dark-800 mb-2">准备生成一桌菜</h2>
                         <p class="text-gray-600 mb-6 text-sm">AI大师已准备就绪，点击按钮开始设计您的专属菜单</p>
@@ -356,7 +356,7 @@
                                 class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 disabled:from-gray-400 disabled:to-gray-400 text-white px-6 py-3 rounded-lg font-bold text-base md:text-lg border-2 border-[#0A0910] transition-all duration-300 transform disabled:scale-100 disabled:cursor-not-allowed shadow-lg"
                             >
                                 <span class="flex items-center gap-2 justify-center">
-                                    <span class="text-xl">✨</span>
+                                    <span class="text-xl">✦</span>
                                     <span>交给大师</span>
                                 </span>
                             </button>
@@ -424,8 +424,8 @@
                                             <div class="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin"></div>
                                             <span>生成中</span>
                                         </span>
-                                        <span v-else-if="dish.recipe">📖 查看菜谱</span>
-                                        <span v-else>📝 生成菜谱</span>
+                                        <span v-else-if="dish.recipe">◐ 查看菜谱</span>
+                                        <span v-else>◐ 生成菜谱</span>
                                     </button>
                                 </div>
                             </div>
@@ -449,7 +449,7 @@
                 <!-- 弹窗头部 -->
                 <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-4 flex justify-between items-center">
                     <div class="flex items-center gap-3">
-                        <span class="text-2xl">📖</span>
+                        <span class="text-2xl">◐</span>
                         <h3 class="text-xl font-bold">{{ selectedRecipe.name }}</h3>
                     </div>
                     <button
@@ -528,19 +528,19 @@ const currentCustomDish = ref('')
 
 // 配置选项数据
 const tasteOptions = [
-    { id: 'spicy', name: '麻辣', icon: '🌶️' },
+    { id: 'spicy', name: '麻辣', icon: '◊' },
     { id: 'sweet', name: '甜味', icon: '🍯' },
     { id: 'sour', name: '酸味', icon: '🍋' },
-    { id: 'salty', name: '咸鲜', icon: '🧂' },
+    { id: 'salty', name: '咸鲜', icon: '◑' },
     { id: 'light', name: '清淡', icon: '🌿' },
     { id: 'rich', name: '浓郁', icon: '🍖' }
 ]
 
 const cuisineStyles = [
-    { id: 'mixed', name: '混合菜系', icon: '🌍' },
-    { id: 'chinese', name: '中式为主', icon: '🥢' },
-    { id: 'western', name: '西式为主', icon: '🍽️' },
-    { id: 'japanese', name: '日式为主', icon: '🍱' }
+    { id: 'mixed', name: '混合菜系', icon: '◎' },
+    { id: 'chinese', name: '中式为主', icon: '◈' },
+    { id: 'western', name: '西式为主', icon: '◈' },
+    { id: 'japanese', name: '日式为主', icon: '◇' }
 ]
 
 const diningScenes = [
@@ -549,15 +549,15 @@ const diningScenes = [
     { id: 'romantic', name: '浪漫晚餐', icon: '💕' },
     { id: 'business', name: '商务宴请', icon: '💼' },
     { id: 'festival', name: '节日庆祝', icon: '🎊' },
-    { id: 'casual', name: '日常用餐', icon: '🍚' }
+    { id: 'casual', name: '日常用餐', icon: '◈' }
 ]
 
 const nutritionOptions = [
-    { id: 'balanced', name: '营养均衡', icon: '⚖️' },
-    { id: 'protein', name: '高蛋白', icon: '💪' },
-    { id: 'vegetarian', name: '素食为主', icon: '🥬' },
-    { id: 'low_fat', name: '低脂健康', icon: '🏃‍♀️' },
-    { id: 'comfort', name: '滋补养生', icon: '🍲' }
+    { id: 'balanced', name: '营养均衡', icon: '◈' },
+    { id: 'protein', name: '高蛋白', icon: '◉' },
+    { id: 'vegetarian', name: '素食为主', icon: '◆' },
+    { id: 'low_fat', name: '低脂健康', icon: '◉' },
+    { id: 'comfort', name: '滋补养生', icon: '◈' }
 ]
 
 // 切换口味选择

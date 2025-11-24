@@ -25,7 +25,7 @@
 
                 <!-- 搭配理由 -->
                 <div class="bg-purple-100 rounded-lg p-3 mb-3">
-                    <h6 class="text-xs font-bold text-purple-700 mb-1">🎯 搭配理由</h6>
+                    <h6 class="text-xs font-bold text-purple-700 mb-1">◎ 搭配理由</h6>
                     <p class="text-xs text-purple-800">{{ winePairing.reason }}</p>
                 </div>
 
@@ -33,7 +33,7 @@
                 <div class="grid grid-cols-2 gap-3 text-xs">
                     <div class="bg-blue-50 rounded p-2 border border-blue-200">
                         <div class="flex items-center gap-1 mb-1">
-                            <span>🌡️</span>
+                            <span>◑</span>
                             <span class="font-bold text-blue-700">饮用温度</span>
                         </div>
                         <p class="text-blue-800">{{ winePairing.servingTemperature }}</p>
@@ -51,7 +51,7 @@
             <!-- 小贴士 -->
             <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-3">
                 <div class="flex items-start gap-2">
-                    <span class="text-yellow-600 text-sm">💡</span>
+                    <span class="text-yellow-600 text-sm">◉</span>
                     <div>
                         <h6 class="text-xs font-bold text-yellow-700 mb-1">品鉴小贴士</h6>
                         <p class="text-xs text-yellow-800">{{ getWineTip(winePairing.type) }}</p>
@@ -83,7 +83,7 @@ const getWineIcon = (type: string): string => {
         non_alcoholic: '🥤',
         soft_drink: '🥤',
         juice: '🧃',
-        dairy: '🥛',
+        dairy: '◇',
         other: '🥤'
     }
     return iconMap[type] || '🥤'

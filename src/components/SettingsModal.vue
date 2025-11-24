@@ -67,7 +67,7 @@
                                         <!-- 特色标签 -->
                                         <div class="flex flex-wrap gap-2 justify-center mb-4">
                                             <span class="bg-gradient-to-r from-green-400 to-emerald-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg">
-                                                ✨ 最新模型
+                                                ✦ 最新模型
                                             </span>
                                             <span class="bg-gradient-to-r from-blue-400 to-cyan-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg">
                                                 💰 按量付费
@@ -116,7 +116,7 @@
                                         target="_blank"
                                         class="group inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 px-6 py-3 md:px-8 md:py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
                                     >
-                                        <span class="text-sm md:text-base">🎯 立即体验</span>
+                                        <span class="text-sm md:text-base">◎ 立即体验</span>
                                         <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                                         </svg>
@@ -125,7 +125,7 @@
                                     <!-- 优惠提示 -->
                                     <div class="mt-3 md:mt-4">
                                         <div class="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-sm px-3 py-1 rounded-full border border-red-400/30">
-                                            <span class="text-xs text-red-200 animate-pulse">🔥</span>
+                                            <span class="text-xs text-red-200 animate-pulse">◈</span>
                                             <span class="text-xs text-red-200 font-medium">新用户专享优惠</span>
                                         </div>
                                     </div>

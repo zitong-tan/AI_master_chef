@@ -17,7 +17,7 @@
             <!-- 弹窗内容 -->
             <div class="p-6">
                 <div class="text-center mb-6">
-                    <div class="text-2xl mb-2">🍽️</div>
+                    <div class="text-2xl mb-2">◈</div>
                     <h4 class="font-medium text-gray-900 text-lg">{{ food?.food_name }}</h4>
                     <p class="text-sm text-gray-500 mt-1">
                         当前库存：{{ food?.quantity }} {{ food?.unit }}
@@ -79,7 +79,7 @@
                         :disabled="useQuantity <= 0 || useQuantity > (food?.quantity || 0)"
                         class="flex-1 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 text-white px-4 py-3 rounded-lg border-2 border-[#0A0910] transition-colors disabled:cursor-not-allowed"
                     >
-                        🍽️ 吃！
+                        ◈ 吃！
                     </button>
                     <button
                         @click="useAllFood"

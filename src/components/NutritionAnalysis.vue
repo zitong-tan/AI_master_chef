@@ -80,7 +80,7 @@
                 <div class="bg-blue-50 border border-blue-200 rounded p-3">
                     <ul class="space-y-1">
                         <li v-for="advice in nutritionAnalysis.balanceAdvice" :key="advice" class="flex items-start gap-2 text-blue-800">
-                            <span class="text-blue-600 mt-1 text-xs">💡</span>
+                            <span class="text-blue-600 mt-1 text-xs">◉</span>
                             <span class="text-xs">{{ advice }}</span>
                         </li>
                     </ul>

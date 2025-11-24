@@ -8,7 +8,7 @@
             <!-- <div class="text-center mb-8">
                 <div class="relative">
                     <div class="relative bg-white/90 backdrop-blur-sm border-2 border-purple-400 rounded-2xl p-6 mb-6">
-                        <div class="text-6xl mb-4 animate-pulse">🔮</div>
+                        <div class="text-6xl mb-4 animate-pulse">◉</div>
                         <h1 class="text-4xl md:text-5xl font-bold text-purple-600 mb-4">料理占卜师</h1>
 
                         <div class="text-sm text-purple-600 italic">"{{ currentMysticalWord }}"</div>
@@ -133,7 +133,7 @@
                                     @click="generateRandomNumber"
                                     class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-lg font-bold hover:from-pink-600 hover:to-purple-600 transition-all duration-200 border-2 border-[#0A0910]"
                                 >
-                                    🎲 随机生成
+                                    ⚄ 随机生成
                                 </button>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                                     <span>{{ currentProcessingText }}</span>
                                 </template>
                                 <template v-else>
-                                    <span>🔮</span>
+                                    <span>◉</span>
                                     <span>开始占卜</span>
                                 </template>
                             </span>
@@ -191,7 +191,7 @@ const fortuneTypes = [
     {
         id: 'daily' as FortuneType,
         name: '今日运势菜',
-        icon: '⭐',
+        icon: '★',
         description: '根据星座生肖推荐幸运菜品'
     },
     {

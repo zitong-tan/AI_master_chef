@@ -20,7 +20,7 @@
                                 class="w-full p-4 border-2 border-[#0A0910] rounded-lg text-md font-medium focus:outline-none focus:ring-2 focus:ring-pink-400"
                             />
                             <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                                <span class="text-2xl">🔍</span>
+                                <span class="text-2xl">◎</span>
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@
                                     <span>AI大师思考中...</span>
                                 </template>
                                 <template v-else>
-                                    <span class="text-xl">🔍</span>
+                                    <span class="text-xl">◎</span>
                                     <span>开始学做菜</span>
                                 </template>
                             </span>
@@ -56,12 +56,12 @@
                     <!-- 空状态提示 -->
                     <div v-if="!recipe && !isLoading" class="text-center py-12">
                         <div class="w-16 h-16 bg-gradient-to-br from-gray-300 to-gray-400 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <span class="text-white text-2xl">🍳</span>
+                            <span class="text-white text-2xl">◈</span>
                         </div>
                         <h3 class="text-lg font-bold text-gray-600 mb-3">等待您的菜名...</h3>
                         <div class="space-y-2 text-sm text-gray-500 max-w-md mx-auto">
                             <p class="flex items-center justify-center gap-2">
-                                <span>💡</span>
+                                <span>◉</span>
                                 <span>输入具体菜名效果更好，如"红烧肉"</span>
                             </p>
                             <p class="flex items-center justify-center gap-2">
@@ -69,7 +69,7 @@
                                 <span>支持各种菜系：川菜、粤菜、湘菜等</span>
                             </p>
                             <p class="flex items-center justify-center gap-2">
-                                <span>📝</span>
+                                <span>◐</span>
                                 <span>包含详细步骤、用料和烹饪技巧</span>
                             </p>
                         </div>
@@ -78,7 +78,7 @@
                     <!-- 加载状态 -->
                     <div v-if="isLoading && !recipe" class="text-center py-12">
                         <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center mx-auto mb-4 animate-pulse">
-                            <span class="text-white text-2xl">👨‍🍳</span>
+                            <span class="text-white text-2xl">◉</span>
                         </div>
                         <h3 class="text-xl font-bold text-gray-700 mb-2">AI大师正在为您准备教程...</h3>
                         <p class="text-gray-500">请稍等片刻，精彩内容即将呈现</p>

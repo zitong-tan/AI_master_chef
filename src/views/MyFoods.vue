@@ -13,7 +13,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
-                                <span class="text-white text-2xl">🥬</span>
+                                <span class="text-white text-2xl">◆</span>
                             </div>
                             <div>
                                 <h1 class="text-md font-bold text-gray-800">食材管理</h1>
@@ -51,7 +51,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 mt-4">
             <div class="bg-gradient-to-r from-green-100 to-emerald-100 p-4 rounded-lg border-2 border-[#0A0910]">
                 <div class="flex items-center gap-2">
-                    <span class="text-2xl">📊</span>
+                    <span class="text-2xl">◫</span>
                     <div>
                         <div class="text-lg font-bold text-gray-800">{{ stats.total }}</div>
                         <div class="text-sm text-gray-600">总食材数</div>
@@ -206,7 +206,7 @@
                                 @click="openUseFoodModal(food)"
                                 class="flex-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs rounded border border-blue-600 transition-colors"
                             >
-                                🍽️ 使用
+                                ◈ 使用
                             </button>
                             <button 
                                 @click="addToShoppingList(food)"
@@ -222,7 +222,7 @@
             <!-- 空状态 -->
             <div v-else-if="foods.length === 0" class="text-center py-6">
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg p-8">
-                    <div class="text-6xl mb-4">🥬</div>
+                    <div class="text-6xl mb-4">◆</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">还没有添加任何食材</h3>
                     <p class="text-gray-600 mb-6">开始管理您的食材库存，避免浪费！</p>
                     <button
@@ -238,7 +238,7 @@
             <!-- 搜索无结果 -->
             <div v-else class="text-center py-16">
                 <div class="bg-white border-2 border-[#0A0910] rounded-lg p-8">
-                    <div class="text-4xl mb-4">🔍</div>
+                    <div class="text-4xl mb-4">◎</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">没有找到匹配的食材</h3>
                     <p class="text-gray-600 mb-4">试试调整搜索条件或筛选选项</p>
                     <button
@@ -390,12 +390,12 @@ const filteredFoods = computed(() => {
 // 获取食材图标
 const getFoodIcon = (foodName: string) => {
     const icons: Record<string, string> = {
-        '鸡蛋': '🥚', '牛奶': '🥛', '牛肉': '🥩', '猪肉': '🥩', '鸡肉': '🍗',
-        '鱼': '🐟', '虾': '🦐', '蔬菜': '🥬', '水果': '🍎', '米饭': '🍚',
-        '面条': '🍜', '面包': '🍞', '奶酪': '🧀', '黄油': '🧈', '油': '🫒',
-        '酱油': '🧂', '盐': '🧂', '糖': '🍬', '面粉': '🌾', '土豆': '🥔',
-        '胡萝卜': '🥕', '西红柿': '🍅', '黄瓜': '🥒', '蘑菇': '🍄', '洋葱': '🧅',
-        '大蒜': '🧄', '辣椒': '🌶️', '香蕉': '🍌', '苹果': '🍎', '橙子': '🍊',
+        '鸡蛋': '◇', '牛奶': '◇', '牛肉': '◉', '猪肉': '◉', '鸡肉': '◉',
+        '鱼': '◊', '虾': '◊', '蔬菜': '◆', '水果': '◐', '米饭': '◈',
+        '面条': '◈', '面包': '◈', '奶酪': '◇', '黄油': '◇', '油': '◑',
+        '酱油': '◑', '盐': '◑', '糖': '◐', '面粉': '◈', '土豆': '◆',
+        '胡萝卜': '🥕', '西红柿': '🍅', '黄瓜': '🥒', '蘑菇': '◆', '洋葱': '🧅',
+        '大蒜': '🧄', '辣椒': '◊', '香蕉': '🍌', '苹果': '◐', '橙子': '🍊',
         '草莓': '🍓', '葡萄': '🍇', '西瓜': '🍉', '菠萝': '🍍', '桃子': '🍑'
     }
     
@@ -405,7 +405,7 @@ const getFoodIcon = (foodName: string) => {
         }
     }
     
-    return '🥬'
+    return '◆'
 }
 
 // 获取剩余天数

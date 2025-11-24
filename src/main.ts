@@ -15,6 +15,8 @@ import Community from './views/Community.vue'
 import MyFoods from './views/MyFoods.vue'
 import { autoRefreshEnvSettings } from './utils/envWatcher'
 import './style.css'
+import './theme-override.css'
+import './components-theme.css'
 
 const routes = [
     { path: '/', component: Home },

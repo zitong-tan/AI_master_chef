@@ -7,7 +7,7 @@
             <!-- 开始按钮 -->
             <div v-if="!isSelecting && selectedDishes.length === 0" class="text-center">
                 <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-[#0A0910]">
-                    <div class="text-6xl mb-4">🎲</div>
+                    <div class="text-6xl mb-4">⚄</div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">准备好了吗？</h2>
 
                     <button
@@ -43,14 +43,14 @@
                                     :class="preference === 'meat-heavy' ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-800'"
                                     class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors md:flex-1"
                                 >
-                                    🥩 荤菜多
+                                    ◉ 荤菜多
                                 </button>
                                 <button
                                     @click="preference = 'veg-heavy'"
                                     :class="preference === 'veg-heavy' ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-800'"
                                     class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors md:flex-1"
                                 >
-                                    🥬 素菜多
+                                    ◆ 素菜多
                                 </button>
                                 <button
                                     @click="preference = 'veg-only'"
@@ -85,7 +85,7 @@
 
                 <!-- 当前选择显示 -->
                 <div v-if="currentSelection" class="text-center p-6 bg-gray-50 rounded-xl">
-                    <div class="text-4xl mb-2">{{ currentSelection.type === 'dish' ? '🍽️' : currentSelection.avatar }}</div>
+                    <div class="text-4xl mb-2">{{ currentSelection.type === 'dish' ? '◈' : currentSelection.avatar }}</div>
                     <div class="text-lg font-semibold text-gray-800">{{ currentSelection.name }}</div>
                     <div v-if="currentSelection.specialty" class="text-sm text-gray-600">{{ currentSelection.specialty }}</div>
                 </div>
@@ -99,7 +99,7 @@
                     <!-- 菜品 -->
                     <div class="bg-green-50 rounded-xl p-4">
                         <h4 class="font-semibold text-green-800 mb-3 flex items-center gap-2">
-                            <span>🥗</span>
+                            <span>◆</span>
                             <span>推荐菜品 ({{ selectedDishes.length }}道)</span>
                         </h4>
                         <div class="grid grid-cols-2 gap-2">
@@ -112,7 +112,7 @@
                     <!-- 大师 -->
                     <div class="bg-purple-50 rounded-xl p-4">
                         <h4 class="font-semibold text-purple-800 mb-3 flex items-center gap-2">
-                            <span>👨‍🍳</span>
+                            <span>◉</span>
                             <span>推荐主厨</span>
                         </h4>
                         <div class="flex items-center gap-3">
@@ -137,7 +137,7 @@
                             <span>{{ generatingText }}</span>
                         </span>
                         <span v-else class="flex items-center gap-2">
-                            <span>✨</span>
+                            <span>✦</span>
                             <span>生成菜谱</span>
                         </span>
                     </button>
@@ -147,7 +147,7 @@
                         :disabled="isGenerating"
                         class="px-6 py-3 bg-gray-500 text-white rounded-xl font-semibold hover:bg-gray-600 transition-all transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     >
-                        🎲 重新选择
+                        ⚄ 重新选择
                     </button>
                 </div>
             </div>
@@ -155,7 +155,7 @@
             <!-- 菜谱结果 -->
             <div v-if="recipe" class="bg-white rounded-2xl shadow-lg p-4 md:p-6 border-2 border-[#0A0910]">
                 <h3 class="text-xl font-bold text-gray-800 mb-6 text-center flex items-center justify-center gap-2">
-                    <span>📖</span>
+                    <span>◐</span>
                     <span>专属菜谱</span>
                 </h3>
                 <div class="max-w-2xl mx-auto border-2 border-[#333333] rounded-lg overflow-hidden">
@@ -198,19 +198,19 @@ const generatingText = ref('正在生成菜谱...')
 const generatingTexts = ['正在生成菜谱...', '大师正在创作...', '调配独特配方...', '完善制作步骤...']
 
 // 随机筛子表情
-const diceEmojis = ['🎯']
-const randomDice = ref('🎯')
+const diceEmojis = ['◎']
+const randomDice = ref('◎')
 
 // 美食评论
 const foodComments = [
-    "💬 鲁菜大师看到我的五花肉，直接拍案而起：'今天必须教你什么叫真正的把子肉！' 🐷🔥",
-    "💬 川菜大师盯着我的鸡胸肉冷笑：'莫得问题，马上让你体验什么叫麻辣鸡丝怀疑人生' 🌶️😭",
-    '💬 给粤菜大师一根白萝卜，他能还你一桌国宴级开水白菜...而我只会凉拌 🦢🤷',
+    "💬 鲁菜大师看到我的五花肉，直接拍案而起：'今天必须教你什么叫真正的把子肉！' 🐷◈",
+    "💬 川菜大师盯着我的鸡胸肉冷笑：'莫得问题，马上让你体验什么叫麻辣鸡丝怀疑人生' ◊😭",
+    '💬 给粤菜大师一根白萝卜，他能还你一桌国宴级开水白菜...而我只会凉拌 🦢◔',
     '💬 日料大师处理我的三文鱼时，刀光闪过，鱼生薄得能当手机贴膜 🍣📱',
-    "💬 湘菜大师的炒锅起火三米高：'辣椒放少了！你这是对湖南人的侮辱！' 🔥🌶️",
-    "💬 当法餐大师看到我用速冻牛排：'亲爱的，这需要先做个SPA再按摩48小时' 🥩💆",
-    '💬 闽菜大师的海鲜汤里，虾兵蟹将都在跳佛跳墙 🦐🙏',
-    '💬 意大利面在真正意厨手里旋转的样子，比我前任还会绕 🍝💔',
+    "💬 湘菜大师的炒锅起火三米高：'辣椒放少了！你这是对湖南人的侮辱！' ◈◊",
+    "💬 当法餐大师看到我用速冻牛排：'亲爱的，这需要先做个SPA再按摩48小时' ◉💆",
+    '💬 闽菜大师的海鲜汤里，虾兵蟹将都在跳佛跳墙 ◊🙏',
+    '💬 意大利面在真正意厨手里旋转的样子，比我前任还会绕 ◈💔',
     '💬 徽菜大师的火腿吊汤术，香得邻居以为我家在炼丹 🐷☁️',
     '💬 泰式大师的冬阴功里，柠檬草、香茅、南姜正在开演唱会 🎤🌿'
 ]

@@ -24,7 +24,7 @@
             <!-- 口味特征 -->
             <div class="mt-4 grid grid-cols-4 gap-2 md:gap-4">
                 <div class="text-center">
-                    <div class="text-xs opacity-80 mb-1">◊ 辣度</div>
+                    <div class="text-xs opacity-80 mb-1">🔥 辣度</div>
                     <div class="text-xl font-bold text-red-200">
                         {{ sauce.spiceLevel || 0 }}
                     </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <div class="text-xs opacity-80 mb-1">◑ 咸度</div>
+                    <div class="text-xs opacity-80 mb-1">🧂 咸度</div>
                     <div class="text-xl font-bold text-blue-200">
                         {{ sauce.saltLevel || 0 }}
                     </div>

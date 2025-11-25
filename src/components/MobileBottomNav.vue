@@ -8,7 +8,7 @@
                 class="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs"
                 :class="$route.path === '/' ? 'text-blue-600' : 'text-gray-600'"
             >
-                <span class="text-xl">⌂</span>
+                <span class="text-xl">🏠️</span>
                 <span class="font-medium">主页</span>
             </router-link>
             
@@ -19,7 +19,7 @@
                     class="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs"
                     :class="showControlPanel ? 'text-blue-600' : 'text-gray-600'"
                 >
-                    <span class="text-xl">◈</span>
+                    <span class="text-xl">🍚</span>
                     <span class="font-medium">操作台</span>
                 </button>
                 
@@ -38,7 +38,7 @@
                             class="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
                             :class="$route.path === '/today-eat' ? 'bg-blue-100 text-blue-700' : 'text-gray-700'"
                         >
-                            <span class="text-xl">⚄</span>
+                            <span class="text-xl flex items-center justify-center w-6 h-6">🎲</span>
                             <div>
                                 <div class="font-bold">美食盲盒</div>
                                 <div class="text-xs text-gray-500">随机美食推荐</div>
@@ -50,7 +50,7 @@
                             class="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
                             :class="$route.path === '/sauce-design' ? 'bg-blue-100 text-blue-700' : 'text-gray-700'"
                         >
-                            <span class="text-xl">◈</span>
+                            <span class="text-xl flex items-center justify-center w-6 h-6">🍝</span>
                             <div>
                                 <div class="font-bold">酱料大师</div>
                                 <div class="text-xs text-gray-500">专业酱料制作</div>
@@ -62,7 +62,7 @@
                             class="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
                             :class="$route.path === '/fortune-cooking' ? 'bg-blue-100 text-blue-700' : 'text-gray-700'"
                         >
-                            <span class="text-xl">◉</span>
+                            <span class="text-xl flex items-center justify-center w-6 h-6">⭐️</span>
                             <div>
                                 <div class="font-bold">玄学厨房</div>
                                 <div class="text-xs text-gray-500">星辰指引美食</div>
@@ -74,7 +74,7 @@
                             class="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
                             :class="$route.path === '/precision-nutrition' ? 'bg-blue-100 text-blue-700' : 'text-gray-700'"
                         >
-                            <span class="text-xl">⚖️</span>
+                            <span class="text-xl flex items-center justify-center w-6 h-6">⚖️</span>
                             <div>
                                 <div class="font-bold">精准营养</div>
                                 <div class="text-xs text-gray-500">健身人士和婴幼儿的餐食</div>
@@ -100,7 +100,7 @@
                     class="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs"
                     :class="showMyPanel ? 'text-blue-600' : 'text-gray-600'"
                 >
-                    <span class="text-xl">◉</span>
+                    <span class="text-xl">😋</span>
                     <span class="font-medium">我的</span>
                 </button>
                 
@@ -119,7 +119,7 @@
                             class="flex items-center gap-3 p-3 rounded-lg hover:bg-green-50 transition-colors"
                             :class="$route.path === '/favorites' ? 'bg-green-100 text-green-700' : 'text-gray-700'"
                         >
-                            <span class="text-xl">♥</span>
+                            <span class="text-xl flex items-center justify-center w-6 h-6">❤</span>
                             <div>
                                 <div class="font-bold">我的收藏</div>
                                 <div class="text-xs text-gray-500">珍藏美味</div>
@@ -131,7 +131,7 @@
                             class="flex items-center gap-3 p-3 rounded-lg hover:bg-green-50 transition-colors"
                             :class="$route.path === '/my-foods' ? 'bg-green-100 text-green-700' : 'text-gray-700'"
                         >
-                            <span class="text-xl">◆</span>
+                            <span class="text-xl flex items-center justify-center w-6 h-6">🥬</span>
                             <div>
                                 <div class="font-bold">我的食材</div>
                                 <div class="text-xs text-gray-500">智能管理食材</div>
@@ -143,7 +143,7 @@
                             class="flex items-center gap-3 p-3 rounded-lg hover:bg-green-50 transition-colors"
                             :class="$route.path === '/gallery' ? 'bg-green-100 text-green-700' : 'text-gray-700'"
                         >
-                            <span class="text-xl">◫</span>
+                            <span class="text-xl flex items-center justify-center w-6 h-6">📔</span>
                             <div>
                                 <div class="font-bold">美食图鉴</div>
                                 <div class="text-xs text-gray-500">厨艺封神时刻</div>
@@ -155,7 +155,7 @@
                             class="flex items-center gap-3 p-3 rounded-lg hover:bg-green-50 transition-colors"
                             :class="$route.path === '/about' ? 'bg-green-100 text-green-700' : 'text-gray-700'"
                         >
-                            <span class="text-xl">◐</span>
+                            <span class="text-xl flex items-center justify-center w-6 h-6">🔖</span>
                             <div>
                                 <div class="font-bold">关于我们</div>
                                 <div class="text-xs text-gray-500">了解更多</div>
@@ -170,7 +170,7 @@
                 class="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs"
                 :class="$route.path === '/community' ? 'text-blue-600' : 'text-gray-600'"
             >
-                <span class="text-xl">◎</span>
+                <span class="text-xl">🍔</span>
                 <span class="font-medium">美食社区</span>
             </router-link>
         </div>

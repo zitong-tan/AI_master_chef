@@ -56,7 +56,7 @@
                         class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/today-eat' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>⚄</span>
+                        <span>🎲</span>
                         <span>美食盲盒</span>
                     </router-link>
                     <router-link
@@ -72,7 +72,7 @@
                         class=" flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/fortune-cooking' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>◉</span>
+                        <span>⭐️</span>
                         <span>玄学厨房</span>
                     </router-link>
                     <router-link
@@ -80,7 +80,7 @@
                         class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/community' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>◎</span>
+                        <span>🍔</span>
                         <span>美食社区</span>
                     </router-link>
                     <router-link
@@ -88,7 +88,7 @@
                         class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
                         :class="$route.path === '/sauce-design' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
                     >
-                        <span>◈</span>
+                        <span>🍝</span>
                         <span>酱料大师</span>
                     </router-link>
                     <router-link
@@ -135,7 +135,7 @@
                                 class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/my-foods' ? 'bg-blue-100 text-gray-800' : 'text-gray-700'"
                             >
-                                <span>◆</span>
+                                <span>🥬</span>
                                 <span>我的食材</span>
                             </router-link>
                             <router-link
@@ -144,7 +144,7 @@
                                 class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/gallery' ? 'bg-blue-100 text-gray-800' : 'text-gray-700'"
                             >
-                                <span>◫</span>
+                                <span>📔</span>
                                 <span>美食图鉴</span>
                             </router-link>
                             <router-link
@@ -153,7 +153,7 @@
                                 class="flex items-center gap-2 px-4 py-3 text-sm font-bold transition-colors duration-200 hover:bg-gray-100"
                                 :class="$route.path === '/about' ? 'bg-blue-100 text-gray-800' : 'text-gray-700'"
                             >
-                                <span>◐</span>
+                                <span>🔖</span>
                                 <span>关于我们</span>
                             </router-link>
                             

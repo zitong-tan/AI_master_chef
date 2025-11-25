@@ -4,7 +4,7 @@
         <div class="bg-white border-2 border-[#0A0910] rounded-lg p-6">
             <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                 <span class="text-2xl">👶</span>
-                婴幼儿个性化信息
+                您家孩子的目前状况~
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -54,7 +54,7 @@
 
                     <!-- 过敏物 -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">过敏物（可多选）</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">过敏物（可多选也可不选哦！）</label>
                         <div class="space-y-2">
                             <label v-for="allergen in allergenOptions" :key="allergen.value" class="flex items-center gap-2">
                                 <input

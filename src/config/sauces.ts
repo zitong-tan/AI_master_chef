@@ -54,11 +54,11 @@ export const sauceCategories: SauceCategoryConfig[] = [
 
 // 使用场景配置
 export const useCaseOptions = [
-    { id: 'noodles', name: '拌面', icon: '◈' },
-    { id: 'dipping', name: '蘸菜', icon: '◈' },
-    { id: 'cooking', name: '炒菜', icon: '◈' },
-    { id: 'bbq', name: '烧烤', icon: '◈' },
-    { id: 'hotpot', name: '火锅', icon: '◈' }
+    { id: 'noodles', name: '拌面', icon: '🍜' },
+    { id: 'dipping', name: '蘸菜', icon: '🥬' },
+    { id: 'cooking', name: '炒菜', icon: '🍳' },
+    { id: 'bbq', name: '烧烤', icon: '🥩' },
+    { id: 'hotpot', name: '火锅', icon: '🫕' }
 ]
 
 // 预设酱料模板

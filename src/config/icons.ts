@@ -85,11 +85,11 @@ export function getIconByType(type: string): string {
 // 根据菜系获取图标
 export function getCuisineIcon(cuisine: string): string {
   const cuisineMap: Record<string, string> = {
-    '川菜': '◊',
-    '粤菜': '◊',
+    '川菜': '🦐',
+    '粤菜': '🦐',
     '鲁菜': '🥟',
     '苏菜': '🦀',
-    '浙菜': '◊',
+    '浙菜': '🦐',
     '闽菜': '🦞',
     '湘菜': '◊',
     '徽菜': '🐷',

@@ -7,7 +7,7 @@
             <!-- 开始按钮 -->
             <div v-if="!isSelecting && selectedDishes.length === 0" class="text-center">
                 <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-[#0A0910]">
-                    <div class="text-6xl mb-4">⚄</div>
+                    <div class="text-6xl mb-4">🎲</div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">准备好了吗？</h2>
 
                     <button

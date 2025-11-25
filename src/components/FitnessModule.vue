@@ -4,7 +4,7 @@
         <div class="bg-white border-2 border-[#0A0910] rounded-lg p-6">
             <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                 <span class="text-2xl">💪</span>
-                健身人士个性化信息
+                填写您的信息哦！
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -137,7 +137,7 @@
                     <h4 class="font-bold text-gray-700 mb-3">饮食偏好</h4>
                     
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">饮食偏好（可多选）</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">饮食偏好（可多选也可不选哦）</label>
                         <div class="space-y-2">
                             <label v-for="pref in dietOptions" :key="pref.value" class="flex items-center gap-2">
                                 <input
@@ -156,7 +156,7 @@
                     <h4 class="font-bold text-gray-700 mb-3">口味与烹饪</h4>
                     
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">偏好口味（可多选）</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">偏好口味（可多选也可不选哦）</label>
                         <div class="space-y-2">
                             <label v-for="taste in tasteOptions" :key="taste.value" class="flex items-center gap-2">
                                 <input
@@ -171,7 +171,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">烹饪方式（可多选）</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">烹饪方式（可多选也可不选哦）</label>
                         <div class="space-y-2">
                             <label v-for="method in cookingOptions" :key="method.value" class="flex items-center gap-2">
                                 <input
@@ -456,9 +456,9 @@ input[type="checkbox"]:checked {
     @apply bg-blue-600 text-blue-600 border-blue-600;
 }
 
+/* 移除重复的对号显示 */
 input[type="checkbox"]:checked::before {
-    content: '✓';
-    @apply text-white text-xs;
+    content: '';
 }
 
 /* 加载动画 */

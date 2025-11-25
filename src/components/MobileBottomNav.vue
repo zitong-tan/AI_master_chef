@@ -68,6 +68,18 @@
                                 <div class="text-xs text-gray-500">星辰指引美食</div>
                             </div>
                         </router-link>
+                        <router-link
+                            to="/precision-nutrition"
+                            @click="showControlPanel = false"
+                            class="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors"
+                            :class="$route.path === '/precision-nutrition' ? 'bg-blue-100 text-blue-700' : 'text-gray-700'"
+                        >
+                            <span class="text-xl">⚖️</span>
+                            <div>
+                                <div class="font-bold">精准营养</div>
+                                <div class="text-xs text-gray-500">健身人士和婴幼儿的餐食</div>
+                            </div>
+                        </router-link>
                     </div>
                 </div>
             </div>

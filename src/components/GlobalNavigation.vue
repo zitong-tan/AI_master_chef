@@ -91,6 +91,14 @@
                         <span>◈</span>
                         <span>酱料大师</span>
                     </router-link>
+                    <router-link
+                        to="/precision-nutrition"
+                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        :class="$route.path === '/precision-nutrition' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                    >
+                        <span>⚖️</span>
+                        <span>精准营养</span>
+                    </router-link>
 
                     <!-- 更多菜单下拉 -->
                     <div class="relative z-[100]" @mouseleave="handleMouseLeave">
@@ -277,6 +285,8 @@ const pageTitle = computed(() => {
             return '菜谱指南'
         case '/sauce-design':
             return '酱料设计大师'
+        case '/precision-nutrition':
+            return '精准营养'
         case '/fortune-cooking':
             return '玄学厨房'
         case '/community':
@@ -306,6 +316,8 @@ const pageSubtitle = computed(() => {
             return 'AI大师手把手教学！'
         case '/sauce-design':
             return '专业酱料制作，调味灵魂升华！'
+        case '/precision-nutrition':
+            return '科学营养配比，精准健康生活！'
         case '/fortune-cooking':
             return '星辰指引美食，占卜预见美味！'
         case '/community':

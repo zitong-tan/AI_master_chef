@@ -9,6 +9,7 @@ import Favorites from './views/Favorites.vue'
 import Gallery from './views/Gallery.vue'
 import HowToCook from './views/HowToCook.vue'
 import SauceDesign from './views/SauceDesign.vue'
+import PrecisionNutrition from './views/PrecisionNutrition.vue'
 import FortuneCooking from './views/FortuneCooking.vue'
 import SettingsDemo from './views/SettingsDemo.vue'
 import Community from './views/Community.vue'
@@ -27,6 +28,7 @@ const routes = [
     { path: '/gallery', component: Gallery },
     { path: '/how-to-cook', component: HowToCook },
     { path: '/sauce-design', component: SauceDesign },
+    { path: '/precision-nutrition', component: PrecisionNutrition },
     { path: '/fortune-cooking', component: FortuneCooking },
     { path: '/community', component: Community },
     { path: '/settings-demo', component: SettingsDemo },

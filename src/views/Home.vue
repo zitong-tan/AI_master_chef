@@ -131,7 +131,7 @@
                             </div>
                             <div>
                                 <h2 class="text-2xl font-bold text-white">选择风格</h2>
-                                <p class="text-white/80 text-sm">挑选你喜欢的菜系或自定义</p>
+                                <p class="text-white/80 text-sm">挑选你喜欢的菜系或自定义（tongtong和jiejie是开发者哦，tongtong是厨神，jiejie是食神，有兴趣可以试一下）</p>
                             </div>
                         </div>
                         <div>

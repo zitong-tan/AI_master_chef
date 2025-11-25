@@ -273,3 +273,76 @@ export interface FortuneStorage {
         [fortuneId: string]: 'accurate' | 'inaccurate'
     }
 }
+
+// ==================== 精准营养相关类型 ====================
+
+// 健身人士配置
+export interface FitnessProfile {
+    age: number // 年龄
+    gender: 'male' | 'female' | 'other' // 性别
+    weight: number // 体重 (kg)
+    height: number // 身高 (cm)
+    exerciseFrequency: 'rarely' | '1-2_times' | '3-4_times' | '5+_times' // 运动频率
+    exerciseIntensity: 'light' | 'moderate' | 'high' | 'very_high' // 运动强度
+    dietPreference: string[] // 饮食偏好
+    tastePreference: string[] // 偏好口味
+    cookingMethod: string[] // 烹饪方式
+    dailyCalorieGoal: number // 每日热量目标 (kcal)
+    fitnessGoal: 'muscle_gain' | 'fat_loss' | 'maintain' // 健身目标：增肌、减脂、维持体态
+}
+
+// 婴幼儿配置
+export interface BabyProfile {
+    ageGroup: '' | '0-6_months' | '7-12_months' | '1-3_years' // 月龄/年龄段
+    monthsAge?: number // 具体月龄 (0-36个月)
+    yearsAge?: number // 具体年龄 (1-3岁)
+    allergens: string[] // 过敏物
+    hasSupplementaryFood: boolean // 是否已添加辅食
+    feedingNeeds: {
+        dailyMeals: number // 每日餐次
+        foodForm: '' | 'puree' | 'mashed' | 'small_pieces' | 'finger_food' // 食材形态
+        nutritionFocus: '' | 'balanced' | 'iron_fortified' | 'dha_enriched' | 'calcium_rich' // 营养侧重
+    }
+    specialNeeds: {
+        isPicky: boolean // 是否挑食
+        hasConstipation: boolean // 是否便秘
+        other: string[] // 其他特殊需求
+    }
+}
+
+// 餐次类型
+export type MealType = 'breakfast' | 'lunch' | 'dinner'
+
+// 生成的餐食
+export interface GeneratedMeal {
+    id: string
+    type: MealType
+    name: string
+    description: string
+    ingredients: string[]
+    steps: string[]
+    nutritionInfo: {
+        calories: number
+        protein: number
+        carbs: number
+        fat: number
+        fiber: number
+        iron?: number
+        calcium?: number
+        vitamins?: string[]
+    }
+    cookingTime: number // 分钟
+    difficulty: 'easy' | 'medium' | 'hard'
+    suitableTools?: string[] // 所需工具
+    tips: string[] // 制作贴士
+    warnings?: string[] // 注意事项（婴幼儿）
+    ageSuitability?: string // 适合年龄说明（婴幼儿）
+}
+
+// 营养餐生成请求
+export interface NutritionMealRequest {
+    profile: FitnessProfile | BabyProfile
+    mealTypes: MealType[]
+    mode: 'fitness' | 'baby'
+    specialRequirements?: string[] // 特殊要求
+}

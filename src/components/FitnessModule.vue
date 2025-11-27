@@ -448,12 +448,16 @@ const getDifficultyLabel = (difficulty: string) => {
 
 <style scoped>
 .fitness-module {
-    @apply max-w-4xl mx-auto;
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* 复选框样式 */
 input[type="checkbox"]:checked {
-    @apply bg-blue-600 text-blue-600 border-blue-600;
+    background-color: rgb(37 99 235);
+    color: rgb(37 99 235);
+    border-color: rgb(37 99 235);
 }
 
 /* 移除重复的对号显示 */
@@ -474,7 +478,7 @@ input[type="checkbox"]:checked::before {
 /* 响应式调整 */
 @media (max-width: 768px) {
     .grid {
-        @apply grid-cols-1;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 1rem;
     }
 }

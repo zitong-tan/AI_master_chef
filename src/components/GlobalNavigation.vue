@@ -20,7 +20,7 @@
                 </router-link>
 
                 <!-- 导航菜单 -->
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-0">
                     <!-- 设置按钮 -->
                     <SettingsButton class="hidden" />
                     <!-- 主要功能 -->
@@ -34,7 +34,7 @@
                     </router-link>
                     
                     <!-- 登录/用户状态按钮 -->
-                    <div v-if="!isLoggedIn" class="flex items-center gap-2">
+                    <div v-if="!isLoggedIn" class="flex items-center gap-0">
                         <button
                             @click="showLoginModal = true"
                             class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm bg-green-500 text-white hover:bg-green-600"
@@ -45,7 +45,7 @@
                     </div>
                     
                     <!-- 用户已登录状态 -->
-                    <div v-else class="flex items-center gap-2">
+                    <div v-else class="flex items-center gap-0">
                         <div class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] bg-blue-100 text-blue-800 text-sm">
                             <span>◉</span>
                             <span>{{ currentUserName }}</span>
@@ -118,7 +118,7 @@
                         <div
                             v-if="showMoreMenu"
                             @mouseenter="handleMouseEnter"
-                            class="absolute right-0 top-full mt-0.5 w-48 bg-white border-2 border-[#0A0910] rounded-lg shadow-lg z-[9999] overflow-hidden"
+                            class="absolute right-0 top-full mt-0 w-48 bg-white border-2 border-[#0A0910] rounded-lg shadow-lg z-[9999] overflow-hidden"
                         >
                             <router-link
                                 to="/favorites"
@@ -190,7 +190,7 @@
                             <div class="text-xs text-gray-600 font-medium">{{ pageSubtitle }}</div>
                         </div>
                     </router-link>
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-0">
                         <!-- 移动端登录/用户状态 -->
                         <div v-if="!isLoggedIn">
                             <button
@@ -200,7 +200,7 @@
                                 <span class="text-sm font-bold">登录</span>
                             </button>
                         </div>
-                        <div v-else class="flex items-center gap-1">
+                        <div v-else class="flex items-center gap-0">
                             <div class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border-2 border-[#0A0910] text-xs font-bold">
                                 <span>◉</span>
                                 <span>{{ currentUserName }}</span>

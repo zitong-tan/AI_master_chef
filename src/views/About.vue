@@ -42,7 +42,7 @@
                             </div>
                             <div class="text-center">
                                 <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg p-8 border-2 border-[#0A0910]">
-                                    <div class="text-6xl mb-4">◉</div>
+                                    <div class="text-6xl mb-4">🧑‍🍳</div>
                                     <h3 class="text-xl font-bold text-white mb-2">LEGENDARY STATUS</h3>
                                     <p class="text-white text-sm">FROM A SINGLE MEAL!</p>
                                 </div>
@@ -62,12 +62,12 @@
                                     <p class="text-xs text-gray-600">基于食材智能匹配最适合的菜谱和烹饪方法</p>
                                 </div>
                                 <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-lg">
-                                    <div class="text-3xl mb-2">◉</div>
+                                    <div class="text-3xl mb-2">🧑‍🍳</div>
                                     <h4 class="font-bold text-dark-800 mb-2 text-sm">大师级指导</h4>
                                     <p class="text-xs text-gray-600">汇聚各菜系大师的烹饪精髓和独门秘籍</p>
                                 </div>
                                 <div class="text-center p-4 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg">
-                                    <div class="text-3xl mb-2">◎</div>
+                                    <div class="text-3xl mb-2">🧑‍🍳</div>
                                     <h4 class="font-bold text-dark-800 mb-2 text-sm">个性化定制</h4>
                                     <p class="text-xs text-gray-600">根据个人口味偏好和饮食需求定制专属菜谱</p>
                                 </div>
@@ -139,6 +139,88 @@
                 </div>
             </div>
 
+            <!-- 作者区域 -->
+            <div class="relative">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-t-lg border-2 border-[#0A0910] border-b-0 inline-block mb-0">
+                    <span class="font-bold text-lg">👨‍💻 作者信息</span>
+                </div>
+                <div class="bg-white border-2 border-[#0A0910] rounded-lg rounded-tl-none p-6">
+                    <div class="mt-4">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center mb-8">
+                            <!-- 作者信息 -->
+                            <div>
+                                <h3 class="text-xl font-bold text-dark-800 mb-4 flex items-center gap-2">
+                                    <span class="text-2xl">👨‍💻</span>
+                                    开发者信息
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-4">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="text-xl">🧑</span>
+                                            <h4 class="font-bold text-dark-800">主要作者</h4>
+                                        </div>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-blue-500">•</span>
+                                                <span class="text-sm"><strong>tongtong</strong> - 厨神</span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-pink-500">•</span>
+                                                <span class="text-sm"><strong>jiejie</strong> - 食神</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="text-xl">🔗</span>
+                                            <h4 class="font-bold text-dark-800">开源地址</h4>
+                                        </div>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-gray-500">📂</span>
+                                                <a href="https://github.com/zitong-tan/AI_master_chef" 
+                                                   target="_blank" 
+                                                   class="text-blue-600 hover:text-blue-700 hover:underline transition-colors text-decoration: none text-sm">
+                                                    https://github.com/zitong-tan/AI_master_chef
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="text-xl">🛠️</span>
+                                            <h4 class="font-bold text-dark-800">开发工具</h4>
+                                        </div>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-orange-500">⚡</span>
+                                                <span class="text-sm"><strong>CodeBuddy</strong> - AI编程助手</span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-green-500">🗄️</span>
+                                                <span class="text-sm"><strong>Supabase</strong> - 数据库服务</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 右侧保持不变（支付二维码） -->
+                            <div class="text-center">
+                                <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg p-6 border-2 border-[#0A0910] shadow-lg">
+                                    <div class="text-lg mb-4 text-white font-bold">💰 支持开发者</div>
+                                    <div class="bg-white rounded-lg p-4 mb-4">
+                                        <img src="/收款.jpg" alt="收款二维码" class="w-32 h-32 mx-auto rounded-lg shadow-md">
+                                    </div>
+                                    <p class="text-white text-sm">您的支持是我们前进的动力！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -159,7 +241,7 @@ const chineseCuisines = ref([
     {
         id: 'sichuan',
         name: '川菜大师',
-        avatar: '◊',
+        avatar: '🌶',
         specialty: '麻辣鲜香，口味浓重',
         dishes: '麻婆豆腐、宫保鸡丁、水煮鱼',
         flavor: '麻辣、鲜香、回甜'
@@ -167,7 +249,7 @@ const chineseCuisines = ref([
     {
         id: 'cantonese',
         name: '粤菜大师',
-        avatar: '◊',
+        avatar: '🦆',
         specialty: '清淡鲜美，注重原味',
         dishes: '白切鸡、蒸蛋羹、广式点心',
         flavor: '清淡、鲜美、嫩滑'
@@ -175,7 +257,7 @@ const chineseCuisines = ref([
     {
         id: 'shandong',
         name: '鲁菜大师',
-        avatar: '◊',
+        avatar: '🐟',
         specialty: '咸鲜为主，突出本味',
         dishes: '糖醋鲤鱼、九转大肠、葱爆海参',
         flavor: '咸鲜、醇厚、清香'
@@ -207,7 +289,7 @@ const chineseCuisines = ref([
     {
         id: 'hunan',
         name: '湘菜大师',
-        avatar: '◊',
+        avatar: '🔥',
         specialty: '香辣鲜浓，口味厚重',
         dishes: '剁椒鱼头、麻辣子鸡、口味虾',
         flavor: '香辣、鲜浓、酸辣'
@@ -237,7 +319,7 @@ const internationalCuisines = ref([
     {
         id: 'korean',
         name: '韩式料理大师',
-        avatar: '◈',
+        avatar: '🥢',
         specialty: '发酵调味，营养均衡',
         dishes: '泡菜、烤肉、石锅拌饭',
         style: '酸辣、发酵、健康'
@@ -245,7 +327,7 @@ const internationalCuisines = ref([
     {
         id: 'thai',
         name: '泰式料理大师',
-        avatar: '◊',
+        avatar: '🌶',
         specialty: '酸甜辣香，层次丰富',
         dishes: '冬阴功汤、绿咖喱、芒果糯米饭',
         style: '酸甜、香辣、清爽'
@@ -253,7 +335,7 @@ const internationalCuisines = ref([
     {
         id: 'italian',
         name: '意式料理大师',
-        avatar: '◈',
+        avatar: '🍝',
         specialty: '简单食材，经典搭配',
         dishes: '意大利面、披萨、提拉米苏',
         style: '简约、经典、浓郁'

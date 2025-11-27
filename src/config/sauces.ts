@@ -97,7 +97,7 @@ export const sauceTemplates = [
         spiceLevel: 3,
         sweetLevel: 1,
         saltLevel: 4,
-        sourLevel: 2
+        sourLevel: 28 
     },
     {
         name: '蒜泥白肉酱',

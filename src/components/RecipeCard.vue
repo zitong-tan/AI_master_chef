@@ -395,7 +395,14 @@ const generateImage = async () => {
         // 将生成的图片添加到图库
         const { GalleryService } = await import('@/services/galleryService')
         const prompt = `一道精美的${props.recipe.cuisine.replace('大师', '').replace('菜', '')}菜肴：${props.recipe.name}`
-        GalleryService.addToGallery(props.recipe, image.url, image.id, prompt)
+        
+        // 处理图片URL，如果是Base64格式则转换为文件上传，否则直接保存URL
+        if (image.url.startsWith('data:')) {
+            await GalleryService.addBase64ImageToGallery(props.recipe, image.url, image.id, prompt)
+        } else {
+            // 直接保存外部图片URL，避免CORS问题
+            await GalleryService.addImageUrlToGallery(props.recipe, image.url, image.id, prompt)
+        }
     } catch (error) {
         console.error('生成图片失败:', error)
         imageError.value = 'AI画师表示这道菜太有艺术挑战性了，哈哈！'

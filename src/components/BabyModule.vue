@@ -478,11 +478,15 @@ const generateMeals = async () => {
             mode: 'baby'
         })
 
-        generatedMeals.value = meals
+        // 为每个餐食设置年龄适用性
+        generatedMeals.value = meals.map(meal => ({
+            ...meal,
+            ageSuitability: getAgeSuitability()
+        }))
         
         // 发送事件给父组件
         meals.forEach(meal => {
-            emit('mealGenerated', meal)
+            emit('mealGenerated', { ...meal, ageSuitability: getAgeSuitability() })
         })
         
     } catch (error) {
@@ -530,19 +534,24 @@ const getAgeSuitability = () => {
 
 <style scoped>
 .baby-module {
-    @apply max-w-4xl mx-auto;
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* 复选框和单选框样式 */
 input[type="checkbox"]:checked,
 input[type="radio"]:checked {
-    @apply bg-pink-600 text-pink-600 border-pink-600;
+    background-color: rgb(219 39 119);
+    color: rgb(219 39 119);
+    border-color: rgb(219 39 119);
 }
 
 input[type="checkbox"]:checked::before,
 input[type="radio"]:checked::before {
     content: '✓';
-    @apply text-white text-xs;
+    color: white;
+    font-size: 0.75rem;
 }
 
 /* 加载动画 */
@@ -558,7 +567,7 @@ input[type="radio"]:checked::before {
 /* 响应式调整 */
 @media (max-width: 768px) {
     .grid {
-        @apply grid-cols-1;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 1rem;
     }
 }

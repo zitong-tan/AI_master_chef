@@ -1,4 +1,5 @@
 import type { Recipe } from '@/types'
+import { supabase } from '@/services/supabaseService'
 
 export interface GalleryImage {
     id: string
@@ -9,6 +10,7 @@ export interface GalleryImage {
     ingredients: string[]
     generatedAt: string
     prompt?: string
+    filePath?: string
 }
 
 export interface GalleryStats {
@@ -18,47 +20,82 @@ export interface GalleryStats {
 }
 
 class GalleryServiceClass {
-    private readonly STORAGE_KEY = 'recipe-gallery-images'
+    private readonly BUCKET_NAME = 'recipe-images'
 
     // 获取所有图库图片
-    getGalleryImages(): GalleryImage[] {
+    async getGalleryImages(): Promise<GalleryImage[]> {
         try {
-            const stored = localStorage.getItem(this.STORAGE_KEY)
-            return stored ? JSON.parse(stored) : []
+            const { data, error } = await supabase
+                .from('recipe_images')
+                .select('*')
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                console.error('获取图库数据失败:', error)
+                return []
+            }
+
+            return data.map(item => ({
+                id: item.id,
+                url: item.image_url,
+                recipeName: item.recipe_name,
+                recipeId: item.recipe_id,
+                cuisine: item.cuisine,
+                ingredients: item.ingredients || [],
+                generatedAt: item.created_at,
+                prompt: item.prompt,
+                filePath: item.file_path
+            }))
         } catch (error) {
             console.error('获取图库数据失败:', error)
             return []
         }
     }
 
-    // 添加图片到图库
-    addToGallery(recipe: Recipe, imageUrl: string, imageId: string, prompt?: string): boolean {
+    // 上传图片到Supabase Storage并添加到图库
+    async addToGallery(recipe: Recipe, imageFile: File, imageId: string, prompt?: string): Promise<boolean> {
         try {
-            const images = this.getGalleryImages()
+            // 1. 上传图片到Storage
+            const fileName = `${imageId}-${Date.now()}.jpg`
+            const filePath = `recipe-images/${fileName}`
 
-            // 检查是否已存在相同的图片
-            const existingIndex = images.findIndex(img => img.id === imageId)
+            const { error: uploadError } = await supabase.storage
+                .from(this.BUCKET_NAME)
+                .upload(filePath, imageFile, {
+                    contentType: 'image/jpeg',
+                    cacheControl: '3600'
+                })
 
-            const galleryImage: GalleryImage = {
-                id: imageId,
-                url: imageUrl,
-                recipeName: recipe.name,
-                recipeId: recipe.id,
-                cuisine: recipe.cuisine,
-                ingredients: recipe.ingredients,
-                generatedAt: new Date().toISOString(),
-                prompt
+            if (uploadError) {
+                console.error('上传图片失败:', uploadError)
+                return false
             }
 
-            if (existingIndex >= 0) {
-                // 更新现有图片
-                images[existingIndex] = galleryImage
-            } else {
-                // 添加新图片到开头
-                images.unshift(galleryImage)
+            // 2. 获取公共URL
+            const { data: urlData } = supabase.storage
+                .from(this.BUCKET_NAME)
+                .getPublicUrl(filePath)
+
+            const imageUrl = urlData.publicUrl
+
+            // 3. 保存元数据到数据库
+            const { error: dbError } = await supabase
+                .from('recipe_images')
+                .insert({
+                    image_url: imageUrl,
+                    recipe_name: recipe.name,
+                    recipe_id: recipe.id,
+                    cuisine: recipe.cuisine,
+                    ingredients: recipe.ingredients,
+                    file_path: filePath,
+                    prompt: prompt
+                })
+
+            if (dbError) {
+                console.error('保存图片元数据失败:', dbError)
+                return false
             }
 
-            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(images))
             return true
         } catch (error) {
             console.error('添加图片到图库失败:', error)
@@ -66,12 +103,87 @@ class GalleryServiceClass {
         }
     }
 
-    // 从图库删除图片
-    removeFromGallery(imageId: string): boolean {
+    // 直接保存图片URL到数据库（不下载文件）
+    async addImageUrlToGallery(recipe: Recipe, imageUrl: string, imageId: string, prompt?: string): Promise<boolean> {
         try {
-            const images = this.getGalleryImages()
-            const filteredImages = images.filter(img => img.id !== imageId)
-            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(filteredImages))
+            // 保存元数据到数据库
+            const { error: dbError } = await supabase
+                .from('recipe_images')
+                .insert({
+                    image_url: imageUrl,
+                    recipe_name: recipe.name,
+                    recipe_id: recipe.id,
+                    cuisine: recipe.cuisine,
+                    ingredients: recipe.ingredients,
+                    file_path: null, // 外部URL没有本地文件路径
+                    prompt: prompt
+                })
+
+            if (dbError) {
+                console.error('保存图片URL失败:', dbError)
+                return false
+            }
+
+            return true
+        } catch (error) {
+            console.error('添加图片URL到图库失败:', error)
+            return false
+        }
+    }
+
+    // 处理Base64图片数据并添加到图库
+    async addBase64ImageToGallery(recipe: Recipe, base64Data: string, imageId: string, prompt?: string): Promise<boolean> {
+        try {
+            // 将Base64转换为File对象
+            const response = await fetch(base64Data)
+            const blob = await response.blob()
+            const file = new File([blob], `recipe-${imageId}.jpg`, { type: 'image/jpeg' })
+
+            return this.addToGallery(recipe, file, imageId, prompt)
+        } catch (error) {
+            console.error('处理Base64图片失败:', error)
+            return false
+        }
+    }
+
+    // 从图库删除图片
+    async removeFromGallery(imageId: string): Promise<boolean> {
+        try {
+            // 1. 先获取图片信息（包括文件路径）
+            const { data: imageData, error: fetchError } = await supabase
+                .from('recipe_images')
+                .select('file_path')
+                .eq('id', imageId)
+                .single()
+
+            if (fetchError) {
+                console.error('获取图片信息失败:', fetchError)
+                return false
+            }
+
+            // 2. 如果是本地存储的图片，从Storage删除文件
+            if (imageData?.file_path) {
+                const { error: deleteFileError } = await supabase.storage
+                    .from(this.BUCKET_NAME)
+                    .remove([imageData.file_path])
+
+                if (deleteFileError) {
+                    console.error('删除存储文件失败:', deleteFileError)
+                    // 继续删除数据库记录，不因文件删除失败而中断
+                }
+            }
+
+            // 3. 从数据库删除记录
+            const { error: deleteError } = await supabase
+                .from('recipe_images')
+                .delete()
+                .eq('id', imageId)
+
+            if (deleteError) {
+                console.error('从图库删除图片失败:', deleteError)
+                return false
+            }
+
             return true
         } catch (error) {
             console.error('从图库删除图片失败:', error)
@@ -80,9 +192,34 @@ class GalleryServiceClass {
     }
 
     // 清空图库
-    clearGallery(): boolean {
+    async clearGallery(): Promise<boolean> {
         try {
-            localStorage.removeItem(this.STORAGE_KEY)
+            // 1. 获取所有图片的文件路径
+            const { data: images } = await supabase
+                .from('recipe_images')
+                .select('file_path')
+
+            // 2. 删除所有本地Storage文件（只删除有file_path的）
+            if (images && images.length > 0) {
+                const filePaths = images.map(img => img.file_path).filter(Boolean)
+                if (filePaths.length > 0) {
+                    await supabase.storage
+                        .from(this.BUCKET_NAME)
+                        .remove(filePaths)
+                }
+            }
+
+            // 3. 清空数据库表
+            const { error } = await supabase
+                .from('recipe_images')
+                .delete()
+                .neq('id', '') // 删除所有记录
+
+            if (error) {
+                console.error('清空图库失败:', error)
+                return false
+            }
+
             return true
         } catch (error) {
             console.error('清空图库失败:', error)
@@ -91,42 +228,137 @@ class GalleryServiceClass {
     }
 
     // 获取图库统计信息
-    getGalleryStats(): GalleryStats {
-        const images = this.getGalleryImages()
+    async getGalleryStats(): Promise<GalleryStats> {
+        try {
+            const { data: images, error } = await supabase
+                .from('recipe_images')
+                .select('cuisine, created_at')
 
-        const cuisineStats: Record<string, number> = {}
-        images.forEach(img => {
-            cuisineStats[img.cuisine] = (cuisineStats[img.cuisine] || 0) + 1
-        })
+            if (error) {
+                console.error('获取图库统计失败:', error)
+                return { total: 0, cuisineStats: {} }
+            }
 
-        return {
-            total: images.length,
-            cuisineStats,
-            latestGenerated: images.length > 0 ? images[0].generatedAt : undefined
+            const cuisineStats: Record<string, number> = {}
+            let latestGenerated: string | undefined
+
+            images?.forEach(img => {
+                cuisineStats[img.cuisine] = (cuisineStats[img.cuisine] || 0) + 1
+                if (!latestGenerated || new Date(img.created_at) > new Date(latestGenerated)) {
+                    latestGenerated = img.created_at
+                }
+            })
+
+            return {
+                total: images?.length || 0,
+                cuisineStats,
+                latestGenerated
+            }
+        } catch (error) {
+            console.error('获取图库统计失败:', error)
+            return { total: 0, cuisineStats: {} }
         }
     }
 
     // 根据菜系筛选图片
-    getImagesByCuisine(cuisine: string): GalleryImage[] {
-        return this.getGalleryImages().filter(img => img.cuisine === cuisine)
+    async getImagesByCuisine(cuisine: string): Promise<GalleryImage[]> {
+        try {
+            const { data, error } = await supabase
+                .from('recipe_images')
+                .select('*')
+                .eq('cuisine', cuisine)
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                console.error('按菜系获取图片失败:', error)
+                return []
+            }
+
+            return data.map(item => ({
+                id: item.id,
+                url: item.image_url,
+                recipeName: item.recipe_name,
+                recipeId: item.recipe_id,
+                cuisine: item.cuisine,
+                ingredients: item.ingredients || [],
+                generatedAt: item.created_at,
+                prompt: item.prompt,
+                filePath: item.file_path
+            }))
+        } catch (error) {
+            console.error('按菜系获取图片失败:', error)
+            return []
+        }
     }
 
     // 搜索图片
-    searchImages(query: string): GalleryImage[] {
-        const images = this.getGalleryImages()
-        const lowerQuery = query.toLowerCase()
+    async searchImages(query: string): Promise<GalleryImage[]> {
+        try {
+            const lowerQuery = query.toLowerCase()
+            const { data, error } = await supabase
+                .from('recipe_images')
+                .select('*')
+                .or(`recipe_name.ilike.%${lowerQuery}%,cuisine.ilike.%${lowerQuery}%`)
+                .order('created_at', { ascending: false })
 
-        return images.filter(
-            img =>
-                img.recipeName.toLowerCase().includes(lowerQuery) ||
-                img.cuisine.toLowerCase().includes(lowerQuery) ||
-                img.ingredients.some(ingredient => ingredient.toLowerCase().includes(lowerQuery))
-        )
+            if (error) {
+                console.error('搜索图片失败:', error)
+                return []
+            }
+
+            // 客户端筛选ingredients（PostgreSQL数组搜索需要特定语法）
+            const filteredData = data?.filter(img => 
+                img.ingredients?.some((ingredient: string) => 
+                    ingredient.toLowerCase().includes(lowerQuery)
+                )
+            ) || []
+
+            return filteredData.map(item => ({
+                id: item.id,
+                url: item.image_url,
+                recipeName: item.recipe_name,
+                recipeId: item.recipe_id,
+                cuisine: item.cuisine,
+                ingredients: item.ingredients || [],
+                generatedAt: item.created_at,
+                prompt: item.prompt,
+                filePath: item.file_path
+            }))
+        } catch (error) {
+            console.error('搜索图片失败:', error)
+            return []
+        }
     }
 
     // 获取最近生成的图片
-    getRecentImages(limit: number = 10): GalleryImage[] {
-        return this.getGalleryImages().slice(0, limit)
+    async getRecentImages(limit: number = 10): Promise<GalleryImage[]> {
+        try {
+            const { data, error } = await supabase
+                .from('recipe_images')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(limit)
+
+            if (error) {
+                console.error('获取最近图片失败:', error)
+                return []
+            }
+
+            return data.map(item => ({
+                id: item.id,
+                url: item.image_url,
+                recipeName: item.recipe_name,
+                recipeId: item.recipe_id,
+                cuisine: item.cuisine,
+                ingredients: item.ingredients || [],
+                generatedAt: item.created_at,
+                prompt: item.prompt,
+                filePath: item.file_path
+            }))
+        } catch (error) {
+            console.error('获取最近图片失败:', error)
+            return []
+        }
     }
 }
 

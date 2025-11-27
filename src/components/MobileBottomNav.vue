@@ -2,7 +2,7 @@
     <!-- 移动端底部导航栏 -->
     <div data-mobile-nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-[#0A0910] z-40">
         <!-- 底部主导航 -->
-        <div class="flex items-center justify-around py-2">
+        <div class="flex items-center justify-between py-2 px-4">
             <router-link
                 to="/"
                 class="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs"

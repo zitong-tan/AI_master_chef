@@ -185,7 +185,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { GalleryService, type GalleryImage } from '@/services/galleryService'
 import GlobalNavigation from '@/components/GlobalNavigation.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
@@ -208,8 +208,16 @@ const availableCuisines = computed(() => {
 })
 
 // 筛选后的图片列表
-const filteredImages = computed(() => {
+const filteredImages = ref<GalleryImage[]>([])
+
+// 手动处理筛选逻辑
+const updateFilteredImages = async () => {
     let filtered = [...images.value]
+
+    // 菜系筛选
+    if (selectedCuisine.value) {
+        filtered = filtered.filter(img => img.cuisine === selectedCuisine.value)
+    }
 
     // 搜索筛选
     if (searchQuery.value.trim()) {
@@ -220,11 +228,6 @@ const filteredImages = computed(() => {
                 img.cuisine.toLowerCase().includes(query) ||
                 img.ingredients.some(ingredient => ingredient.toLowerCase().includes(query))
         )
-    }
-
-    // 菜系筛选
-    if (selectedCuisine.value) {
-        filtered = filtered.filter(img => img.cuisine === selectedCuisine.value)
     }
 
     // 排序
@@ -243,8 +246,13 @@ const filteredImages = computed(() => {
         }
     })
 
-    return filtered
-})
+    filteredImages.value = filtered
+}
+
+// 监听筛选条件变化
+watch([images, selectedCuisine, searchQuery, sortBy], () => {
+    updateFilteredImages()
+}, { immediate: true })
 
 // 格式化日期
 const formatDate = (dateString: string) => {
@@ -268,8 +276,8 @@ const formatDate = (dateString: string) => {
 }
 
 // 刷新图库
-const refreshGallery = () => {
-    images.value = GalleryService.getGalleryImages()
+const refreshGallery = async () => {
+    images.value = await GalleryService.getGalleryImages()
 }
 
 // 打开图片详情弹窗
@@ -284,12 +292,12 @@ const confirmDeleteImage = (imageId: string) => {
 }
 
 // 删除图片
-const deleteImage = () => {
+const deleteImage = async () => {
     if (!deletingImageId.value) return
 
-    const success = GalleryService.removeFromGallery(deletingImageId.value)
+    const success = await GalleryService.removeFromGallery(deletingImageId.value)
     if (success) {
-        refreshGallery()
+        await refreshGallery()
         showToast('图片已删除', 'info')
     } else {
         showToast('删除失败', 'error')
@@ -298,10 +306,10 @@ const deleteImage = () => {
 }
 
 // 清空所有图片
-const clearAllImages = () => {
-    const success = GalleryService.clearGallery()
+const clearAllImages = async () => {
+    const success = await GalleryService.clearGallery()
     if (success) {
-        refreshGallery()
+        await refreshGallery()
         showToast('图库已清空', 'info')
     } else {
         showToast('清空失败', 'error')
@@ -362,8 +370,8 @@ const showToast = (message: string, type: 'success' | 'error' | 'warning' | 'inf
 }
 
 // 初始化
-onMounted(() => {
-    refreshGallery()
+onMounted(async () => {
+    await refreshGallery()
 })
 </script>
 

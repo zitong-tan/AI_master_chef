@@ -32,6 +32,14 @@
                         <span>⌂</span>
                         <span>主页</span>
                     </router-link>
+                    <router-link
+                        to="/community"
+                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
+                        :class="$route.path === '/community' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+                    >
+                        <span>🍔</span>
+                        <span>美食社区</span>
+                    </router-link>
                     
                     <!-- 登录/用户状态按钮 -->
                     <div v-if="!isLoggedIn" class="flex items-center gap-0">
@@ -74,14 +82,6 @@
                     >
                         <span>⭐️</span>
                         <span>玄学厨房</span>
-                    </router-link>
-                    <router-link
-                        to="/community"
-                        class="flex items-center gap-1 px-3 py-2 rounded-lg font-bold border-2 border-[#0A0910] transition-all duration-200 transform hover:scale-105 text-sm"
-                        :class="$route.path === '/community' ? 'bg-blue-400 text-gray-800' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
-                    >
-                        <span>🍔</span>
-                        <span>美食社区</span>
                     </router-link>
                     <router-link
                         to="/sauce-design"

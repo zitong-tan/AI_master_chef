@@ -1,5 +1,6 @@
 import type { Recipe } from '@/types'
 import { supabase } from '@/services/supabaseService'
+import { AuthService } from './authService'
 
 export interface GalleryImage {
     id: string
@@ -22,12 +23,20 @@ export interface GalleryStats {
 class GalleryServiceClass {
     private readonly BUCKET_NAME = 'recipe-images'
 
-    // 获取所有图库图片
+    // 获取当前用户的图库图片
     async getGalleryImages(): Promise<GalleryImage[]> {
         try {
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，返回空数组
+            if (!currentUser) {
+                return []
+            }
+
             const { data, error } = await supabase
                 .from('recipe_images')
                 .select('*')
+                .eq('user_id', currentUser.id)
                 .order('created_at', { ascending: false })
 
             if (error) {
@@ -55,9 +64,17 @@ class GalleryServiceClass {
     // 上传图片到Supabase Storage并添加到图库
     async addToGallery(recipe: Recipe, imageFile: File, imageId: string, prompt?: string): Promise<boolean> {
         try {
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，不允许上传
+            if (!currentUser) {
+                console.error('用户未登录，无法保存图片')
+                return false
+            }
+
             // 1. 上传图片到Storage
             const fileName = `${imageId}-${Date.now()}.jpg`
-            const filePath = `recipe-images/${fileName}`
+            const filePath = `recipe-images/${currentUser.id}/${fileName}`
 
             const { error: uploadError } = await supabase.storage
                 .from(this.BUCKET_NAME)
@@ -82,6 +99,7 @@ class GalleryServiceClass {
             const { error: dbError } = await supabase
                 .from('recipe_images')
                 .insert({
+                    user_id: currentUser.id,
                     image_url: imageUrl,
                     recipe_name: recipe.name,
                     recipe_id: recipe.id,
@@ -106,10 +124,19 @@ class GalleryServiceClass {
     // 直接保存图片URL到数据库（不下载文件）
     async addImageUrlToGallery(recipe: Recipe, imageUrl: string, imageId: string, prompt?: string): Promise<boolean> {
         try {
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，不允许保存
+            if (!currentUser) {
+                console.error('用户未登录，无法保存图片')
+                return false
+            }
+
             // 保存元数据到数据库
             const { error: dbError } = await supabase
                 .from('recipe_images')
                 .insert({
+                    user_id: currentUser.id,
                     image_url: imageUrl,
                     recipe_name: recipe.name,
                     recipe_id: recipe.id,
@@ -149,10 +176,18 @@ class GalleryServiceClass {
     // 从图库删除图片
     async removeFromGallery(imageId: string): Promise<boolean> {
         try {
-            // 1. 先获取图片信息（包括文件路径）
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，不允许删除
+            if (!currentUser) {
+                console.error('用户未登录，无法删除图片')
+                return false
+            }
+
+            // 1. 先获取图片信息（包括文件路径和用户ID）
             const { data: imageData, error: fetchError } = await supabase
                 .from('recipe_images')
-                .select('file_path')
+                .select('file_path, user_id')
                 .eq('id', imageId)
                 .single()
 
@@ -161,7 +196,13 @@ class GalleryServiceClass {
                 return false
             }
 
-            // 2. 如果是本地存储的图片，从Storage删除文件
+            // 2. 验证图片属于当前用户
+            if (!imageData || imageData.user_id !== currentUser.id) {
+                console.error('无权限删除此图片')
+                return false
+            }
+
+            // 3. 如果是本地存储的图片，从Storage删除文件
             if (imageData?.file_path) {
                 const { error: deleteFileError } = await supabase.storage
                     .from(this.BUCKET_NAME)
@@ -173,11 +214,12 @@ class GalleryServiceClass {
                 }
             }
 
-            // 3. 从数据库删除记录
+            // 4. 从数据库删除记录
             const { error: deleteError } = await supabase
                 .from('recipe_images')
                 .delete()
                 .eq('id', imageId)
+                .eq('user_id', currentUser.id) // 双重验证
 
             if (deleteError) {
                 console.error('从图库删除图片失败:', deleteError)
@@ -191,15 +233,24 @@ class GalleryServiceClass {
         }
     }
 
-    // 清空图库
+    // 清空当前用户的图库
     async clearGallery(): Promise<boolean> {
         try {
-            // 1. 获取所有图片的文件路径
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，不允许清空
+            if (!currentUser) {
+                console.error('用户未登录，无法清空图库')
+                return false
+            }
+
+            // 1. 获取当前用户所有图片的文件路径
             const { data: images } = await supabase
                 .from('recipe_images')
                 .select('file_path')
+                .eq('user_id', currentUser.id)
 
-            // 2. 删除所有本地Storage文件（只删除有file_path的）
+            // 2. 删除用户的所有本地Storage文件（只删除有file_path的）
             if (images && images.length > 0) {
                 const filePaths = images.map(img => img.file_path).filter(Boolean)
                 if (filePaths.length > 0) {
@@ -209,11 +260,11 @@ class GalleryServiceClass {
                 }
             }
 
-            // 3. 清空数据库表
+            // 3. 清空当前用户的数据库记录
             const { error } = await supabase
                 .from('recipe_images')
                 .delete()
-                .neq('id', '') // 删除所有记录
+                .eq('user_id', currentUser.id)
 
             if (error) {
                 console.error('清空图库失败:', error)
@@ -227,12 +278,20 @@ class GalleryServiceClass {
         }
     }
 
-    // 获取图库统计信息
+    // 获取当前用户的图库统计信息
     async getGalleryStats(): Promise<GalleryStats> {
         try {
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，返回空统计
+            if (!currentUser) {
+                return { total: 0, cuisineStats: {} }
+            }
+
             const { data: images, error } = await supabase
                 .from('recipe_images')
                 .select('cuisine, created_at')
+                .eq('user_id', currentUser.id)
 
             if (error) {
                 console.error('获取图库统计失败:', error)
@@ -260,12 +319,20 @@ class GalleryServiceClass {
         }
     }
 
-    // 根据菜系筛选图片
+    // 根据菜系筛选当前用户的图片
     async getImagesByCuisine(cuisine: string): Promise<GalleryImage[]> {
         try {
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，返回空数组
+            if (!currentUser) {
+                return []
+            }
+
             const { data, error } = await supabase
                 .from('recipe_images')
                 .select('*')
+                .eq('user_id', currentUser.id)
                 .eq('cuisine', cuisine)
                 .order('created_at', { ascending: false })
 
@@ -291,13 +358,21 @@ class GalleryServiceClass {
         }
     }
 
-    // 搜索图片
+    // 搜索当前用户的图片
     async searchImages(query: string): Promise<GalleryImage[]> {
         try {
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，返回空数组
+            if (!currentUser) {
+                return []
+            }
+
             const lowerQuery = query.toLowerCase()
             const { data, error } = await supabase
                 .from('recipe_images')
                 .select('*')
+                .eq('user_id', currentUser.id)
                 .or(`recipe_name.ilike.%${lowerQuery}%,cuisine.ilike.%${lowerQuery}%`)
                 .order('created_at', { ascending: false })
 
@@ -330,12 +405,20 @@ class GalleryServiceClass {
         }
     }
 
-    // 获取最近生成的图片
+    // 获取当前用户最近生成的图片
     async getRecentImages(limit: number = 10): Promise<GalleryImage[]> {
         try {
+            const currentUser = AuthService.getCurrentUser()
+            
+            // 如果用户未登录，返回空数组
+            if (!currentUser) {
+                return []
+            }
+
             const { data, error } = await supabase
                 .from('recipe_images')
                 .select('*')
+                .eq('user_id', currentUser.id)
                 .order('created_at', { ascending: false })
                 .limit(limit)
 

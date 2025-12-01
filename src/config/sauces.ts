@@ -6,7 +6,7 @@ export const sauceCategories: SauceCategoryConfig[] = [
         id: 'spicy',
         name: '辣味酱料',
         description: '各种辣椒酱、辣油、麻辣酱料',
-        icon: '◊',
+        icon: '🌶',
         color: 'bg-red-500',
         examples: ['辣椒酱', '蒜蓉辣椒酱', '麻辣油', '韩式辣椒酱', '泰式甜辣酱']
     },

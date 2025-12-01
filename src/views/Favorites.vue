@@ -125,7 +125,7 @@
                                 <span class="text-sm text-gray-600">收藏于 {{ formatDate(favorite.favoriteDate) }}</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <button @click="editNotes(favorite)" class="text-blue-500 hover:text-blue-600 text-sm" title="编辑备注">◐</button>
+                                <button @click="editNotes(favorite)" class="text-blue-500 hover:text-blue-600 text-sm" title="编辑备注">📝</button>
                                 <button @click="confirmRemoveFavorite(favorite.recipe.id)" class="text-red-500 hover:text-red-600 text-sm" title="取消收藏">🗑️</button>
                             </div>
                         </div>

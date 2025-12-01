@@ -606,6 +606,9 @@
 
         <!-- 底部 -->
         <GlobalFooter />
+        
+        <!-- 食材过期提醒组件 -->
+        <FoodExpirationReminder ref="expirationReminderRef" />
     </div>
 </template>
 
@@ -657,12 +660,13 @@
 </style>
 
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue'
+import { ref, onUnmounted, onMounted } from 'vue'
 import { cuisines } from '@/config/cuisines'
 import { ingredientCategories } from '@/config/ingredients'
 import RecipeCard from '@/components/RecipeCard.vue'
 import GlobalNavigation from '@/components/GlobalNavigation.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
+import FoodExpirationReminder from '@/components/FoodExpirationReminder.vue'
 import { generateCustomRecipe, generateMultipleRecipesStream, generateRecipe } from '@/services/aiService'
 import type { Recipe, CuisineType } from '@/types'
 
@@ -679,6 +683,7 @@ const errorMessage = ref('')
 const showIngredientPicker = ref(false)
 const showPresetPicker = ref(false)
 const showCustomPrompt = ref(false)
+const expirationReminderRef = ref<InstanceType<typeof FoodExpirationReminder> | null>(null)
 
 // 菜系槽位数据 - 用于显示加载状态和完成状态
 interface CuisineSlot {
@@ -1198,6 +1203,13 @@ const retryFailedCuisine = async (failedSlot: CuisineSlot) => {
 //         servingSize: '1人份'
 //     }
 // }
+
+onMounted(() => {
+    // 页面加载时检查食材过期情况
+    if (expirationReminderRef.value) {
+        expirationReminderRef.value.checkFoodExpiration()
+    }
+})
 
 onUnmounted(() => {
     if (loadingInterval) {

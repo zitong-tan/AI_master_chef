@@ -539,6 +539,121 @@ export class FoodService {
       return false
     }
   }
+
+  // 获取即将过期的食材（用于提醒）
+  static async getExpiringSoonFoods(daysAhead: number = 3): Promise<Food[]> {
+    try {
+      const currentUser = AuthService.getCurrentUser()
+      if (!currentUser) {
+        return []
+      }
+
+      const targetDate = new Date()
+      targetDate.setDate(targetDate.getDate() + daysAhead)
+      targetDate.setHours(23, 59, 59, 999)
+
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+
+      const { data, error } = await supabase
+        .from('foods')
+        .select('*')
+        .eq('user_id', currentUser.id)
+        .gte('expiration_date', today.toISOString().split('T')[0])
+        .lte('expiration_date', targetDate.toISOString().split('T')[0])
+        .order('expiration_date', { ascending: true })
+
+      if (error) {
+        console.error('获取即将过期食材失败:', error)
+        return []
+      }
+
+      return data || []
+    } catch (error) {
+      console.error('获取即将过期食材异常:', error)
+      return []
+    }
+  }
+
+  // 获取已过期的食材
+  static async getExpiredFoods(): Promise<Food[]> {
+    try {
+      const currentUser = AuthService.getCurrentUser()
+      if (!currentUser) {
+        return []
+      }
+
+      const today = new Date()
+      today.setHours(23, 59, 59, 999)
+
+      const { data, error } = await supabase
+        .from('foods')
+        .select('*')
+        .eq('user_id', currentUser.id)
+        .lt('expiration_date', today.toISOString().split('T')[0])
+        .order('expiration_date', { ascending: true })
+
+      if (error) {
+        console.error('获取已过期食材失败:', error)
+        return []
+      }
+
+      return data || []
+    } catch (error) {
+      console.error('获取已过期食材异常:', error)
+      return []
+    }
+  }
+
+  // 获取需要提醒的食材（1天和3天后过期，以及已过期的）
+  static async getFoodsWithReminders(): Promise<{
+    expiringInOneDay: Food[]
+    expiringInThreeDays: Food[]
+    expired: Food[]
+  }> {
+    try {
+      const [expiringInOneDay, expiringInThreeDays, expired] = await Promise.all([
+        this.getExpiringSoonFoods(1),
+        this.getExpiringSoonFoods(3),
+        this.getExpiredFoods()
+      ])
+
+      // 筛选出确切1天后过期的食材
+      const today = new Date()
+      const oneDayFromNow = new Date(today)
+      oneDayFromNow.setDate(oneDayFromNow.getDate() + 1)
+      oneDayFromNow.setHours(23, 59, 59, 999)
+
+      const exactlyOneDay = expiringInOneDay.filter(food => {
+        const expiration = new Date(food.expiration_date)
+        return expiration.toDateString() === oneDayFromNow.toDateString()
+      })
+
+      // 筛选出确切3天后过期的食材
+      const threeDaysFromNow = new Date(today)
+      threeDaysFromNow.setDate(threeDaysFromNow.getDate() + 3)
+      threeDaysFromNow.setHours(23, 59, 59, 999)
+
+      const exactlyThreeDays = expiringInThreeDays.filter(food => {
+        const expiration = new Date(food.expiration_date)
+        return expiration.toDateString() === threeDaysFromNow.toDateString() && 
+               expiration.toDateString() !== oneDayFromNow.toDateString()
+      })
+
+      return {
+        expiringInOneDay: exactlyOneDay,
+        expiringInThreeDays: exactlyThreeDays,
+        expired: expired
+      }
+    } catch (error) {
+      console.error('获取提醒食材异常:', error)
+      return {
+        expiringInOneDay: [],
+        expiringInThreeDays: [],
+        expired: []
+      }
+    }
+  }
 }
 
 // 补货清单项接口

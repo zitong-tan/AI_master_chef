@@ -42,6 +42,21 @@ export interface UserCommentInput {
     comment_text: string
 }
 
+export interface DishComment {
+    id: string
+    dish_id: string
+    user_name: string
+    comment_text: string
+    created_at: string
+    updated_at: string
+}
+
+export interface DishCommentInput {
+    dish_id: string
+    user_name: string
+    comment_text: string
+}
+
 export const communityService = {
     // 获取所有用户菜品
     async getUserDishes(): Promise<UserDish[]> {
@@ -328,6 +343,96 @@ export const communityService = {
         } catch (error) {
             console.error('删除用户评论异常:', error)
             return false
+        }
+    },
+
+    // ============================================
+    // 菜品评论相关方法
+    // ============================================
+
+    // 获取某道菜品的所有评论
+    async getDishComments(dishId: string): Promise<DishComment[]> {
+        try {
+            const { data, error } = await supabase
+                .from('dish_comments')
+                .select('*')
+                .eq('dish_id', dishId)
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                console.error('获取菜品评论失败:', error)
+                throw error
+            }
+
+            return data || []
+        } catch (error) {
+            console.error('获取菜品评论异常:', error)
+            return []
+        }
+    },
+
+    // 添加菜品评论
+    async addDishComment(comment: DishCommentInput): Promise<DishComment> {
+        try {
+            const { data, error } = await supabase
+                .from('dish_comments')
+                .insert([{
+                    dish_id: comment.dish_id,
+                    user_name: comment.user_name,
+                    comment_text: comment.comment_text
+                }])
+                .select()
+                .single()
+
+            if (error) {
+                console.error('添加菜品评论失败:', error)
+                throw error
+            }
+
+            return data
+        } catch (error) {
+            console.error('添加菜品评论异常:', error)
+            throw error
+        }
+    },
+
+    // 删除菜品评论
+    async deleteDishComment(id: string): Promise<boolean> {
+        try {
+            const { error } = await supabase
+                .from('dish_comments')
+                .delete()
+                .eq('id', id)
+
+            if (error) {
+                console.error('删除菜品评论失败:', error)
+                throw error
+            }
+
+            return true
+        } catch (error) {
+            console.error('删除菜品评论异常:', error)
+            return false
+        }
+    },
+
+    // 获取菜品评论数量
+    async getDishCommentCount(dishId: string): Promise<number> {
+        try {
+            const { count, error } = await supabase
+                .from('dish_comments')
+                .select('*', { count: 'exact', head: true })
+                .eq('dish_id', dishId)
+
+            if (error) {
+                console.error('获取菜品评论数量失败:', error)
+                throw error
+            }
+
+            return count || 0
+        } catch (error) {
+            console.error('获取菜品评论数量异常:', error)
+            return 0
         }
     }
 }

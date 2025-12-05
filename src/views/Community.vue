@@ -27,7 +27,7 @@
                                     <input v-model="newDish.cuisine" type="text" class="w-full px-4 py-2 border-2 border-gray-800 rounded-lg focus:outline-none focus:border-blue-500" placeholder="如：川菜、粤菜、西餐等" />
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">所需食材</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">所需食材（记得写用量哦）</label>
                                     <div class="space-y-2">
                                         <div v-for="(_, index) in newDish.ingredients" :key="index" class="flex gap-2">
                                             <input v-model="newDish.ingredients[index]" type="text" class="flex-1 px-4 py-2 border-2 border-gray-800 rounded-lg" placeholder="食材名称和用量" />

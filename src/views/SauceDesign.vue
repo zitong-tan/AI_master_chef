@@ -16,7 +16,7 @@
                             <div class="space-y-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-                                        <span>◊ 辣度</span>
+                                        <span>🌶 辣度</span>
                                         <span class="text-red-600 font-bold">{{ preferences.spiceLevel }}</span>
                                     </label>
                                     <input
@@ -42,7 +42,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center justify-between">
-                                        <span>◑ 咸度</span>
+                                        <span>🫙 咸度</span>
                                         <span class="text-blue-600 font-bold">{{ preferences.saltLevel }}</span>
                                     </label>
                                     <input

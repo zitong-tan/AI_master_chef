@@ -94,7 +94,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue'
+import { ref, watch } from 'vue'
 import { FoodService, type Food } from '@/services/foodService'
 
 // Props

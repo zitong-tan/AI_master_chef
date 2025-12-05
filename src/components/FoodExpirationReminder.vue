@@ -99,6 +99,16 @@ const checkFoodExpiration = async () => {
           message: `您的【${food.food_name}】已经过期啦，记得把它扔掉哦！`
         })
       }
+      // 还有两天过期
+      else if (daysUntilExpiration === 2) {
+        newReminders.push({
+          id: `expiring-2days-${food.id}`,
+          type: 'expiring-soon',
+          foodName: food.food_name,
+          expirationDate: food.expiration_date,
+          message: `您的【${food.food_name}】还有两天就要过期啦，记得吃掉它哦！`
+        })
+      }
       // 还有一天过期
       else if (daysUntilExpiration === 1) {
         newReminders.push({

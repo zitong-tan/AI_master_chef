@@ -229,7 +229,7 @@ export const moodConfigs: MoodConfig[] = [
     {
         id: 'happy',
         name: '开心',
-        emoji: '◡',
+        emoji: '😀',
         color: 'text-yellow-500',
         cookingStyle: ['甜品', '色彩丰富', '庆祝菜品', '轻松制作'],
         description: '心情愉悦，适合制作色彩缤纷的美食'
